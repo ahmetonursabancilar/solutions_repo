@@ -48,6 +48,10 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#horizontal-motion">Horizontal Motion:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vertical-motion">Vertical Motion:</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -171,7 +175,70 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<p><strong>Theoretical Foundation of Projectile Motion</strong></p>
+<h3 id="derivation-of-governing-equations">Derivation of Governing Equations</h3>
+<p>Projectile motion can be described by decomposing the motion into horizontal and vertical components. The motion follows Newton’s second law of motion:</p>
+<div class="arithmatex">\[F = ma\]</div>
+<p>For a projectile launched with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span>, the velocity components are:</p>
+<div class="arithmatex">\[v_{0x} = v_0 \cos\theta$$  
+$$v_{0y} = v_0 \sin\theta\]</div>
+<p>Assuming constant gravitational acceleration <span class="arithmatex">\(g\)</span> acting downward, the equations of motion arise from Newton’s second law:</p>
+<h4 id="horizontal-motion">Horizontal Motion:</h4>
+<p>Since there is no acceleration in the horizontal direction (neglecting air resistance), the equation of motion simplifies to:</p>
+<div class="arithmatex">\[\frac{d^2x}{dt^2} = 0\]</div>
+<p>Integrating twice gives:</p>
+<div class="arithmatex">\[x(t) = v_0 \cos\theta \cdot t\]</div>
+<h4 id="vertical-motion">Vertical Motion:</h4>
+<p>The vertical motion follows:</p>
+<div class="arithmatex">\[\frac{d^2y}{dt^2} = -g\]</div>
+<p>Integrating once:</p>
+<div class="arithmatex">\[\frac{dy}{dt} = v_0 \sin\theta - g t\]</div>
+<p>Integrating again:</p>
+<div class="arithmatex">\[y(t) = v_0 \sin\theta \cdot t - \frac{1}{2} g t^2\]</div>
+<h3 id="time-of-flight">Time of Flight</h3>
+<p>To determine the total time the projectile remains in the air, we set <span class="arithmatex">\(y = 0\)</span> (assuming launch and landing at the same height):</p>
+<div class="arithmatex">\[0 = v_0 \sin\theta \cdot t - \frac{1}{2} g t^2\]</div>
+<p>Solving for <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[t = \frac{2 v_0 \sin\theta}{g}\]</div>
+<h3 id="range-of-the-projectile">Range of the Projectile</h3>
+<p>The horizontal range <span class="arithmatex">\(R\)</span> is found by substituting the time of flight into the horizontal motion equation:</p>
+<div class="arithmatex">\[R = v_{0x} t\]</div>
+<div class="arithmatex">\[R = (v_0 \cos\theta) \times \frac{2 v_0 \sin\theta}{g}\]</div>
+<p>Using the identity <span class="arithmatex">\(2 \sin\theta \cos\theta = \sin 2\theta\)</span>:</p>
+<div class="arithmatex">\[R = \frac{v_0^2 \sin 2\theta}{g}\]</div>
+<h3 id="effect-of-launch-angle-on-range">Effect of Launch Angle on Range</h3>
+<p>The range equation shows that <span class="arithmatex">\(R\)</span> depends on <span class="arithmatex">\(\sin 2\theta\)</span>. The maximum range occurs when <span class="arithmatex">\(\sin 2\theta = 1\)</span>, which happens at <span class="arithmatex">\(2\theta = 90^\circ\)</span> or <span class="arithmatex">\(\theta = 45^\circ\)</span>. Therefore, the optimal launch angle for maximum range is <strong>45 degrees</strong>.</p>
+<h3 id="influence-of-initial-conditions">Influence of Initial Conditions</h3>
+<p>Several factors influence the projectile’s trajectory:</p>
+<ol>
+<li><strong>Initial Velocity <span class="arithmatex">\(v_0\)</span></strong>: Higher speeds result in a longer range.</li>
+<li><strong>Gravitational Acceleration <span class="arithmatex">\(g\)</span></strong>: Increased gravity shortens the range.</li>
+<li><strong>Launch Angle <span class="arithmatex">\(\theta\)</span></strong>: Different angles yield different parabolic trajectories, with 45° providing maximum range.</li>
+<li><strong>Launch Height</strong>: If the projectile starts from a height <span class="arithmatex">\(h\)</span>, the time of flight increases, thereby affecting the range.</li>
+</ol>
+<h3 id="investigation-of-horizontal-range-dependence">Investigation of Horizontal Range Dependence</h3>
+<h4 id="dependence-on-angle-of-projection">Dependence on Angle of Projection</h4>
+<p>From the range equation:</p>
+<div class="arithmatex">\[R = \frac{v_0^2 \sin 2\theta}{g}\]</div>
+<ul>
+<li>The function <span class="arithmatex">\(\sin 2\theta\)</span> dictates how <span class="arithmatex">\(R\)</span> varies with angle.</li>
+<li><span class="arithmatex">\(R\)</span> increases as <span class="arithmatex">\(\theta\)</span> moves from 0° to 45° and decreases thereafter up to 90°.</li>
+<li>This symmetric behavior results in the same range for complementary angles (e.g., 30° and 60°).</li>
+</ul>
+<h4 id="effect-of-other-parameters">Effect of Other Parameters</h4>
+<ul>
+<li><strong>Initial Velocity (<span class="arithmatex">\(v_0\)</span>)</strong>: Since range is proportional to <span class="arithmatex">\(v_0^2\)</span>, doubling the velocity quadruples the range.</li>
+<li><strong>Gravitational Acceleration (<span class="arithmatex">\(g\)</span>)</strong>: Range is inversely proportional to <span class="arithmatex">\(g\)</span>, meaning that stronger gravity (such as on Jupiter) reduces range, while weaker gravity (such as on the Moon) increases range.</li>
+<li><strong>Launch Height (<span class="arithmatex">\(h\)</span>)</strong>: An increased launch height extends the flight time, thereby increasing the range.</li>
+</ul>
+<h3 id="family-of-solutions">Family of Solutions</h3>
+<p>By varying initial conditions, a family of parabolic trajectories emerges:
+- <strong>Different launch angles</strong> create different paths, with the same range for complementary angles.
+- <strong>Different initial velocities</strong> scale the trajectory while maintaining its shape.
+- <strong>Different gravitational accelerations</strong> alter both the height and range.
+- <strong>Different launch heights</strong> modify the total flight time and final landing position.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Projectile motion is governed by fundamental principles of kinematics and provides a versatile framework to analyze various physical scenarios. The dependence of range on the launch angle follows a sinusoidal relationship, with an optimal angle of 45° in the absence of other factors like air resistance or variable terrain. Variations in velocity and gravity significantly influence the trajectory, making projectile motion a crucial concept in physics applications such as ballistics, sports, and space travel.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
