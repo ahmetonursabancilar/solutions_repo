@@ -102,7 +102,7 @@ By varying initial conditions, a family of parabolic trajectories emerges:
 
 ---
 
-**Practical Applications**
+## Practical Applications ##
 
 Projectile motion applies to numerous real-world scenarios, where additional factors such as air resistance and uneven terrain must be considered. Some key applications include:
 
@@ -116,7 +116,7 @@ In these cases, computational models incorporating additional forces, such as dr
 
 ---
 
-## Implementation##
+## Implementation ##
 
 ### Computational Simulation of Projectile Motion
 Developing a computational tool allows for precise analysis of projectile motion under varying conditions. A basic algorithm for simulating projectile motion follows these steps:
