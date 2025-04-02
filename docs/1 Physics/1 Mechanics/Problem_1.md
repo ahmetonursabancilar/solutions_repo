@@ -8,10 +8,8 @@ $$F = ma$$
 
 For a projectile launched with an initial velocity $v_0$ at an angle $\theta$, the velocity components are:
 
-
- $$ v_{0x} = v_0 \cos\theta $$   
- $$ v_{0y} = v_0 \sin\theta $$
- 
+$$v_{0x} = v_0 \cos\theta$$  
+$$v_{0y} = v_0 \sin\theta$$
 
 Assuming constant gravitational acceleration $g$ acting downward, the equations of motion arise from Newton’s second law:
 
@@ -117,9 +115,13 @@ In these cases, computational models incorporating additional forces, such as dr
 ### Computational Simulation of Projectile Motion
 Developing a computational tool allows for precise analysis of projectile motion under varying conditions. A basic algorithm for simulating projectile motion follows these steps:
 
+1. **Initialize Parameters**: Define initial velocity $v_0$, launch angle $\theta$, gravitational acceleration $g$, and time step $\Delta t$.
+2. **Calculate Components**: Compute horizontal and vertical velocity components.
+3. **Iterate Motion**: Update position and velocity using kinematic equations at small time steps.
+4. **Plot Trajectory**: Visualize the projectile’s path using computational tools such as Python (Matplotlib) or MATLAB.
+5. **Analyze Variations**: Generate plots of range as a function of launch angle for different velocities and gravitational conditions.
 
-
-
+Such simulations help in educational demonstrations, research, and engineering applications where precise trajectory predictions are required.
 
 ---
 
