@@ -221,3 +221,53 @@ plt.show()
 
 ---
 
+
+
+ 
+
+---
+
+### **Implementation 2: Simulating Projectile Motion**  
+
+To visualize how projectile motion changes with different initial velocities, we implemented a Python script that simulates the motion of a projectile launched at **45°** with three different speeds: **30, 40, and 50 m/s**.  
+
+#### **Key Observations:**  
+- Higher initial velocity results in a **longer range** and **greater peak height** while maintaining the same parabolic trajectory shape.  
+- The motion follows the equations derived earlier, confirming that the **range is proportional to the square of velocity**.  
+- The graph clearly demonstrates how projectiles with different speeds travel varying distances while following a predictable arc.  
+
+This computational model allows for further analysis, such as exploring different angles, gravitational effects, and real-world factors like air resistance.  
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_projectile(v0_values, theta=45, g=9.81, dt=0.01):
+    plt.figure(figsize=(8, 6))
+
+    for v0 in v0_values:
+        theta_rad = np.radians(theta)
+        vx = v0 * np.cos(theta_rad)
+        vy = v0 * np.sin(theta_rad)
+
+        t_max = 2 * vy / g  # Total flight time
+        t = np.arange(0, t_max, dt)
+
+        x = vx * t
+        y = vy * t - 0.5 * g * t**2
+
+        plt.plot(x, y, label=f"v0 = {v0} m/s")
+
+    plt.xlabel("Horizontal Distance (m)")
+    plt.ylabel("Vertical Distance (m)")
+    plt.title(f"Projectile Motion for {theta}° with Different Initial Velocities")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Run simulation for initial velocities 30, 40, and 50 m/s
+plot_projectile([30, 40, 50])
+```
+
+![alt text](image-2.png)
