@@ -262,9 +262,133 @@
 <li><strong>Analyze Variations</strong>: Generate plots of range as a function of launch angle for different velocities and gravitational conditions.</li>
 </ol>
 <p>Such simulations help in educational demonstrations, research, and engineering applications where precise trajectory predictions are required.</p>
+<p>Computational Simulation of Projectile Motion
+To analyze projectile motion computationally, we implement a numerical simulation. The following Python script:</p>
+<p>✅ Simulates the motion of a projectile for different launch angles.</p>
+<p>✅ Plots the trajectory of the projectile.</p>
+<p>✅ Visualizes range vs launch angle to analyze how the angle affects the range.</p>
+<p>Python Code for Simulation</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="constants">Constants</h1>
+<p>g = 9.81  # Gravitational acceleration (m/s^2)
+v0 = 20  # Initial velocity (m/s)
+angles = np.linspace(0, 90, 10)  # Angles from 0° to 90°</p>
+<h1 id="function-to-compute-projectile-trajectory">Function to compute projectile trajectory</h1>
+<p>def projectile_trajectory(v0, theta, g):
+    theta_rad = np.radians(theta)  # Convert to radians
+    vx = v0 * np.cos(theta_rad)
+    vy = v0 * np.sin(theta_rad)</p>
+<pre><code># Time of flight
+t_flight = 2 * vy / g
+t = np.linspace(0, t_flight, num=100)
+
+# Compute x and y coordinates
+x = vx * t
+y = vy * t - 0.5 * g * t**2
+return x, y
+</code></pre>
+<h1 id="plot-projectile-trajectories-for-different-angles">Plot projectile trajectories for different angles</h1>
+<p>plt.figure(figsize=(10, 5))
+for angle in angles:
+    x, y = projectile_trajectory(v0, angle, g)
+    plt.plot(x, y, label=f'{int(angle)}°')</p>
+<p>plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.title("Projectile Motion for Different Angles")
+plt.legend()
+plt.grid(True)
+plt.show()</p>
+<h1 id="compute-and-plot-range-vs-angle">Compute and plot range vs angle</h1>
+<p>ranges = [(v0**2 * np.sin(2 * np.radians(angle))) / g for angle in angles]</p>
+<p>plt.figure(figsize=(8, 5))
+plt.plot(angles, ranges, 'bo-', label="Range")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (m)")
+plt.title("Range vs Launch Angle")
+plt.legend()
+plt.grid(True)
+plt.show()</p>
+<p>Sunumundaki <strong>Implementation</strong> başlığı altına eklemen için Python kodunu ve grafiklerin neyi anlattığını aşağıya ekledim. 🚀  </p>
 <hr/>
-<p><strong>Conclusion</strong></p>
-<p>Projectile motion is governed by fundamental principles of kinematics and provides a versatile framework to analyze various physical scenarios. The dependence of range on the launch angle follows a sinusoidal relationship, with an optimal angle of 45° in the absence of other factors like air resistance or variable terrain. Variations in velocity and gravity significantly influence the trajectory, making projectile motion a crucial concept in physics applications such as ballistics, sports, and space travel.</p>
+<h3 id="implementation"><strong>Implementation</strong></h3>
+<h4 id="computational-simulation-of-projectile-motion_1"><strong>Computational Simulation of Projectile Motion</strong></h4>
+<p>To analyze projectile motion computationally, we implement a numerical simulation. The following Python script:<br/>
+✅ Simulates the motion of a projectile for different launch angles.<br/>
+✅ Plots the <strong>trajectory</strong> of the projectile.<br/>
+✅ Visualizes <strong>range vs launch angle</strong> to analyze how the angle affects the range.  </p>
+<h4 id="python-code-for-simulation"><strong>Python Code for Simulation</strong></h4>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+g = 9.81  # Gravitational acceleration (m/s^2)
+v0 = 20  # Initial velocity (m/s)
+angles = np.linspace(0, 90, 10)  # Angles from 0° to 90°
+
+# Function to compute projectile trajectory
+def projectile_trajectory(v0, theta, g):
+    theta_rad = np.radians(theta)  # Convert to radians
+    vx = v0 * np.cos(theta_rad)
+    vy = v0 * np.sin(theta_rad)
+
+    # Time of flight
+    t_flight = 2 * vy / g
+    t = np.linspace(0, t_flight, num=100)
+
+    # Compute x and y coordinates
+    x = vx * t
+    y = vy * t - 0.5 * g * t**2
+    return x, y
+
+# Plot projectile trajectories for different angles
+plt.figure(figsize=(10, 5))
+for angle in angles:
+    x, y = projectile_trajectory(v0, angle, g)
+    plt.plot(x, y, label=f'{int(angle)}°')
+
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.title("Projectile Motion for Different Angles")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Compute and plot range vs angle
+ranges = [(v0**2 * np.sin(2 * np.radians(angle))) / g for angle in angles]
+
+plt.figure(figsize=(8, 5))
+plt.plot(angles, ranges, 'bo-', label="Range")
+plt.xlabel("Launch Angle (degrees)")
+plt.ylabel("Range (m)")
+plt.title("Range vs Launch Angle")
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+<h4 id="interpretation-of-results"><strong>Interpretation of Results</strong></h4>
+<ol>
+<li><strong>Projectile Trajectories for Different Angles</strong> </li>
+<li>The first plot shows how the <strong>path of the projectile</strong> changes with the launch angle.  </li>
+<li>Lower angles result in longer but lower trajectories, while higher angles make the projectile reach greater heights but shorter distances.  </li>
+<li>
+<p>The optimal trajectory for maximum range appears near <strong>45°</strong>, confirming the theoretical prediction.  </p>
+</li>
+<li>
+<p><strong>Range vs Launch Angle Graph</strong> </p>
+</li>
+<li>The second plot demonstrates the <strong>relationship between range and launch angle</strong>.  </li>
+<li>The <strong>range is maximum at 45°</strong> and symmetric for complementary angles (e.g., <strong>30° and 60° yield the same range</strong>).  </li>
+<li>This confirms that the <strong>optimal launch angle for maximum horizontal distance in ideal conditions is 45°</strong>.  </li>
+</ol>
+<h4 id="limitations-real-world-considerations"><strong>Limitations &amp; Real-World Considerations</strong></h4>
+<ul>
+<li>This model <strong>neglects air resistance</strong>, which in reality <strong>reduces range</strong>.  </li>
+<li>Uneven terrain or variable gravity (e.g., Moon vs Earth) can alter the motion.  </li>
+<li><strong>Wind and drag forces</strong> significantly affect projectiles in sports and ballistics.  </li>
+<li>More <strong>advanced simulations</strong> incorporate fluid dynamics for real-world accuracy.  </li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
