@@ -196,7 +196,8 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
-![Resim Açıklaması](C:\Users\admin\Desktop\grafik1.png)
+
+![alt text](image.png)
 
 
 #### **Interpretation of Results**  
