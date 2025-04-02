@@ -136,7 +136,7 @@ Such simulations help in educational demonstrations, research, and engineering a
 
 ---
 
-### **Implementation**  
+### **Implementation 1**  
 
 #### **Computational Simulation of Projectile Motion**  
 
@@ -271,3 +271,117 @@ plot_projectile([30, 40, 50])
 ```
 
 ![alt text](image-2.png)
+
+
+
+
+Here's how you can incorporate this code and explanation into your presentation:
+
+---
+
+### ****Implementation 3: Comparison of Projectile Motion: With and Without Air Resistance****
+
+The following plot compares projectile motion with and without air resistance. The simulation uses a launch angle of 45° and an initial velocity of 50 m/s.
+
+#### **Python Code to Simulate Projectile Motion with and Without Air Resistance:**
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_motion_with_air_resistance(v0, angle, g=9.81, dt=0.01, air_resistance=True):
+    # Constants
+    mass = 1.0  # Mass of the projectile in kg (assumed)
+    drag_coefficient = 0.47  # Drag coefficient for a sphere (approx)
+    radius = 0.1  # Radius of the projectile (in meters)
+    area = np.pi * radius**2  # Cross-sectional area (m^2)
+    air_density = 1.225  # Air density at sea level (kg/m^3)
+    
+    # Initial conditions
+    theta_rad = np.radians(angle)
+    vx = v0 * np.cos(theta_rad)
+    vy = v0 * np.sin(theta_rad)
+    
+    # Initial position
+    x, y = 0, 0
+    
+    # Lists to store the position data
+    x_vals, y_vals = [x], [y]
+    
+    # Air resistance calculations
+    if air_resistance:
+        drag_force = lambda v: 0.5 * air_density * area * drag_coefficient * v**2
+    else:
+        drag_force = lambda v: 0  # No drag force
+    
+    # Time of flight estimation
+    while y >= 0:
+        speed = np.sqrt(vx**2 + vy**2)
+        
+        # Calculate drag force if air resistance is considered
+        drag_x = drag_force(speed) * (vx / speed) if air_resistance else 0
+        drag_y = drag_force(speed) * (vy / speed) if air_resistance else 0
+        
+        # Accelerations
+        ax = -drag_x / mass
+        ay = -g - drag_y / mass
+        
+        # Update velocities
+        vx += ax * dt
+        vy += ay * dt
+        
+        # Update positions
+        x += vx * dt
+        y += vy * dt
+        
+        # Store positions
+        x_vals.append(x)
+        y_vals.append(y)
+    
+    return x_vals, y_vals
+
+# Parameters
+v0 = 50  # Initial velocity (m/s)
+angle = 45  # Launch angle (degrees)
+
+# Plot projectile motion with and without air resistance
+plt.figure(figsize=(8, 6))
+
+# Plot with air resistance
+x_vals_with_air, y_vals_with_air = projectile_motion_with_air_resistance(v0, angle, air_resistance=True)
+plt.plot(x_vals_with_air, y_vals_with_air, label="With Air Resistance", color='blue')
+
+# Plot without air resistance
+x_vals_without_air, y_vals_without_air = projectile_motion_with_air_resistance(v0, angle, air_resistance=False)
+plt.plot(x_vals_without_air, y_vals_without_air, label="Without Air Resistance", color='red', linestyle='--')
+
+# Adding labels and title
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Distance (m)")
+plt.title("Projectile Motion: With and Without Air Resistance")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+---
+
+![alt text](image-3.png)
+
+
+
+#### **Explanation of the Plot:**
+
+- **Blue Line:** Represents the projectile trajectory when **air resistance** is taken into account. Notice how the range is shorter and the maximum height is reduced compared to the ideal case.
+- **Red Dashed Line:** Represents the idealized trajectory assuming **no air resistance**. This is the parabolic motion we commonly study in basic physics.
+
+#### **Key Insights:**
+- **Air Resistance:** In real-world scenarios, air resistance causes the projectile to decelerate more quickly, reducing both its range and maximum height.
+- **Idealized Model:** The absence of air resistance results in a larger range and higher trajectory, which is what we see in an idealized situation without drag forces.
+
+---
+
+
+**Conclusion:**
+
+Projectile motion is a foundational concept in physics, with applications spanning from sports to engineering and space exploration. While the idealized model of projectile motion provides a clear understanding of the relationship between launch angle, initial velocity, and range, real-world factors like air resistance and varying terrain complicate these trajectories. Computational models, such as the one presented here, allow for more accurate predictions by incorporating these additional forces, thus enhancing our ability to model and optimize projectile motion in practical scenarios.
