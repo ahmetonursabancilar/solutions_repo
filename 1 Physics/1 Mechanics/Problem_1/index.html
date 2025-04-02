@@ -343,6 +343,47 @@ plt.show()
 <li>More <strong>advanced simulations</strong> incorporate fluid dynamics for real-world accuracy.  </li>
 </ul>
 <hr/>
+<hr/>
+<h3 id="implementation-2-simulating-projectile-motion"><strong>Implementation 2: Simulating Projectile Motion</strong></h3>
+<p>To visualize how projectile motion changes with different initial velocities, we implemented a Python script that simulates the motion of a projectile launched at <strong>45°</strong> with three different speeds: <strong>30, 40, and 50 m/s</strong>.  </p>
+<h4 id="key-observations"><strong>Key Observations:</strong></h4>
+<ul>
+<li>Higher initial velocity results in a <strong>longer range</strong> and <strong>greater peak height</strong> while maintaining the same parabolic trajectory shape.  </li>
+<li>The motion follows the equations derived earlier, confirming that the <strong>range is proportional to the square of velocity</strong>.  </li>
+<li>The graph clearly demonstrates how projectiles with different speeds travel varying distances while following a predictable arc.  </li>
+</ul>
+<p>This computational model allows for further analysis, such as exploring different angles, gravitational effects, and real-world factors like air resistance.  </p>
+<pre><code class="language-python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_projectile(v0_values, theta=45, g=9.81, dt=0.01):
+    plt.figure(figsize=(8, 6))
+
+    for v0 in v0_values:
+        theta_rad = np.radians(theta)
+        vx = v0 * np.cos(theta_rad)
+        vy = v0 * np.sin(theta_rad)
+
+        t_max = 2 * vy / g  # Total flight time
+        t = np.arange(0, t_max, dt)
+
+        x = vx * t
+        y = vy * t - 0.5 * g * t**2
+
+        plt.plot(x, y, label=f"v0 = {v0} m/s")
+
+    plt.xlabel("Horizontal Distance (m)")
+    plt.ylabel("Vertical Distance (m)")
+    plt.title(f"Projectile Motion for {theta}° with Different Initial Velocities")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Run simulation for initial velocities 30, 40, and 50 m/s
+plot_projectile([30, 40, 50])
+</code></pre>
+<p><img alt="alt text" src="../image-2.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
