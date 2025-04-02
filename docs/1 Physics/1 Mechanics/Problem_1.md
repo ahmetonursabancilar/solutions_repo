@@ -1,4 +1,4 @@
-**Theoretical Foundation of Projectile Motion**
+## Theoretical Foundation of Projectile Motion ##
 
 
 ### Derivation of Governing Equations
