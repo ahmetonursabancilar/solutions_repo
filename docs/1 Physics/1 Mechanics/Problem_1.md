@@ -188,7 +188,6 @@ plt.show()
 
 
 
-Sunumundaki **Implementation** başlığı altına eklemen için Python kodunu ve grafiklerin neyi anlattığını aşağıya ekledim. 🚀  
 
 ---
 
