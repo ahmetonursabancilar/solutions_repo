@@ -1,6 +1,6 @@
 **Theoretical Foundation of Projectile Motion**
 
-#### Derivation of Governing Equations
+### Derivation of Governing Equations
 
 Projectile motion can be described by decomposing the motion into horizontal and vertical components. The motion follows Newton’s second law of motion:
 
