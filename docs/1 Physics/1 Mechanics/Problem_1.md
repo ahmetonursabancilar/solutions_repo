@@ -8,8 +8,10 @@ $$F = ma$$
 
 For a projectile launched with an initial velocity $v_0$ at an angle $\theta$, the velocity components are:
 
-$$v_{0x} = v_0 \cos\theta$$  
-$$v_{0y} = v_0 \sin\theta$$
+
+ $$v_{0x} = v_0 \cos\theta$$  
+ $$v_{0y} = v_0 \sin\theta$$
+
 
 Assuming constant gravitational acceleration $g$ acting downward, the equations of motion arise from Newton’s second law:
 
