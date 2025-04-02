@@ -114,7 +114,7 @@ In these cases, computational models incorporating additional forces, such as dr
 
 ---
 
-**Implementation**
+## Implementation ##
 
 ### Computational Simulation of Projectile Motion
 Developing a computational tool allows for precise analysis of projectile motion under varying conditions. A basic algorithm for simulating projectile motion follows these steps:
