@@ -180,8 +180,8 @@
 <p>Projectile motion can be described by decomposing the motion into horizontal and vertical components. The motion follows Newton’s second law of motion:</p>
 <div class="arithmatex">\[F = ma\]</div>
 <p>For a projectile launched with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span>, the velocity components are:</p>
-<p>$$ v_{0x} = v_0 \cos\theta $$ <br/>
- $$ v_{0y} = v_0 \sin\theta $$</p>
+<div class="arithmatex">\[v_{0x} = v_0 \cos\theta$$  
+$$v_{0y} = v_0 \sin\theta\]</div>
 <p>Assuming constant gravitational acceleration <span class="arithmatex">\(g\)</span> acting downward, the equations of motion arise from Newton’s second law:</p>
 <h4 id="horizontal-motion">Horizontal Motion:</h4>
 <p>Since there is no acceleration in the horizontal direction (neglecting air resistance), the equation of motion simplifies to:</p>
@@ -254,6 +254,14 @@
 <p><strong>Implementation</strong></p>
 <h3 id="computational-simulation-of-projectile-motion">Computational Simulation of Projectile Motion</h3>
 <p>Developing a computational tool allows for precise analysis of projectile motion under varying conditions. A basic algorithm for simulating projectile motion follows these steps:</p>
+<ol>
+<li><strong>Initialize Parameters</strong>: Define initial velocity <span class="arithmatex">\(v_0\)</span>, launch angle <span class="arithmatex">\(\theta\)</span>, gravitational acceleration <span class="arithmatex">\(g\)</span>, and time step <span class="arithmatex">\(\Delta t\)</span>.</li>
+<li><strong>Calculate Components</strong>: Compute horizontal and vertical velocity components.</li>
+<li><strong>Iterate Motion</strong>: Update position and velocity using kinematic equations at small time steps.</li>
+<li><strong>Plot Trajectory</strong>: Visualize the projectile’s path using computational tools such as Python (Matplotlib) or MATLAB.</li>
+<li><strong>Analyze Variations</strong>: Generate plots of range as a function of launch angle for different velocities and gravitational conditions.</li>
+</ol>
+<p>Such simulations help in educational demonstrations, research, and engineering applications where precise trajectory predictions are required.</p>
 <hr/>
 <p><strong>Conclusion</strong></p>
 <p>Projectile motion is governed by fundamental principles of kinematics and provides a versatile framework to analyze various physical scenarios. The dependence of range on the launch angle follows a sinusoidal relationship, with an optimal angle of 45° in the absence of other factors like air resistance or variable terrain. Variations in velocity and gravity significantly influence the trajectory, making projectile motion a crucial concept in physics applications such as ballistics, sports, and space travel.</p>
