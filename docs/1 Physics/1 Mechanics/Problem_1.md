@@ -127,64 +127,9 @@ Developing a computational tool allows for precise analysis of projectile motion
 
 Such simulations help in educational demonstrations, research, and engineering applications where precise trajectory predictions are required.
 
-Computational Simulation of Projectile Motion
-To analyze projectile motion computationally, we implement a numerical simulation. The following Python script:
 
-✅ Simulates the motion of a projectile for different launch angles.
 
-✅ Plots the trajectory of the projectile.
 
-✅ Visualizes range vs launch angle to analyze how the angle affects the range.
-
-Python Code for Simulation
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-g = 9.81  # Gravitational acceleration (m/s^2)
-v0 = 20  # Initial velocity (m/s)
-angles = np.linspace(0, 90, 10)  # Angles from 0° to 90°
-
-# Function to compute projectile trajectory
-def projectile_trajectory(v0, theta, g):
-    theta_rad = np.radians(theta)  # Convert to radians
-    vx = v0 * np.cos(theta_rad)
-    vy = v0 * np.sin(theta_rad)
-    
-    # Time of flight
-    t_flight = 2 * vy / g
-    t = np.linspace(0, t_flight, num=100)
-
-    # Compute x and y coordinates
-    x = vx * t
-    y = vy * t - 0.5 * g * t**2
-    return x, y
-
-# Plot projectile trajectories for different angles
-plt.figure(figsize=(10, 5))
-for angle in angles:
-    x, y = projectile_trajectory(v0, angle, g)
-    plt.plot(x, y, label=f'{int(angle)}°')
-
-plt.xlabel("Horizontal Distance (m)")
-plt.ylabel("Vertical Distance (m)")
-plt.title("Projectile Motion for Different Angles")
-plt.legend()
-plt.grid(True)
-plt.show()
-
-# Compute and plot range vs angle
-ranges = [(v0**2 * np.sin(2 * np.radians(angle))) / g for angle in angles]
-
-plt.figure(figsize=(8, 5))
-plt.plot(angles, ranges, 'bo-', label="Range")
-plt.xlabel("Launch Angle (degrees)")
-plt.ylabel("Range (m)")
-plt.title("Range vs Launch Angle")
-plt.legend()
-plt.grid(True)
-plt.show()
 
 
 
