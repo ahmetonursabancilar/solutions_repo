@@ -281,7 +281,7 @@ Here's how you can incorporate this code and explanation into your presentation:
 
 ---
 
-### ** Implementation 3: Comparison of Projectile Motion: With and Without Air Resistance **
+### **Implementation 3: Comparison of Projectile Motion: With and Without Air Resistance**
 
 The following plot compares projectile motion with and without air resistance. The simulation uses a launch angle of 45° and an initial velocity of 50 m/s.
 
