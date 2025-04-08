@@ -350,6 +350,10 @@ def forced_damped_pendulum(t, y, gamma, omega0, A, omega_drive):
     dtheta_dot_dt = -gamma * theta_dot - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
     return [dtheta_dt, dtheta_dot_dt]
 </code></pre>
+<p><strong>Explanation:</strong> This function defines the equations of motion for the forced damped pendulum. The pendulum's behavior is modeled using two ordinary differential equations (ODEs):
+- <code>dθ/dt = θ̇</code>, where <code>θ</code> is the angle and <code>θ̇</code> is the angular velocity.
+- <code>dθ̇/dt = -γ * θ̇ - ω₀² * sin(θ) + A * cos(ω_drive * t)</code>, which represents the forces acting on the pendulum, including damping (<code>-γ * θ̇</code>), restoring force (<code>-ω₀² * sin(θ)</code>), and the external periodic driving force (<code>A * cos(ω_drive * t)</code>).</p>
+<p>This equation is the foundation of the simulation, capturing both the damping and the external driving force acting on the system.</p>
 <hr/>
 <h3 id="42-simulate-the-pendulums-motion">🧪 4.2 Simulate the Pendulum's Motion</h3>
 <pre><code class="language-python">from scipy.integrate import solve_ivp
@@ -374,6 +378,9 @@ sol = solve_ivp(
     args=(gamma, omega0, A, omega_drive)
 )
 </code></pre>
+<p><strong>Explanation:</strong> This code solves the system of differential equations defined in <strong>4.1</strong>. We use the <code>solve_ivp</code> (solve initial value problem) function from the <code>scipy.integrate</code> module to numerically solve the equations. The parameters such as damping coefficient (<code>γ</code>), natural frequency (<code>ω₀</code>), amplitude of the driving force (<code>A</code>), and the frequency of the driving force (<code>ω_drive</code>) are defined here.</p>
+<p>The initial conditions for the angle and angular velocity (<code>y0 = [0.1, 0.0]</code>) are set, and the solution is computed over a time span of 0 to 100 seconds with 3000 time steps (<code>t_eval</code>). The result is stored in the variable <code>sol</code>, which contains both the time (<code>sol.t</code>) and the pendulum's angle and angular velocity at each time step (<code>sol.y</code>).</p>
+<p>This step prepares the data for later visualization and analysis.</p>
 <hr/>
 <h3 id="43-plot-t-time-series">📈 4.3 Plot θ(t) – Time Series</h3>
 <pre><code class="language-python">plt.figure(figsize=(10, 4))
@@ -387,6 +394,7 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <p><img alt="alt text" src="../image-4.png"/></p>
+<p><strong>Explanation:</strong> This graph shows the angle of the forced damped pendulum over time, represented by the function <code>θ(t)</code>. It reveals how the pendulum's angle evolves over time, providing insights into whether the system reaches a stable equilibrium or exhibits periodic motion. The graph allows you to understand the time dynamics of the pendulum.</p>
 <hr/>
 <h3 id="44-phase-space-diagram-vs">🌀 4.4 Phase Space Diagram (θ vs θ̇)</h3>
 <pre><code class="language-python">plt.figure(figsize=(6, 6))
@@ -399,6 +407,7 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <p><img alt="alt text" src="../image-5.png"/></p>
+<p><strong>Explanation:</strong> This graph illustrates the phase space of the pendulum, plotting the angle (<code>θ</code>) against the angular velocity (<code>θ̇</code>). The horizontal axis represents the angle, while the vertical axis represents angular velocity. This diagram helps you visualize the pendulum's motion in its state space, showing whether the system behaves in a periodic or chaotic manner.</p>
 <hr/>
 <h3 id="45-poincare-section">🔁 4.5 Poincaré Section</h3>
 <pre><code class="language-python">T_drive = 2 * np.pi / omega_drive
@@ -421,7 +430,7 @@ plt.tight_layout()
 plt.show()
 </code></pre>
 <p><img alt="alt text" src="../image-6.png"/></p>
-<hr/>
+<p><strong>Explanation:</strong> The Poincaré section is a tool for analyzing the dynamics of the system by recording points in phase space at regular intervals of the driving period. In this case, the graph plots the points in the <code>(θ, θ̇)</code> plane that correspond to times at multiples of the driving period. This visualization is useful for identifying periodic behavior or chaotic patterns in the system.</p>
 <hr/>
 </div>
 </div><footer>
