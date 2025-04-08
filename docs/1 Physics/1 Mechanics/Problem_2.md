@@ -163,5 +163,120 @@ it's a **model for complexity, transition, and control**.
 
 Whether you're an engineer, physicist, or just someone who likes watching the world wiggle into chaos—this system's got something for you.
 
+
 ---
+
+## 🔧 4. Implementation: Computational Model of the Forced Damped Pendulum
+
+We now implement a simulation of the forced damped pendulum to explore its dynamic behavior under varying conditions.
+
+---
+
+### 🔢 4.1 Define the Pendulum Equation
+
+```python
+import numpy as np
+
+def forced_damped_pendulum(t, y, gamma, omega0, A, omega_drive):
+    theta, theta_dot = y
+    dtheta_dt = theta_dot
+    dtheta_dot_dt = -gamma * theta_dot - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
+    return [dtheta_dt, dtheta_dot_dt]
+```
+
+---
+
+### 🧪 4.2 Simulate the Pendulum's Motion
+
+```python
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+# Parameters
+gamma = 0.2
+omega0 = 2.0
+A = 1.2
+omega_drive = 2.0
+
+# Initial conditions
+y0 = [0.1, 0.0]
+t_eval = np.linspace(0, 100, 3000)
+
+# Solve the system
+sol = solve_ivp(
+    forced_damped_pendulum,
+    (0, 100),
+    y0,
+    t_eval=t_eval,
+    args=(gamma, omega0, A, omega_drive)
+)
+```
+
+---
+
+### 📈 4.3 Plot θ(t) – Time Series
+
+```python
+plt.figure(figsize=(10, 4))
+plt.plot(sol.t, sol.y[0], label='θ(t)')
+plt.xlabel('Time (s)')
+plt.ylabel('θ (rad)')
+plt.title('Pendulum Angle Over Time')
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+ ![alt text](image-4.png)
+
+---
+
+### 🌀 4.4 Phase Space Diagram (θ vs θ̇)
+
+```python
+plt.figure(figsize=(6, 6))
+plt.plot(sol.y[0], sol.y[1], lw=0.8)
+plt.xlabel('θ (rad)')
+plt.ylabel('θ̇ (rad/s)')
+plt.title('Phase Space Diagram')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+ ![alt text](image-5.png)
+
+---
+
+### 🔁 4.5 Poincaré Section
+
+```python
+T_drive = 2 * np.pi / omega_drive
+poincare_t = np.arange(0, 100, T_drive)
+
+poincare_points = []
+for pt in poincare_t:
+    idx = (np.abs(sol.t - pt)).argmin()
+    poincare_points.append((sol.y[0][idx], sol.y[1][idx]))
+
+x_vals, y_vals = zip(*poincare_points)
+
+plt.figure(figsize=(6, 6))
+plt.scatter(x_vals, y_vals, s=10)
+plt.xlabel('θ (rad)')
+plt.ylabel('θ̇ (rad/s)')
+plt.title('Poincaré Section')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+ ![alt text](image-6.png)
+
+---
+
+
+---
+
 
