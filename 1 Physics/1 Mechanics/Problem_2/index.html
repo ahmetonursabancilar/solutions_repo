@@ -50,6 +50,30 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">🧠 1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">✏️ Small-Angle Approximation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#general-solution">🔍 General Solution</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#resonance-the-sweet-spot-of-energy">📈 Resonance: The Sweet Spot of Energy</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">🌀 2. Analysis of Dynamics</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-effects">🎛️ Parameter Effects</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#from-order-to-chaos">⚠️ From Order to Chaos</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-real-world-applications">⚙️ 3. Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wrap-up">🚀 Wrap-Up</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +195,135 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<hr/>
+<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">🎢 <strong>Investigating the Dynamics of a Forced Damped Pendulum</strong></h1>
+<hr/>
+<h2 id="motivation">🎯 <strong>Motivation</strong></h2>
+<p>The <strong>forced damped pendulum</strong> is not just another mechanical system—<br/>
+it's a <strong>gateway into the world of complex, nonlinear dynamics</strong>.</p>
+<p>When damping and a periodic driving force are both present, something magical happens:<br/>
+a simple swing turns into a playground of <strong>resonance, chaos, and quasiperiodicity</strong>.</p>
+<p>This makes the system a powerful <strong>analogy</strong> for real-world phenomena like:</p>
+<ul>
+<li>Climate cycles 🌍  </li>
+<li>Vibrating bridges 🌉  </li>
+<li>Electrical circuits ⚡  </li>
+</ul>
+<p>So why study this? Because understanding how <strong>a simple pendulum</strong> behaves under stress tells us <strong>how complex systems thrive—or fail</strong>—in the face of repeated forces.</p>
+<hr/>
+<h2 id="1-theoretical-foundation">🧠 <strong>1. Theoretical Foundation</strong></h2>
+<p>Let’s start from the fundamental equation that governs the motion:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \sin(\theta) = A \cos(\omega t)
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(\theta(t)\)</span>: Angular displacement<br/>
+- <span class="arithmatex">\(\gamma\)</span>: Damping coefficient<br/>
+- <span class="arithmatex">\(\omega_0\)</span>: Natural frequency<br/>
+- <span class="arithmatex">\(A\)</span>: Driving force amplitude<br/>
+- <span class="arithmatex">\(\omega\)</span>: Driving frequency  </p>
+<hr/>
+<h3 id="small-angle-approximation">✏️ <strong>Small-Angle Approximation</strong></h3>
+<p>When the angle is small <span class="arithmatex">\((\theta \ll 1)\)</span>, we simplify:</p>
+<div class="arithmatex">\[
+\sin(\theta) \approx \theta
+\]</div>
+<p>Which gives:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \theta = A \cos(\omega t)
+\]</div>
+<p>This version is linear and lets us dig into analytical solutions.</p>
+<hr/>
+<h3 id="general-solution">🔍 <strong>General Solution</strong></h3>
+<p>The full solution is the sum of:</p>
+<ol>
+<li><strong>Homogeneous (transient) part</strong> </li>
+<li><strong>Particular (steady-state) part</strong></li>
+</ol>
+<p><strong>Transient part:</strong></p>
+<div class="arithmatex">\[
+\theta_{\text{hom}}(t) = e^{-\frac{\gamma}{2} t} \left( C_1 \cos(\Omega t) + C_2 \sin(\Omega t) \right)
+\]</div>
+<p>Where:</p>
+<div class="arithmatex">\[
+\Omega = \sqrt{\omega_0^2 - \left(\frac{\gamma}{2}\right)^2}
+\]</div>
+<p><strong>Steady-state part:</strong></p>
+<div class="arithmatex">\[
+\theta_{\text{part}}(t) = B \cos(\omega t - \delta)
+\]</div>
+<p>Amplitude and phase shift are:</p>
+<div class="arithmatex">\[
+B = \frac{A}{\sqrt{(\omega_0^2 - \omega^2)^2 + (\gamma \omega)^2}}, \quad \tan(\delta) = \frac{\gamma \omega}{\omega_0^2 - \omega^2}
+\]</div>
+<hr/>
+<h3 id="resonance-the-sweet-spot-of-energy">📈 <strong>Resonance: The Sweet Spot of Energy</strong></h3>
+<p>Resonance happens when the system <strong>absorbs maximum energy</strong> from the driving force:</p>
+<div class="arithmatex">\[
+\omega_{\text{res}} = \sqrt{\omega_0^2 - \frac{\gamma^2}{2}}
+\]</div>
+<p>Here, even small forces can cause <strong>large-amplitude</strong> oscillations.<br/>
+This is where beauty meets danger in mechanical systems!</p>
+<hr/>
+<h2 id="2-analysis-of-dynamics">🌀 <strong>2. Analysis of Dynamics</strong></h2>
+<h3 id="parameter-effects">🎛️ Parameter Effects</h3>
+<p>Let’s see how changing different parameters affects motion:</p>
+<ul>
+<li><strong>Damping (<span class="arithmatex">\(\gamma\)</span>)</strong>:  </li>
+<li>High → suppresses motion  </li>
+<li>
+<p>Low → enables oscillation and even chaos</p>
+</li>
+<li>
+<p><strong>Driving amplitude (<span class="arithmatex">\(A\)</span>)</strong>:  </p>
+</li>
+<li>Low → simple periodic motion  </li>
+<li>
+<p>High → system may go chaotic</p>
+</li>
+<li>
+<p><strong>Driving frequency (<span class="arithmatex">\(\omega\)</span>)</strong>:  </p>
+</li>
+<li>Near <span class="arithmatex">\(\omega_0\)</span> → <strong>resonance!</strong> </li>
+<li>Far → low amplitude</li>
+</ul>
+<hr/>
+<h3 id="from-order-to-chaos">⚠️ From Order to Chaos</h3>
+<p>As you tweak <span class="arithmatex">\(A\)</span> or <span class="arithmatex">\(\omega\)</span>, the system transitions like this:</p>
+<ol>
+<li><strong>Simple periodic motion</strong> </li>
+<li><strong>Quasiperiodic motion</strong> </li>
+<li><strong>Period-doubling</strong> </li>
+<li><strong>Chaos</strong> 🚨</li>
+</ol>
+<p>Visualize this with:
+- <strong>Phase space plots</strong> <span class="arithmatex">\((\theta \text{ vs } \dot{\theta})\)</span>
+- <strong>Poincaré sections</strong>: snapshot once per cycle
+- <strong>Bifurcation diagrams</strong>: to see chaos emerge!</p>
+<hr/>
+<h2 id="3-real-world-applications">⚙️ <strong>3. Real-World Applications</strong></h2>
+<p>This isn't just theory—it shows up in real life:</p>
+<ul>
+<li>
+<p>🧲 <strong>Energy Harvesting</strong>:<br/>
+  Tiny vibrations → electricity (like in wearables or smart bridges)</p>
+</li>
+<li>
+<p>🌉 <strong>Suspension Bridges</strong>:<br/>
+  Unchecked resonance can cause catastrophic failure<br/>
+  (hello, Tacoma Narrows Bridge...)</p>
+</li>
+<li>
+<p>⚡ <strong>Oscillating Circuits</strong>:<br/>
+  The pendulum’s math is mirrored in RLC circuits with AC driving.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="wrap-up">🚀 Wrap-Up</h2>
+<p>The forced damped pendulum is more than a swinging weight—<br/>
+it's a <strong>model for complexity, transition, and control</strong>.</p>
+<p>Whether you're an engineer, physicist, or just someone who likes watching the world wiggle into chaos—this system's got something for you.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
