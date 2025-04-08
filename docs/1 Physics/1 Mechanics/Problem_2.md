@@ -183,6 +183,11 @@ def forced_damped_pendulum(t, y, gamma, omega0, A, omega_drive):
     dtheta_dot_dt = -gamma * theta_dot - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
     return [dtheta_dt, dtheta_dot_dt]
 ```
+**Explanation:** This function defines the equations of motion for the forced damped pendulum. The pendulum's behavior is modeled using two ordinary differential equations (ODEs):
+- `dθ/dt = θ̇`, where `θ` is the angle and `θ̇` is the angular velocity.
+- `dθ̇/dt = -γ * θ̇ - ω₀² * sin(θ) + A * cos(ω_drive * t)`, which represents the forces acting on the pendulum, including damping (`-γ * θ̇`), restoring force (`-ω₀² * sin(θ)`), and the external periodic driving force (`A * cos(ω_drive * t)`).
+
+This equation is the foundation of the simulation, capturing both the damping and the external driving force acting on the system.
 
 ---
 
@@ -211,6 +216,14 @@ sol = solve_ivp(
     args=(gamma, omega0, A, omega_drive)
 )
 ```
+**Explanation:** This code solves the system of differential equations defined in **4.1**. We use the `solve_ivp` (solve initial value problem) function from the `scipy.integrate` module to numerically solve the equations. The parameters such as damping coefficient (`γ`), natural frequency (`ω₀`), amplitude of the driving force (`A`), and the frequency of the driving force (`ω_drive`) are defined here.
+
+The initial conditions for the angle and angular velocity (`y0 = [0.1, 0.0]`) are set, and the solution is computed over a time span of 0 to 100 seconds with 3000 time steps (`t_eval`). The result is stored in the variable `sol`, which contains both the time (`sol.t`) and the pendulum's angle and angular velocity at each time step (`sol.y`).
+
+This step prepares the data for later visualization and analysis.
+
+
+
 
 ---
 
@@ -230,6 +243,8 @@ plt.show()
 
  ![alt text](image-4.png)
 
+**Explanation:** This graph shows the angle of the forced damped pendulum over time, represented by the function `θ(t)`. It reveals how the pendulum's angle evolves over time, providing insights into whether the system reaches a stable equilibrium or exhibits periodic motion. The graph allows you to understand the time dynamics of the pendulum.
+
 ---
 
 ### 🌀 4.4 Phase Space Diagram (θ vs θ̇)
@@ -246,6 +261,8 @@ plt.show()
 ```
 
  ![alt text](image-5.png)
+
+**Explanation:** This graph illustrates the phase space of the pendulum, plotting the angle (`θ`) against the angular velocity (`θ̇`). The horizontal axis represents the angle, while the vertical axis represents angular velocity. This diagram helps you visualize the pendulum's motion in its state space, showing whether the system behaves in a periodic or chaotic manner.
 
 ---
 
@@ -274,9 +291,15 @@ plt.show()
 
  ![alt text](image-6.png)
 
+**Explanation:** The Poincaré section is a tool for analyzing the dynamics of the system by recording points in phase space at regular intervals of the driving period. In this case, the graph plots the points in the `(θ, θ̇)` plane that correspond to times at multiples of the driving period. This visualization is useful for identifying periodic behavior or chaotic patterns in the system.
+
 ---
 
 
----
+
+
+
+
+
 
 
