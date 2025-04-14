@@ -56,6 +56,26 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-core-idea">📐 The Core Idea</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#derivation-of-the-law">🧮 Derivation of the Law</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-examples">🌍 Real-World Examples</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-moon-around-earth">🌕 The Moon Around Earth</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#planets-in-the-solar-system">☀️ Planets in the Solar System</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#astronomical-implications">🔭 Astronomical Implications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-verification-python">💻 Simulation &amp; Verification (Python)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">🌠 Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -171,7 +191,116 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<p>I see! Let's correct this properly, ensuring everything is formatted for environments like VSCode with proper LaTeX syntax. Here's an improved version with <strong>correct usage</strong> of the dollar signs for inline and block math.</p>
+<hr/>
+<h2 id="keplers-third-law-orbital-period-and-orbital-radius">🌌 <strong>Kepler’s Third Law: Orbital Period and Orbital Radius</strong></h2>
+<hr/>
+<h3 id="motivation">🎯 <strong>Motivation</strong></h3>
+<ul>
+<li>Understanding how celestial bodies move helps us decode the structure and mechanics of the universe.</li>
+<li>Kepler’s Third Law offers a beautifully simple way to connect gravity, motion, and distance.</li>
+<li>It's crucial for:</li>
+<li>Calculating satellite orbits</li>
+<li>Estimating planetary distances</li>
+<li>Understanding exoplanet systems</li>
+</ul>
+<blockquote>
+<p><em>“The harmony of the worlds is made manifest in Kepler’s Laws.”</em></p>
+</blockquote>
+<hr/>
+<h3 id="the-core-idea">📐 <strong>The Core Idea</strong></h3>
+<p>For circular orbits:</p>
+<div class="arithmatex">\[
+T^2 \propto r^3
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( T \)</span> is the orbital period (time to complete one orbit)
+- <span class="arithmatex">\( r \)</span> is the orbital radius (distance from the central body)</p>
+<p>This means:</p>
+<blockquote>
+<p>The square of the orbital period is proportional to the cube of the orbital radius.</p>
+</blockquote>
+<hr/>
+<h3 id="derivation-of-the-law">🧮 <strong>Derivation of the Law</strong></h3>
+<p>Start with Newton's law of gravity and circular motion:</p>
+<div class="arithmatex">\[
+\frac{G M m}{r^2} = \frac{m v^2}{r}
+\]</div>
+<p>This simplifies to:</p>
+<div class="arithmatex">\[
+v^2 = \frac{G M}{r}
+\]</div>
+<p>The orbital period <span class="arithmatex">\( T \)</span> is the time it takes to complete one orbit, so we can express it as:</p>
+<div class="arithmatex">\[
+T = \frac{2\pi r}{v}
+\]</div>
+<p>Now substitute <span class="arithmatex">\( v^2 \)</span> into this equation:</p>
+<div class="arithmatex">\[
+T^2 = \frac{4\pi^2 r^3}{G M}
+\]</div>
+<p>✅ This confirms Kepler’s law from first principles!</p>
+<hr/>
+<h3 id="real-world-examples">🌍 <strong>Real-World Examples</strong></h3>
+<h4 id="the-moon-around-earth">🌕 The Moon Around Earth</h4>
+<ul>
+<li>Radius: <span class="arithmatex">\( 3.84 \times 10^8 \, \text{m} \)</span> </li>
+<li>Period: ~27.3 days  </li>
+<li>$ T^2 \propto r^3 $ holds true!</li>
+</ul>
+<h4 id="planets-in-the-solar-system">☀️ Planets in the Solar System</h4>
+<table>
+<thead>
+<tr>
+<th>Planet</th>
+<th>Orbital Radius (AU)</th>
+<th>Period (Years)</th>
+<th><span class="arithmatex">\(T^2/r^3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td>1</td>
+<td>1</td>
+<td>~1</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>1.52</td>
+<td>1.88</td>
+<td>~1</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>5.20</td>
+<td>11.86</td>
+<td>~1</td>
+</tr>
+</tbody>
+</table>
+<p>🌟 <strong>Conclusion:</strong> The law holds remarkably well across the solar system.</p>
+<hr/>
+<h3 id="astronomical-implications">🔭 <strong>Astronomical Implications</strong></h3>
+<ul>
+<li><strong>Planet Mass Estimation:</strong> Rearranged formula allows us to calculate the mass of the central body:</li>
+</ul>
+<div class="arithmatex">\[
+M = \frac{4\pi^2 r^3}{G T^2}
+\]</div>
+<ul>
+<li><strong>Satellite Design:</strong> Engineers use this to plan communication orbits, GPS, and space station paths.</li>
+<li><strong>Exoplanet Detection:</strong> Astronomers infer unseen planets’ orbits and masses using this law!</li>
+</ul>
+<hr/>
+<h3 id="simulation-verification-python">💻 <strong>Simulation &amp; Verification (Python)</strong></h3>
+<hr/>
+<h3 id="conclusion">🌠 <strong>Conclusion</strong></h3>
+<ul>
+<li>Kepler’s Third Law is a powerful bridge between <strong>observational astronomy</strong> and <strong>Newtonian physics</strong>.</li>
+<li>Its simplicity hides immense depth, powering everything from moon missions to exoplanet discovery.</li>
+<li>Understanding it means understanding the <strong>rhythm of the cosmos</strong>.</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
