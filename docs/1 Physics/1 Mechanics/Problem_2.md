@@ -236,6 +236,13 @@ plot_phase_diagram(sol, "Simple Pendulum: Phase Diagram")
 
 ![alt text](image-8.png)
 
+**θ(t) Plot:**  
+> The pendulum oscillates in a regular, periodic motion without any energy loss. This is the ideal, undamped case.
+
+**Phase Diagram:**  
+> Closed elliptical loops indicate conserved energy and perfect periodic behavior.
+
+
 ### 2️⃣ Damped Pendulum
 
 ```python
@@ -255,6 +262,12 @@ plot_phase_diagram(sol, "Damped Pendulum: Phase Diagram")
 ![alt text](image-9.png)
 
 ![alt text](image-10.png)
+
+**θ(t) Plot:**  
+> The oscillations decay over time as energy is gradually lost due to damping. The system approaches equilibrium.
+
+**Phase Diagram:**  
+> A spiral trajectory converging to the origin, showing the loss of kinetic and potential energy.
 
 
 ---
@@ -281,6 +294,13 @@ plot_phase_diagram(sol, "Forced Pendulum (No Damping): Phase Diagram")
 
 ![alt text](image-12.png)
 
+**θ(t) Plot:**  
+> Continuous external forcing causes sustained oscillations. The amplitude can vary depending on resonance.
+
+**Phase Diagram:**  
+> Complex loops reflect the interplay between the natural frequency and driving force — no energy is lost.
+
+
 
 ### 4️⃣ Forced Damped Pendulum – Scenario 1 (Moderate Forcing)
 
@@ -302,6 +322,12 @@ plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 1): Phase Diagram")
 ![alt text](image-13.png)
 
 ![alt text](image-14.png)
+
+**θ(t) Plot:**  
+> The system reaches a steady oscillatory state after initial transients. Oscillations are periodic but limited by damping.
+
+**Phase Diagram:**  
+> A stable closed loop (limit cycle), indicating periodic motion with energy input balancing damping.
 
 
 ---
@@ -325,7 +351,15 @@ plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 2): Phase Diagram")
 ![alt text](image-15.png)
 
 ![alt text](image-16.png)
+
+**θ(t) Plot:**  
+> The system shows irregular or chaotic behavior due to stronger forcing or off-resonance driving.
+
+**Phase Diagram:**  
+> The scattered points or tangled trajectories suggest sensitive dependence on initial conditions — a sign of chaos.
+
 ---
+
 
 
 
