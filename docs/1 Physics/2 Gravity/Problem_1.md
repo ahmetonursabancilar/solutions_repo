@@ -275,7 +275,7 @@ plot_multi_system_orbits(
 - **X-axis**: Orbital radius in gigameters (Gm = 1e9 m), **log scale**.
 - **Y-axis**: Orbital period in days, **log scale**.
 - **Caption**: Under the plot, describing the physics.
-- **File saved**: `orbital_period_plot.png` in the script's directory.
+
 
 
 
