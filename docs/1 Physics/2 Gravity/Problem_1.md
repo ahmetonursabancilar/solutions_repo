@@ -66,6 +66,8 @@ $$
 
 ### 🌍 **Real-World Examples**
 
+![alt text](image.png)
+
 #### 🌕 The Moon Around Earth
 - Radius: \( 3.84 \times 10^8 \, \text{m} \)  
 - Period: ~27.3 days  
