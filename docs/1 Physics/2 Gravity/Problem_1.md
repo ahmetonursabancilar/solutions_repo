@@ -1,6 +1,4 @@
-I see! Let's correct this properly, ensuring everything is formatted for environments like VSCode with proper LaTeX syntax. Here's an improved version with **correct usage** of the dollar signs for inline and block math.
 
----
 
 ## 🌌 **Kepler’s Third Law: Orbital Period and Orbital Radius**
 
