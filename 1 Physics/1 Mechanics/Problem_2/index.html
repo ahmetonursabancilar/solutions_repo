@@ -74,19 +74,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#wrap-up">🚀 Wrap-Up</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#4-implementation-computational-model-of-the-forced-damped-pendulum">🔧 4. Implementation: Computational Model of the Forced Damped Pendulum</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#41-define-the-pendulum-equation">🔢 4.1 Define the Pendulum Equation</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#42-simulate-the-pendulums-motion">🧪 4.2 Simulate the Pendulum's Motion</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#43-plot-t-time-series">📈 4.3 Plot θ(t) – Time Series</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#44-phase-space-diagram-vs">🌀 4.4 Phase Space Diagram (θ vs θ̇)</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#45-poincare-section">🔁 4.5 Poincaré Section</a>
-</li>
-</ul>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation-computational-model">🔧 4. Implementation: Computational Model</a>
 </li>
 </ul>
 </li>
@@ -338,100 +326,7 @@ This is where beauty meets danger in mechanical systems!</p>
 it's a <strong>model for complexity, transition, and control</strong>.</p>
 <p>Whether you're an engineer, physicist, or just someone who likes watching the world wiggle into chaos—this system's got something for you.</p>
 <hr/>
-<h2 id="4-implementation-computational-model-of-the-forced-damped-pendulum">🔧 4. Implementation: Computational Model of the Forced Damped Pendulum</h2>
-<p>We now implement a simulation of the forced damped pendulum to explore its dynamic behavior under varying conditions.</p>
-<hr/>
-<h3 id="41-define-the-pendulum-equation">🔢 4.1 Define the Pendulum Equation</h3>
-<pre><code class="language-python">import numpy as np
-
-def forced_damped_pendulum(t, y, gamma, omega0, A, omega_drive):
-    theta, theta_dot = y
-    dtheta_dt = theta_dot
-    dtheta_dot_dt = -gamma * theta_dot - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
-    return [dtheta_dt, dtheta_dot_dt]
-</code></pre>
-<p><strong>Explanation:</strong> This function defines the equations of motion for the forced damped pendulum. The pendulum's behavior is modeled using two ordinary differential equations (ODEs):
-- <code>dθ/dt = θ̇</code>, where <code>θ</code> is the angle and <code>θ̇</code> is the angular velocity.
-- <code>dθ̇/dt = -γ * θ̇ - ω₀² * sin(θ) + A * cos(ω_drive * t)</code>, which represents the forces acting on the pendulum, including damping (<code>-γ * θ̇</code>), restoring force (<code>-ω₀² * sin(θ)</code>), and the external periodic driving force (<code>A * cos(ω_drive * t)</code>).</p>
-<p>This equation is the foundation of the simulation, capturing both the damping and the external driving force acting on the system.</p>
-<hr/>
-<h3 id="42-simulate-the-pendulums-motion">🧪 4.2 Simulate the Pendulum's Motion</h3>
-<pre><code class="language-python">from scipy.integrate import solve_ivp
-import matplotlib.pyplot as plt
-
-# Parameters
-gamma = 0.2
-omega0 = 2.0
-A = 1.2
-omega_drive = 2.0
-
-# Initial conditions
-y0 = [0.1, 0.0]
-t_eval = np.linspace(0, 100, 3000)
-
-# Solve the system
-sol = solve_ivp(
-    forced_damped_pendulum,
-    (0, 100),
-    y0,
-    t_eval=t_eval,
-    args=(gamma, omega0, A, omega_drive)
-)
-</code></pre>
-<p><strong>Explanation:</strong> This code solves the system of differential equations defined in <strong>4.1</strong>. We use the <code>solve_ivp</code> (solve initial value problem) function from the <code>scipy.integrate</code> module to numerically solve the equations. The parameters such as damping coefficient (<code>γ</code>), natural frequency (<code>ω₀</code>), amplitude of the driving force (<code>A</code>), and the frequency of the driving force (<code>ω_drive</code>) are defined here.</p>
-<p>The initial conditions for the angle and angular velocity (<code>y0 = [0.1, 0.0]</code>) are set, and the solution is computed over a time span of 0 to 100 seconds with 3000 time steps (<code>t_eval</code>). The result is stored in the variable <code>sol</code>, which contains both the time (<code>sol.t</code>) and the pendulum's angle and angular velocity at each time step (<code>sol.y</code>).</p>
-<p>This step prepares the data for later visualization and analysis.</p>
-<hr/>
-<h3 id="43-plot-t-time-series">📈 4.3 Plot θ(t) – Time Series</h3>
-<pre><code class="language-python">plt.figure(figsize=(10, 4))
-plt.plot(sol.t, sol.y[0], label='θ(t)')
-plt.xlabel('Time (s)')
-plt.ylabel('θ (rad)')
-plt.title('Pendulum Angle Over Time')
-plt.grid(True)
-plt.legend()
-plt.tight_layout()
-plt.show()
-</code></pre>
-<p><img alt="alt text" src="../image-4.png"/></p>
-<p><strong>Explanation:</strong> This graph shows the angle of the forced damped pendulum over time, represented by the function <code>θ(t)</code>. It reveals how the pendulum's angle evolves over time, providing insights into whether the system reaches a stable equilibrium or exhibits periodic motion. The graph allows you to understand the time dynamics of the pendulum.</p>
-<hr/>
-<h3 id="44-phase-space-diagram-vs">🌀 4.4 Phase Space Diagram (θ vs θ̇)</h3>
-<pre><code class="language-python">plt.figure(figsize=(6, 6))
-plt.plot(sol.y[0], sol.y[1], lw=0.8)
-plt.xlabel('θ (rad)')
-plt.ylabel('θ̇ (rad/s)')
-plt.title('Phase Space Diagram')
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-</code></pre>
-<p><img alt="alt text" src="../image-5.png"/></p>
-<p><strong>Explanation:</strong> This graph illustrates the phase space of the pendulum, plotting the angle (<code>θ</code>) against the angular velocity (<code>θ̇</code>). The horizontal axis represents the angle, while the vertical axis represents angular velocity. This diagram helps you visualize the pendulum's motion in its state space, showing whether the system behaves in a periodic or chaotic manner.</p>
-<hr/>
-<h3 id="45-poincare-section">🔁 4.5 Poincaré Section</h3>
-<pre><code class="language-python">T_drive = 2 * np.pi / omega_drive
-poincare_t = np.arange(0, 100, T_drive)
-
-poincare_points = []
-for pt in poincare_t:
-    idx = (np.abs(sol.t - pt)).argmin()
-    poincare_points.append((sol.y[0][idx], sol.y[1][idx]))
-
-x_vals, y_vals = zip(*poincare_points)
-
-plt.figure(figsize=(6, 6))
-plt.scatter(x_vals, y_vals, s=10)
-plt.xlabel('θ (rad)')
-plt.ylabel('θ̇ (rad/s)')
-plt.title('Poincaré Section')
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-</code></pre>
-<p><img alt="alt text" src="../image-6.png"/></p>
-<p><strong>Explanation:</strong> The Poincaré section is a tool for analyzing the dynamics of the system by recording points in phase space at regular intervals of the driving period. In this case, the graph plots the points in the <code>(θ, θ̇)</code> plane that correspond to times at multiples of the driving period. This visualization is useful for identifying periodic behavior or chaotic patterns in the system.</p>
-<hr/>
+<h2 id="4-implementation-computational-model">🔧 4. Implementation: Computational Model</h2>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
