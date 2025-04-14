@@ -171,4 +171,164 @@ Whether you're an engineer, physicist, or just someone who likes watching the wo
 
 
 
+---
+
+### 🛠️ Common Setup (Run This First)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Pendulum equation
+def pendulum_eq(t, y, gamma, omega0, A, omega_drive):
+    theta, theta_dot = y
+    dtheta_dt = theta_dot
+    dtheta_dot_dt = -gamma * theta_dot - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
+    return [dtheta_dt, dtheta_dot_dt]
+
+# Plotting functions
+def plot_time_series(sol, title):
+    plt.figure(figsize=(10, 3.5))
+    plt.plot(sol.t, sol.y[0])
+    plt.xlabel('Time (s)')
+    plt.ylabel('θ (rad)')
+    plt.title(title)
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+def plot_phase_diagram(sol, title):
+    plt.figure(figsize=(5, 5))
+    plt.plot(sol.y[0], sol.y[1], lw=0.8)
+    plt.xlabel('θ (rad)')
+    plt.ylabel('θ̇ (rad/s)')
+    plt.title(title)
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+```
+
+---
+
+### 1️⃣ Simple Pendulum
+
+```python
+# Parameters
+gamma = 0.0
+A = 0.0
+omega0 = 2.0
+omega_drive = 0.0  # Not used since A = 0
+
+# Initial conditions and simulation
+y0 = [0.2, 0.0]
+t_eval = np.linspace(0, 20, 1000)
+sol = solve_ivp(pendulum_eq, (0, 20), y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
+
+# Plots
+plot_time_series(sol, "Simple Pendulum: θ(t)")
+plot_phase_diagram(sol, "Simple Pendulum: Phase Diagram")
+```
+
+---
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+### 2️⃣ Damped Pendulum
+
+```python
+gamma = 0.2
+A = 0.0
+omega0 = 2.0
+omega_drive = 0.0
+
+y0 = [0.2, 0.0]
+t_eval = np.linspace(0, 20, 1000)
+sol = solve_ivp(pendulum_eq, (0, 20), y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
+
+plot_time_series(sol, "Damped Pendulum: θ(t)")
+plot_phase_diagram(sol, "Damped Pendulum: Phase Diagram")
+```
+
+![alt text](image-9.png)
+
+![alt text](image-10.png)
+
+
+---
+
+### 3️⃣ Forced Pendulum (No Damping)
+
+```python
+gamma = 0.0
+A = 1.0
+omega0 = 2.0
+omega_drive = 1.5
+
+y0 = [0.2, 0.0]
+t_eval = np.linspace(0, 100, 3000)
+sol = solve_ivp(pendulum_eq, (0, 100), y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
+
+plot_time_series(sol, "Forced Pendulum (No Damping): θ(t)")
+plot_phase_diagram(sol, "Forced Pendulum (No Damping): Phase Diagram")
+```
+
+---
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+
+### 4️⃣ Forced Damped Pendulum – Scenario 1 (Moderate Forcing)
+
+```python
+gamma = 0.2
+A = 1.2
+omega0 = 2.0
+omega_drive = 2.0
+
+y0 = [0.1, 0.0]
+t_eval = np.linspace(0, 100, 3000)
+sol = solve_ivp(pendulum_eq, (0, 100), y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
+
+plot_time_series(sol, "Forced Damped Pendulum (Scenario 1): θ(t)")
+plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 1): Phase Diagram")
+```
+
+
+![alt text](image-13.png)
+
+![alt text](image-14.png)
+
+
+---
+
+### 5️⃣ Forced Damped Pendulum – Scenario 2 (Stronger Forcing)
+
+```python
+gamma = 0.2
+A = 1.5
+omega0 = 2.0
+omega_drive = 1.0
+
+y0 = [0.1, 0.0]
+t_eval = np.linspace(0, 100, 3000)
+sol = solve_ivp(pendulum_eq, (0, 100), y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
+
+plot_time_series(sol, "Forced Damped Pendulum (Scenario 2): θ(t)")
+plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 2): Phase Diagram")
+```
+
+![alt text](image-15.png)
+
+![alt text](image-16.png)
+---
+
+
+
+
+
 
