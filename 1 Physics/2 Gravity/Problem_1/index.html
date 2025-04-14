@@ -74,6 +74,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#simulation-verification-python">💻 Simulation &amp; Verification (Python)</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code-with-graph-and-explanation">✅ Python Code with Graph and Explanation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#what-youll-see">📊 What You'll See</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#conclusion">🌠 Conclusion</a>
 </li>
 </ul>
@@ -292,6 +296,78 @@ M = \frac{4\pi^2 r^3}{G T^2}
 </ul>
 <hr/>
 <h3 id="simulation-verification-python">💻 <strong>Simulation &amp; Verification (Python)</strong></h3>
+<hr/>
+<h3 id="python-code-with-graph-and-explanation">✅ <strong>Python Code with Graph and Explanation</strong></h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+
+def orbital_period(mass_central_body, orbital_radius):
+    """
+    Calculate orbital period using Kepler's 3rd Law.
+
+    Parameters:
+        mass_central_body (float): Mass of the central object (kg)
+        orbital_radius (float): Orbital radius (m)
+
+    Returns:
+        float: Orbital period in seconds
+    """
+    return 2 * np.pi * np.sqrt(orbital_radius**3 / (G * mass_central_body))
+
+def plot_orbital_period_vs_radius(mass_central_body, r_min, r_max, points=200):
+    """
+    Plot orbital period vs orbital radius for a given central body mass.
+
+    Parameters:
+        mass_central_body (float): Mass of the central body (kg)
+        r_min (float): Minimum orbital radius (m)
+        r_max (float): Maximum orbital radius (m)
+        points (int): Number of points in the plot
+    """
+    # Generate radius values
+    radii = np.linspace(r_min, r_max, points)
+
+    # Compute corresponding periods
+    periods = [orbital_period(mass_central_body, r) for r in radii]
+    periods_days = np.array(periods) / 86400  # convert seconds to days
+
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.plot(radii / 1e9, periods_days, color='blue', linewidth=2)
+    plt.xlabel("Orbital Radius (Gm)", fontsize=12)  # Gm = gigameters
+    plt.ylabel("Orbital Period (days)", fontsize=12)
+    plt.title("Orbital Period vs Orbital Radius", fontsize=14)
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout()
+
+    # Explanation below the graph
+    plt.figtext(0.5, -0.08,
+                "This graph illustrates Kepler's Third Law for circular orbits: "
+                "The orbital period increases with the orbital radius. "
+                "It shows how planets or satellites further from the central mass "
+                "take longer to complete one orbit.",
+                wrap=True, horizontalalignment='center', fontsize=10)
+
+    plt.show()
+
+# Example: Using the Sun's mass
+mass_of_sun = 1.989e30  # kg
+r_min = 5e10  # 50 million km (Mercury-like orbit)
+r_max = 4.5e11  # 450 million km (beyond Mars)
+
+plot_orbital_period_vs_radius(mass_of_sun, r_min, r_max)
+</code></pre>
+<hr/>
+<h3 id="what-youll-see">📊 <strong>What You'll See</strong></h3>
+<ul>
+<li><strong>X-axis</strong>: Orbital radius in gigameters (Gm, i.e., billions of meters)</li>
+<li><strong>Y-axis</strong>: Orbital period in days</li>
+<li><strong>Graph Trend</strong>: Gently curving upward — because as the orbital radius increases, the period increases (slower orbits)</li>
+</ul>
+<p><img alt="alt text" src="../image-1.png"/></p>
 <hr/>
 <h3 id="conclusion">🌠 <strong>Conclusion</strong></h3>
 <ul>
