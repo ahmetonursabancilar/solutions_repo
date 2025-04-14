@@ -90,8 +90,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
-</li>
 </ul>
 </li>
 </ul>
@@ -397,6 +395,14 @@ plot_phase_diagram(sol, "Simple Pendulum: Phase Diagram")
 <hr/>
 <p><img alt="alt text" src="../image-7.png"/></p>
 <p><img alt="alt text" src="../image-8.png"/></p>
+<p><strong>θ(t) Plot:</strong> </p>
+<blockquote>
+<p>The pendulum oscillates in a regular, periodic motion without any energy loss. This is the ideal, undamped case.</p>
+</blockquote>
+<p><strong>Phase Diagram:</strong> </p>
+<blockquote>
+<p>Closed elliptical loops indicate conserved energy and perfect periodic behavior.</p>
+</blockquote>
 <h3 id="2-damped-pendulum">2️⃣ Damped Pendulum</h3>
 <pre><code class="language-python">gamma = 0.2
 A = 0.0
@@ -412,6 +418,14 @@ plot_phase_diagram(sol, "Damped Pendulum: Phase Diagram")
 </code></pre>
 <p><img alt="alt text" src="../image-9.png"/></p>
 <p><img alt="alt text" src="../image-10.png"/></p>
+<p><strong>θ(t) Plot:</strong> </p>
+<blockquote>
+<p>The oscillations decay over time as energy is gradually lost due to damping. The system approaches equilibrium.</p>
+</blockquote>
+<p><strong>Phase Diagram:</strong> </p>
+<blockquote>
+<p>A spiral trajectory converging to the origin, showing the loss of kinetic and potential energy.</p>
+</blockquote>
 <hr/>
 <h3 id="3-forced-pendulum-no-damping">3️⃣ Forced Pendulum (No Damping)</h3>
 <pre><code class="language-python">gamma = 0.0
@@ -429,6 +443,14 @@ plot_phase_diagram(sol, "Forced Pendulum (No Damping): Phase Diagram")
 <hr/>
 <p><img alt="alt text" src="../image-11.png"/></p>
 <p><img alt="alt text" src="../image-12.png"/></p>
+<p><strong>θ(t) Plot:</strong> </p>
+<blockquote>
+<p>Continuous external forcing causes sustained oscillations. The amplitude can vary depending on resonance.</p>
+</blockquote>
+<p><strong>Phase Diagram:</strong> </p>
+<blockquote>
+<p>Complex loops reflect the interplay between the natural frequency and driving force — no energy is lost.</p>
+</blockquote>
 <h3 id="4-forced-damped-pendulum-scenario-1-moderate-forcing">4️⃣ Forced Damped Pendulum – Scenario 1 (Moderate Forcing)</h3>
 <pre><code class="language-python">gamma = 0.2
 A = 1.2
@@ -444,6 +466,14 @@ plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 1): Phase Diagram")
 </code></pre>
 <p><img alt="alt text" src="../image-13.png"/></p>
 <p><img alt="alt text" src="../image-14.png"/></p>
+<p><strong>θ(t) Plot:</strong> </p>
+<blockquote>
+<p>The system reaches a steady oscillatory state after initial transients. Oscillations are periodic but limited by damping.</p>
+</blockquote>
+<p><strong>Phase Diagram:</strong> </p>
+<blockquote>
+<p>A stable closed loop (limit cycle), indicating periodic motion with energy input balancing damping.</p>
+</blockquote>
 <hr/>
 <h3 id="5-forced-damped-pendulum-scenario-2-stronger-forcing">5️⃣ Forced Damped Pendulum – Scenario 2 (Stronger Forcing)</h3>
 <pre><code class="language-python">gamma = 0.2
@@ -459,7 +489,16 @@ plot_time_series(sol, "Forced Damped Pendulum (Scenario 2): θ(t)")
 plot_phase_diagram(sol, "Forced Damped Pendulum (Scenario 2): Phase Diagram")
 </code></pre>
 <p><img alt="alt text" src="../image-15.png"/></p>
-<h2 id="_1"><img alt="alt text" src="../image-16.png"/></h2>
+<p><img alt="alt text" src="../image-16.png"/></p>
+<p><strong>θ(t) Plot:</strong> </p>
+<blockquote>
+<p>The system shows irregular or chaotic behavior due to stronger forcing or off-resonance driving.</p>
+</blockquote>
+<p><strong>Phase Diagram:</strong> </p>
+<blockquote>
+<p>The scattered points or tangled trajectories suggest sensitive dependence on initial conditions — a sign of chaos.</p>
+</blockquote>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
