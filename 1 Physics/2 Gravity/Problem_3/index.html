@@ -60,6 +60,14 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 3</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fundamental-concepts">Fundamental Concepts</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-trajectories">Types of Trajectories</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-simulation-overview">Numerical Simulation Overview</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +179,272 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-3">Problem 3</h1>
+<h3 id="presentation-trajectories-of-a-freely-released-payload-near-earth"><strong>Presentation: Trajectories of a Freely Released Payload Near Earth</strong></h3>
+<hr/>
+<h4 id="introduction">Introduction</h4>
+<ul>
+<li><strong>Objective:</strong> Analyze the trajectories of a payload released near Earth under different initial conditions.</li>
+<li><strong>Key Questions:</strong></li>
+<li>How do initial velocity and altitude affect the trajectory?</li>
+<li>What types of orbits (elliptical, parabolic, hyperbolic) can occur?</li>
+<li>How does this relate to real-world applications like satellite deployment and escape missions?</li>
+</ul>
+<hr/>
+<h4 id="fundamental-concepts">Fundamental Concepts</h4>
+<ul>
+<li><strong>Newton's Law of Gravitation:</strong>
+  $$
+  F = G \frac{m_1 m_2}{r^2}
+  $$</li>
+<li>Describes the force between two masses.</li>
+<li><strong>Kepler's Laws:</strong></li>
+<li>Elliptical orbits with Earth at one focus.</li>
+<li>Equal areas swept in equal times.</li>
+<li>Period squared proportional to semi-major axis cubed.</li>
+<li><strong>Escape Velocity:</strong>
+  $$
+  v_{\text{escape}} = \sqrt{\frac{2GM}{r}}
+  $$</li>
+<li>Minimum velocity to escape Earth's gravity.</li>
+</ul>
+<hr/>
+<h4 id="types-of-trajectories">Types of Trajectories</h4>
+<ul>
+<li><strong>Elliptical Orbit:</strong> Bound orbit with negative total energy (<span class="arithmatex">\(E &lt; 0\)</span>).</li>
+<li><strong>Parabolic Trajectory:</strong> Boundary condition for escape (<span class="arithmatex">\(E = 0\)</span>).</li>
+<li><strong>Hyperbolic Trajectory:</strong> Unbound orbit with positive total energy (<span class="arithmatex">\(E &gt; 0\)</span>).</li>
+</ul>
+<hr/>
+<h4 id="numerical-simulation-overview">Numerical Simulation Overview</h4>
+<ul>
+<li><strong>Approach:</strong></li>
+<li>Solve equations of motion using numerical integration.</li>
+<li>Use Python with <code>scipy.integrate.solve_ivp</code>.</li>
+<li><strong>Equations of Motion:</strong>
+  $$
+  \frac{d\mathbf{r}}{dt} = \mathbf{v}, \quad \frac{d\mathbf{v}}{dt} = -\frac{GM}{r^3} \mathbf{r}.
+  $$</li>
+</ul>
+<hr/>
+<h3 id="graph-1-trajectories-with-varying-velocities"><strong>Graph 1: Trajectories with Varying Velocities</strong></h3>
+<h4 id="python-code-for-graph-1"><strong>Python Code for Graph 1</strong></h4>
+<pre><code class="language-python">import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.674e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24   # Mass of Earth (kg)
+R_Earth = 6371e3  # Radius of Earth (m)
+
+# Equations of motion
+def equations_of_motion(t, state):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y / r**3
+    return [vx, vy, ax, ay]
+
+# Simulate trajectory
+def simulate_trajectory(initial_velocity, initial_position, t_span, t_eval):
+    state0 = [initial_position[0], initial_position[1], 0, initial_velocity]
+    sol = solve_ivp(equations_of_motion, t_span, state0, t_eval=t_eval)
+    return sol.y[0], sol.y[1]
+
+# Plotting
+def plot_case_1():
+    altitudes = [300e3] * 6  # Altitude in meters
+    velocities = [7800, 7900, 8000, 8100, 8200, 8300]  # Velocity in m/s
+    colors = ['blue', 'orange', 'green', 'red', 'purple', 'brown']
+    labels = [f'Trajectory {i+1}' for i in range(6)]
+
+    t_span = (0, 5000)  # 5000 seconds
+    t_eval = np.linspace(t_span[0], t_span[1], 1000)
+
+    fig, ax = plt.subplots(figsize=(8, 8))
+    earth_radius = R_Earth
+    circle = plt.Circle((0, 0), earth_radius, color='blue', alpha=0.3, label="Earth")
+    ax.add_patch(circle)
+    plt.scatter(0, 0, color='yellow', s=50, label="Center of Earth")
+
+    for i in range(len(velocities)):
+        initial_position = [R_Earth + altitudes[i], 0]
+        x, y = simulate_trajectory(velocities[i], initial_position, t_span, t_eval)
+        plt.plot(x, y, color=colors[i], label=labels[i])
+
+    plt.title("Trajectories in a Gravitational Field with Filled Earth")
+    plt.xlabel("x [m]")
+    plt.ylabel("y [m]")
+    plt.axis('equal')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Run the plot
+plot_case_1()
+</code></pre>
+<p><img alt="
+" src="../image-4.png"/></p>
+<h4 id="explanation-of-graph-1"><strong>Explanation of Graph 1</strong></h4>
+<ul>
+<li><strong>Observations:</strong></li>
+<li><strong>Trajectory 1 (Blue):</strong> Circular orbit at 7800 m/s.</li>
+<li><strong>Trajectories 2-5:</strong> Elliptical orbits as velocity increases.</li>
+<li><strong>Trajectory 6 (Brown):</strong> Hyperbolic trajectory at 8300 m/s.</li>
+<li><strong>Insights:</strong> Increasing velocity changes the orbit from circular to elliptical to hyperbolic.</li>
+</ul>
+<hr/>
+<h3 id="graph-2-multiple-elliptical-orbits"><strong>Graph 2: Multiple Elliptical Orbits</strong></h3>
+<h4 id="python-code-for-graph-2"><strong>Python Code for Graph 2</strong></h4>
+<pre><code class="language-python">def plot_case_2():
+    altitudes = [300e3] * 11  # All at 300 km altitude
+    velocities = np.linspace(7500, 8000, 11)  # Velocities ranging from 7500 to 8000 m/s
+    colors = plt.cm.viridis(np.linspace(0, 1, 11))
+    labels = [f'Trajectory {i+1}' for i in range(11)]
+
+    t_span = (0, 5000)  # 5000 seconds
+    t_eval = np.linspace(t_span[0], t_span[1], 1000)
+
+    fig, ax = plt.subplots(figsize=(8, 8))
+    earth_radius = R_Earth
+    circle = plt.Circle((0, 0), earth_radius, color='blue', alpha=0.3, label="Earth")
+    ax.add_patch(circle)
+    plt.scatter(0, 0, color='yellow', s=50, label="Center of Earth")
+
+    for i in range(len(velocities)):
+        initial_position = [R_Earth + altitudes[i], 0]
+        x, y = simulate_trajectory(velocities[i], initial_position, t_span, t_eval)
+        plt.plot(x, y, color=colors[i], label=labels[i])
+
+    plt.title("Trajectories in a Gravitational Field with Filled Earth")
+    plt.xlabel("x [m]")
+    plt.ylabel("y [m]")
+    plt.axis('equal')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Run the plot
+plot_case_2()
+</code></pre>
+<p><img alt="alt text" src="../image-5.png"/></p>
+<h4 id="explanation-of-graph-2"><strong>Explanation of Graph 2</strong></h4>
+<ul>
+<li><strong>Observations:</strong></li>
+<li>All trajectories are elliptical, indicating they are bound to Earth.</li>
+<li>As velocity increases, the eccentricity of the orbits increases.</li>
+<li><strong>Insights:</strong> Small variations in velocity lead to significant changes in orbital shape.</li>
+</ul>
+<hr/>
+<h4 id="slide-6-real-world-applications"><strong>Slide 6: Real-World Applications</strong></h4>
+<ul>
+<li><strong>Satellite Deployment:</strong> Precise control of velocity ensures stable orbits.</li>
+<li><strong>Reentry Missions:</strong> Understanding deceleration is crucial for safe reentry.</li>
+<li><strong>Interplanetary Missions:</strong> Hyperbolic trajectories for escaping Earth's gravity.</li>
+</ul>
+<hr/>
+<h4 id="conclusion">Conclusion</h4>
+<ul>
+<li><strong>Key Takeaways:</strong></li>
+<li>Initial velocity and altitude determine the type of trajectory.</li>
+<li>Elliptical, parabolic, and hyperbolic orbits represent different energy states.</li>
+<li>Numerical simulations provide insights into complex gravitational dynamics.</li>
+<li><strong>Future Work:</strong></li>
+<li>Include atmospheric drag for more realistic models.</li>
+<li>Explore multi-body interactions for planetary exploration.</li>
+</ul>
+<hr/>
+<h3 id="bonus-slide-fun-fact"><strong>Bonus Slide: Fun Fact</strong></h3>
+<ul>
+<li><strong>Did You Know?</strong></li>
+<li>The International Space Station orbits Earth at about 7.66 km/s.</li>
+<li>A slight increase in velocity could send it on an escape trajectory!</li>
+</ul>
+<hr/>
+<h3 id="fun-fact-escape-velocity">Fun Fact - Escape Velocity</h3>
+<p><strong>Title:</strong> 🚀 Fun Fact: Escape Velocity<br/>
+<strong>Content:</strong>
+- <strong>Escape Velocity on Earth:</strong> <span class="arithmatex">\(11,186 \, \text{m/s}\)</span> (about <span class="arithmatex">\(40,270 \, \text{km/h}\)</span>).
+- <strong>Fun Comparison:</strong> If you could drive a car at this speed, you'd go around the world in just over <strong>1 hour</strong>!
+- <strong>Visual:</strong> A cartoon car speeding around the globe with a "Whoosh!" sound effect.</p>
+<hr/>
+<h3 id="interactive-quiz">Interactive Quiz</h3>
+<p><strong>Title:</strong> 🤔 Quiz Time!<br/>
+<strong>Question:</strong> What happens if you release a payload from a rocket moving at exactly escape velocity?<br/>
+<strong>Options:</strong>
+1. It orbits Earth in a perfect circle.
+2. It follows a parabolic trajectory.
+3. It escapes Earth's gravity immediately.
+4. It falls back to Earth.</p>
+<p><strong>Answer:</strong><br/>
+- <strong>Correct Answer:</strong> 2. It follows a parabolic trajectory.<br/>
+- <strong>Explanation:</strong> At exactly escape velocity, the payload has enough energy to escape Earth's gravity but not enough to move away indefinitely—it follows a parabolic path.</p>
+<p><strong>Visual:</strong> A rocket releasing a payload with a trajectory animation.</p>
+<hr/>
+<h3 id="real-life-example-apollo-missions">Real-Life Example - Apollo Missions</h3>
+<p><strong>Title:</strong> 🌕 Real-Life Application: Apollo Missions<br/>
+<strong>Content:</strong>
+- The Apollo missions used precise calculations of trajectories to:
+  - Launch from Earth.
+  - Enter lunar orbit.
+  - Return safely to Earth.
+- <strong>Key Trajectory Types Used:</strong>
+  - <strong>Elliptical Orbit:</strong> To reach the Moon.
+  - <strong>Hyperbolic Trajectory:</strong> For returning to Earth.</p>
+<hr/>
+<h3 id="gravity-well-visualization">Gravity Well Visualization</h3>
+<p><strong>Title:</strong> 🌍 Gravity Well Visualization<br/>
+<strong>Content:</strong>
+- <strong>Concept:</strong> Imagine Earth as a deep well. Objects fall into the well unless they have enough energy to climb out.
+- <strong>Visual:</strong> A 3D gravity well diagram showing how different velocities affect the path of an object:
+  - Low velocity: Falls back into the well (Earth).
+  - High velocity: Escapes the well.</p>
+<p><strong>Python Code for Gravity Well Visualization :</strong></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Create a grid of points
+theta = np.linspace(0, 2 * np.pi, 100)
+phi = np.linspace(0, np.pi, 100)
+theta, phi = np.meshgrid(theta, phi)
+
+# Radius of the gravity well
+r = 1 / (1 + 0.5 * np.sin(phi))
+
+# Convert spherical coordinates to Cartesian
+x = r * np.sin(phi) * np.cos(theta)
+y = r * np.sin(phi) * np.sin(theta)
+z = r * np.cos(phi)
+
+# Plot
+fig = plt.figure(figsize=(8, 8))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(x, y, z, cmap='viridis')
+
+ax.set_title("Gravity Well Visualization")
+ax.set_xlabel("X-axis")
+ax.set_ylabel("Y-axis")
+ax.set_zlabel("Z-axis")
+
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-6.png"/></p>
+<hr/>
+<h3 id="summary">Summary</h3>
+<p><strong>Title:</strong> 📝 Summary<br/>
+<strong>Key Points:</strong>
+1. Initial conditions (velocity and altitude) determine the type of trajectory.
+2. Elliptical, parabolic, and hyperbolic orbits represent different energy states.
+3. Numerical simulations help predict and visualize complex gravitational dynamics.
+4. Real-world applications include satellite deployment, reentry missions, and interplanetary travel.</p>
+<p><strong>Takeaway:</strong> Understanding trajectories is crucial for successful space missions!</p>
+<hr/>
+<h3 id="bonus-slide-space-joke"><strong>Bonus Slide: Space Joke</strong></h3>
+<p><strong>Title:</strong> 😄 Space Joke<br/>
+<strong>Joke:</strong> Why did the astronaut break up with their partner?<br/>
+<strong>Answer:</strong> They needed space!  </p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
