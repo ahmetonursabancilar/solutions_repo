@@ -249,3 +249,25 @@ As we continue to explore the vastness of space, understanding the speed require
 
 ---
 
+
+
+
+#### Third Cosmic Velocity (Heliocentric Escape Velocity) 🚀
+
+To escape both Earth's and the Sun's gravitational fields, the total energy at the moment of escape is given by:
+
+$$
+\frac{1}{2}mv^2 = \frac{GM_{\text{Earth}}m}{r_{\text{Earth}}} + \left( \frac{GM_{\text{Sun}}m}{r_{\text{Sun}}} - \frac{GM_{\text{Sun}}m}{r_{\text{Earth}}} \right)
+$$
+
+Where:
+- $ M_{\text{Earth}} $: Mass of Earth,
+- $ M_{\text{Sun}} $: Mass of the Sun,
+- $ r_{\text{Earth}} $: Distance from the object to the center of Earth,
+- $ r_{\text{Sun}} $: Distance from the object to the center of the Sun.
+
+Simplifying this expression, the third cosmic velocity ($ v_3 $) becomes:
+
+$$
+v_3 = \sqrt{\frac{2GM_{\text{Earth}}}{r_{\text{Earth}}} + \frac{2GM_{\text{Sun}}}{r_{\text{Sun}}} \left( 1 - \frac{r_{\text{Earth}}}{r_{\text{Sun}}} \right)}
+$$
