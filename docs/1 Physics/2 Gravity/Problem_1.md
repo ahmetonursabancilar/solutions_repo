@@ -102,6 +102,40 @@ $$
 
 ### 💻 **Simulation & Verification (Python)**
 
+Verification of Kepler's Third Law: T² vs r³
+```
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Orbital data for inner planets (values in Astronomical Units and Earth years)
+planets = ['Mercury', 'Venus', 'Earth', 'Mars']
+orbital_radii_au = np.array([0.39, 0.72, 1.00, 1.52])  # Orbital radii (AU)
+orbital_periods_years = np.array([0.24, 0.62, 1.00, 1.88])  # Orbital periods (years)
+
+# Compute T^2 and r^3
+T_squared = orbital_periods_years ** 2
+r_cubed = orbital_radii_au ** 3
+
+# Plotting T^2 vs r^3
+plt.figure(figsize=(8,6))
+plt.plot(r_cubed, T_squared, 'o-', color='royalblue')
+
+# Annotate planets on the plot
+for i, planet in enumerate(planets):
+    plt.text(r_cubed[i] + 0.01, T_squared[i], planet, fontsize=9)
+
+# Labels and title
+plt.xlabel(r'$r^3$ (AU³)', fontsize=12)
+plt.ylabel(r'$T^2$ (Years²)', fontsize=12)
+plt.title('Kepler\'s Third Law: $T^2$ vs $r^3$', fontsize=14)
+plt.grid(True)
+
+# Show the plot
+plt.show()
+
+```
+
+![alt text](image-7.png)
 
 
 
