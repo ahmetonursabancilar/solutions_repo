@@ -71,7 +71,8 @@ $$
 #### 🌕 The Moon Around Earth
 - Radius: \( 3.84 \times 10^8 \, \text{m} \)  
 - Period: ~27.3 days  
-- $T^2 \propto r^3$
+- $ T^2 \propto r^3 $
+
   
 
 #### ☀️ Planets in the Solar System
