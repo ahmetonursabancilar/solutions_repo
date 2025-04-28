@@ -33,7 +33,6 @@ The second cosmic velocity is even more exciting — it’s the speed required t
 
 $$
 v_2 = \sqrt{\frac{2GM}{r}} \quad \text{(The speed we need to break free from a planet’s gravity and venture into the cosmos)}
-
 $$
 
 Think about the thrilling moment when a spacecraft breaks free from Earth's gravity — that's the second cosmic velocity in action!
