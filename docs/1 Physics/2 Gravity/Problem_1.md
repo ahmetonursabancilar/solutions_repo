@@ -103,7 +103,7 @@ $$
 ### 💻 **Simulation & Verification (Python)**
 
 Verification of Kepler's Third Law: T² vs r³
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
