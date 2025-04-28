@@ -100,6 +100,7 @@ $$
 
 
 
+
 ---
 
 # 🌎☀️ Mass Determination Using Kepler’s Law
@@ -156,8 +157,6 @@ Again, this result aligns extremely well with the accepted mass of the Sun.
 This method shows how Kepler’s Third Law not only describes orbital motion but also enables the calculation of massive celestial bodies, connecting orbital dynamics with fundamental gravitational properties.
 
 ---
-
-
 
 
 
