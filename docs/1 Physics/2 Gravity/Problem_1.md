@@ -177,7 +177,6 @@ plt.show()
 
 ![alt text](image-8.png)
 
-İşte **daha kısa ve poster tarzı** bir versiyonu Emmolu:  
 
 ---
 
