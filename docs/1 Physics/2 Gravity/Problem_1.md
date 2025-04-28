@@ -98,7 +98,71 @@ $$
 - **Satellite Design:** Engineers use this to plan communication orbits, GPS, and space station paths.
 - **Exoplanet Detection:** Astronomers infer unseen planets’ orbits and masses using this law!
 
+
+
 ---
+
+# 🌎☀️ Mass Determination Using Kepler’s Law
+
+Kepler’s Third Law, in its Newtonian form, allows us to calculate the mass of a central body if the orbital radius and period of an orbiting object are known.  
+The formula is:
+
+$$
+M = \frac{4 \pi^2 r^3}{G T^2}
+$$
+
+Where:
+- $M$ = Mass of the central object (kg),
+- $r$ = Orbital radius (meters),
+- $T$ = Orbital period (seconds),
+- $G$ = Gravitational constant $(6.67430 \times 10^{-11}\ \text{m}^3 \text{kg}^{-1} \text{s}^{-2})$.
+
+---
+
+## 📍 Finding the Mass of Earth
+
+Using the Moon's orbit:
+- Orbital radius: $r = 384,400\ \text{km}$
+- Orbital period: $T = 27.32\ \text{days}$
+
+Converting to SI units and applying the formula gives:
+
+$$
+M_{\text{Earth}} \approx 5.97 \times 10^{24}\ \text{kg}
+$$
+
+This matches the known mass of Earth very closely!
+
+---
+
+## 📍 Finding the Mass of the Sun
+
+Using Earth's orbit around the Sun:
+- Orbital radius: $r = 149.6\ \text{million km}$
+- Orbital period: $T = 365.25\ \text{days}$
+
+Calculations yield:
+
+$$
+M_{\text{Sun}} \approx 1.99 \times 10^{30}\ \text{kg}
+$$
+
+Again, this result aligns extremely well with the accepted mass of the Sun.
+
+---
+
+## 🎯 Conclusion
+
+This method shows how Kepler’s Third Law not only describes orbital motion but also enables the calculation of massive celestial bodies, connecting orbital dynamics with fundamental gravitational properties.
+
+---
+
+
+
+
+
+
+
 
 ### 💻 **Simulation & Verification (Python)**
 
