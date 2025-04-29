@@ -165,6 +165,106 @@ plot_case_2()
 
 ---
 
+
+Absolutely, Emmolu! Below is a **complete Python code snippet** that generates a plot of the **trajectories of a payload released 800 km above Earth** with initial velocities ranging from **5 km/s to 13 km/s**. I’ve also included a **graph title** and **clear English explanation** of what the plot represents.
+
+---
+
+### 🔭 **Python Code: Payload Trajectories from 800 km Altitude**
+
+```python
+import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.674e-11         # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24          # Mass of Earth (kg)
+R_EARTH = 6371e3      # Radius of Earth (m)
+ALTITUDE = 800e3      # Initial altitude above Earth's surface (800 km)
+
+# Equations of motion under gravity
+def equations_of_motion(t, state):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y / r**3
+    return [vx, vy, ax, ay]
+
+# Simulate trajectory for given initial speed
+def simulate_trajectory(initial_speed, t_span, t_eval):
+    x0 = R_EARTH + ALTITUDE  # Initial position (800 km from surface)
+    y0 = 0
+    vx0 = 0
+    vy0 = initial_speed      # Velocity in y-direction (upward)
+    initial_state = [x0, y0, vx0, vy0]
+    sol = solve_ivp(equations_of_motion, t_span, initial_state, t_eval=t_eval)
+    return sol.y[0], sol.y[1]
+
+# Plotting the trajectories
+def plot_trajectories():
+    velocities = np.arange(5000, 13500, 500)  # From 5 km/s to 13 km/s
+    colors = plt.cm.plasma(np.linspace(0, 1, len(velocities)))
+    t_span = (0, 5000)  # 5000 seconds
+    t_eval = np.linspace(*t_span, 1000)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+    
+    # Draw Earth
+    earth = plt.Circle((0, 0), R_EARTH, color='blue', alpha=0.3, label="Earth")
+    ax.add_patch(earth)
+    ax.scatter(0, 0, color='yellow', label="Center of Earth")
+
+    # Plot each trajectory
+    for i, v in enumerate(velocities):
+        x, y = simulate_trajectory(v, t_span, t_eval)
+        label = f'{v/1000:.1f} km/s'
+        ax.plot(x, y, color=colors[i], label=label)
+
+    ax.set_title("Payload Trajectories from 800 km Altitude at Different Initial Velocities", fontsize=14)
+    ax.set_xlabel("x [m]")
+    ax.set_ylabel("y [m]")
+    ax.set_aspect('equal')
+    ax.grid(True)
+    ax.legend(title="Initial Speed")
+    plt.show()
+
+# Run the plot
+plot_trajectories()
+```
+
+
+![alt text](image-9.png)
+
+
+---
+
+### 📌 **Graph Title:**
+> **"Payload Trajectories from 800 km Altitude at Different Initial Velocities"**
+
+---
+
+### 📘 **What the Graph Shows  :**
+
+- The plot illustrates the paths (trajectories) of a payload launched **from 800 km above Earth's surface**, starting from the right side of the Earth.
+- Each colored curve corresponds to a **different initial launch speed**, ranging from **5 km/s to 13 km/s**.
+- **At lower velocities (e.g., 5 km/s)**, the payload **falls back to Earth** due to insufficient energy.
+- **At moderate velocities (7–8 km/s)**, it enters **elliptical or circular orbits**, staying gravitationally bound to Earth.
+- **At high velocities (above ~11.2 km/s)**, it follows a **hyperbolic trajectory**, meaning it **escapes Earth's gravitational pull**.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
 #### **Slide 6: Real-World Applications**
 - **Satellite Deployment:** Precise control of velocity ensures stable orbits.
 - **Reentry Missions:** Understanding deceleration is crucial for safe reentry.
