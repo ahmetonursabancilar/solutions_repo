@@ -163,10 +163,7 @@ plot_case_2()
   - As velocity increases, the eccentricity of the orbits increases.
 - **Insights:** Small variations in velocity lead to significant changes in orbital shape.
 
----
 
-
-Absolutely, Emmolu! Below is a **complete Python code snippet** that generates a plot of the **trajectories of a payload released 800 km above Earth** with initial velocities ranging from **5 km/s to 13 km/s**. I’ve also included a **graph title** and **clear English explanation** of what the plot represents.
 
 ---
 
