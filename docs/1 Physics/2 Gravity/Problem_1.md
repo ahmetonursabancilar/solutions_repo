@@ -200,45 +200,7 @@ plt.show()
 
 ![alt text](image-7.png)
 
-Verification of Kepler's Third Law for Natural Satellites
-```python
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Orbital data for natural satellites
-# Distance from the planet center in kilometers (km)
-orbital_radii_km = np.array([384400, 421700, 671100, 1070400, 1882700])
-
-# Orbital periods in days
-orbital_periods_days = np.array([27.32, 1.77, 3.55, 7.15, 16.69])
-
-# Names of the moons
-moons = ['Moon (Earth)', 'Io (Jupiter)', 'Europa (Jupiter)', 'Ganymede (Jupiter)', 'Callisto (Jupiter)']
-
-# Calculate T^2 and r^3
-T_squared = orbital_periods_days ** 2
-r_cubed = orbital_radii_km ** 3
-
-# Create the plot
-plt.figure(figsize=(8,6))
-plt.plot(r_cubed, T_squared, 'o-', color='darkorange', markersize=8)
-
-# Annotate each moon
-for i, moon in enumerate(moons):
-    plt.text(r_cubed[i]*1.05, T_squared[i]*1.05, moon, fontsize=9)
-
-# Add labels and title
-plt.xlabel(r'$r^3$ (km³)', fontsize=12)
-plt.ylabel(r'$T^2$ (days²)', fontsize=12)
-plt.title('Verification of Kepler\'s Third Law for Natural Satellites', fontsize=14)
-plt.grid(True)
-
-# Show the plot
-plt.show()
-```
-
-![alt text](image-8.png)
 
 
 ---
