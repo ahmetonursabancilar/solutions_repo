@@ -336,6 +336,84 @@ plot_case_2()
 <li><strong>Insights:</strong> Small variations in velocity lead to significant changes in orbital shape.</li>
 </ul>
 <hr/>
+<p>Absolutely, Emmolu! Below is a <strong>complete Python code snippet</strong> that generates a plot of the <strong>trajectories of a payload released 800 km above Earth</strong> with initial velocities ranging from <strong>5 km/s to 13 km/s</strong>. I’ve also included a <strong>graph title</strong> and <strong>clear English explanation</strong> of what the plot represents.</p>
+<hr/>
+<h3 id="python-code-payload-trajectories-from-800-km-altitude">🔭 <strong>Python Code: Payload Trajectories from 800 km Altitude</strong></h3>
+<pre><code class="language-python">import numpy as np
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.674e-11         # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24          # Mass of Earth (kg)
+R_EARTH = 6371e3      # Radius of Earth (m)
+ALTITUDE = 800e3      # Initial altitude above Earth's surface (800 km)
+
+# Equations of motion under gravity
+def equations_of_motion(t, state):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y / r**3
+    return [vx, vy, ax, ay]
+
+# Simulate trajectory for given initial speed
+def simulate_trajectory(initial_speed, t_span, t_eval):
+    x0 = R_EARTH + ALTITUDE  # Initial position (800 km from surface)
+    y0 = 0
+    vx0 = 0
+    vy0 = initial_speed      # Velocity in y-direction (upward)
+    initial_state = [x0, y0, vx0, vy0]
+    sol = solve_ivp(equations_of_motion, t_span, initial_state, t_eval=t_eval)
+    return sol.y[0], sol.y[1]
+
+# Plotting the trajectories
+def plot_trajectories():
+    velocities = np.arange(5000, 13500, 500)  # From 5 km/s to 13 km/s
+    colors = plt.cm.plasma(np.linspace(0, 1, len(velocities)))
+    t_span = (0, 5000)  # 5000 seconds
+    t_eval = np.linspace(*t_span, 1000)
+
+    fig, ax = plt.subplots(figsize=(10, 10))
+
+    # Draw Earth
+    earth = plt.Circle((0, 0), R_EARTH, color='blue', alpha=0.3, label="Earth")
+    ax.add_patch(earth)
+    ax.scatter(0, 0, color='yellow', label="Center of Earth")
+
+    # Plot each trajectory
+    for i, v in enumerate(velocities):
+        x, y = simulate_trajectory(v, t_span, t_eval)
+        label = f'{v/1000:.1f} km/s'
+        ax.plot(x, y, color=colors[i], label=label)
+
+    ax.set_title("Payload Trajectories from 800 km Altitude at Different Initial Velocities", fontsize=14)
+    ax.set_xlabel("x [m]")
+    ax.set_ylabel("y [m]")
+    ax.set_aspect('equal')
+    ax.grid(True)
+    ax.legend(title="Initial Speed")
+    plt.show()
+
+# Run the plot
+plot_trajectories()
+</code></pre>
+<p><img alt="alt text" src="../image-9.png"/></p>
+<hr/>
+<h3 id="graph-title">📌 <strong>Graph Title:</strong></h3>
+<blockquote>
+<p><strong>"Payload Trajectories from 800 km Altitude at Different Initial Velocities"</strong></p>
+</blockquote>
+<hr/>
+<h3 id="what-the-graph-shows">📘 <strong>What the Graph Shows  :</strong></h3>
+<ul>
+<li>The plot illustrates the paths (trajectories) of a payload launched <strong>from 800 km above Earth's surface</strong>, starting from the right side of the Earth.</li>
+<li>Each colored curve corresponds to a <strong>different initial launch speed</strong>, ranging from <strong>5 km/s to 13 km/s</strong>.</li>
+<li><strong>At lower velocities (e.g., 5 km/s)</strong>, the payload <strong>falls back to Earth</strong> due to insufficient energy.</li>
+<li><strong>At moderate velocities (7–8 km/s)</strong>, it enters <strong>elliptical or circular orbits</strong>, staying gravitationally bound to Earth.</li>
+<li><strong>At high velocities (above ~11.2 km/s)</strong>, it follows a <strong>hyperbolic trajectory</strong>, meaning it <strong>escapes Earth's gravitational pull</strong>.</li>
+</ul>
+<hr/>
 <h4 id="slide-6-real-world-applications"><strong>Slide 6: Real-World Applications</strong></h4>
 <ul>
 <li><strong>Satellite Deployment:</strong> Precise control of velocity ensures stable orbits.</li>
