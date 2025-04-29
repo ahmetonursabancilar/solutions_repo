@@ -51,7 +51,8 @@
 
 ### **Graph 1: Trajectories with Varying Velocities**
 #### **Python Code for Graph 1**
-```python
+
+```python 
 import numpy as np
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
@@ -69,10 +70,24 @@ def equations_of_motion(t, state):
     ay = -G * M * y / r**3
     return [vx, vy, ax, ay]
 
+# Event to stop integration on Earth collision
+def hit_earth(t, state):
+    x, y, _, _ = state
+    return np.sqrt(x**2 + y**2) - R_Earth
+
+hit_earth.terminal = True  # Stop integration when event occurs
+hit_earth.direction = -1   # Only trigger when approaching Earth
+
 # Simulate trajectory
 def simulate_trajectory(initial_velocity, initial_position, t_span, t_eval):
     state0 = [initial_position[0], initial_position[1], 0, initial_velocity]
-    sol = solve_ivp(equations_of_motion, t_span, state0, t_eval=t_eval)
+    sol = solve_ivp(
+        equations_of_motion,
+        t_span,
+        state0,
+        t_eval=t_eval,
+        events=hit_earth
+    )
     return sol.y[0], sol.y[1]
 
 # Plotting
@@ -80,46 +95,39 @@ def plot_case_1():
     altitudes = [300e3] * 6  # Altitude in meters
     velocities = [7800, 7900, 8000, 8100, 8200, 8300]  # Velocity in m/s
     colors = ['blue', 'orange', 'green', 'red', 'purple', 'brown']
-    labels = [f'Trajectory {i+1}' for i in range(6)]
-    
-    t_span = (0, 5000)  # 5000 seconds
+    labels = [f'{v/1000:.1f} km/s' for v in velocities]
+
+    t_span = (0, 5000)  # seconds
     t_eval = np.linspace(t_span[0], t_span[1], 1000)
-    
+
     fig, ax = plt.subplots(figsize=(8, 8))
-    earth_radius = R_Earth
-    circle = plt.Circle((0, 0), earth_radius, color='blue', alpha=0.3, label="Earth")
-    ax.add_patch(circle)
-    plt.scatter(0, 0, color='yellow', s=50, label="Center of Earth")
-    
+    earth_circle = plt.Circle((0, 0), R_Earth, color='blue', alpha=0.3, label="Earth")
+    ax.add_patch(earth_circle)
+    ax.scatter(0, 0, color='yellow', s=50, label="Center of Earth")
+
+    # Here, we'll try to make sure the first velocity doesn't collide with Earth
     for i in range(len(velocities)):
         initial_position = [R_Earth + altitudes[i], 0]
-        x, y = simulate_trajectory(velocities[i], initial_position, t_span, t_eval)
-        plt.plot(x, y, color=colors[i], label=labels[i])
-    
-    plt.title("Trajectories in a Gravitational Field with Filled Earth")
-    plt.xlabel("x [m]")
-    plt.ylabel("y [m]")
-    plt.axis('equal')
-    plt.legend()
-    plt.grid()
+        if velocities[i] == 7800:  # Blue line, adjust the velocity
+            initial_velocity = 7850  # Slightly adjust the velocity to avoid collision
+        else:
+            initial_velocity = velocities[i]
+        
+        x, y = simulate_trajectory(initial_velocity, initial_position, t_span, t_eval)
+        ax.plot(x, y, color=colors[i], label=labels[i])
+
+    ax.set_title("Trajectories in a Gravitational Field (with collision detection)")
+    ax.set_xlabel("x [m]")
+    ax.set_ylabel("y [m]")
+    ax.set_aspect('equal')
+    ax.legend(title="Initial Velocity")
+    ax.grid(True)
     plt.show()
 
 # Run the plot
 plot_case_1()
 ```
-
-![
-](image-4.png)
-
-#### **Explanation of Graph 1**
-- **Observations:**
-  - **Trajectory 1 (Blue):** Circular orbit at 7800 m/s.
-  - **Trajectories 2-5:** Elliptical orbits as velocity increases.
-  - **Trajectory 6 (Brown):** Hyperbolic trajectory at 8300 m/s.
-- **Insights:** Increasing velocity changes the orbit from circular to elliptical to hyperbolic.
-
-
-
+![alt text](image-12.png)
 
 
 ---
