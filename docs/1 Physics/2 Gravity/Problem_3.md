@@ -145,25 +145,37 @@ def equations_of_motion(t, state):
     ay = -G * M * y / r**3
     return [vx, vy, ax, ay]
 
+# Event: detect collision with Earth
+def hit_earth(t, state):
+    x, y, _, _ = state
+    r = np.sqrt(x**2 + y**2)
+    return r - R_EARTH
+
+hit_earth.terminal = True  # Stop integration if this event is triggered
+hit_earth.direction = -1   # Only trigger when approaching Earth
+
 # Simulate trajectory for given initial speed
 def simulate_trajectory(initial_speed, t_span, t_eval):
-    x0 = R_EARTH + ALTITUDE  # Initial position (800 km from surface)
+    x0 = R_EARTH + ALTITUDE  # Starting from surface + altitude (along x-axis)
     y0 = 0
     vx0 = 0
-    vy0 = initial_speed      # Velocity in y-direction (upward)
+    vy0 = initial_speed      # Launch straight up
     initial_state = [x0, y0, vx0, vy0]
-    sol = solve_ivp(equations_of_motion, t_span, initial_state, t_eval=t_eval)
+    sol = solve_ivp(
+        equations_of_motion, t_span, initial_state,
+        t_eval=t_eval, events=hit_earth
+    )
     return sol.y[0], sol.y[1]
 
 # Plotting the trajectories
 def plot_trajectories():
     velocities = np.arange(5000, 13500, 500)  # From 5 km/s to 13 km/s
     colors = plt.cm.plasma(np.linspace(0, 1, len(velocities)))
-    t_span = (0, 5000)  # 5000 seconds
+    t_span = (0, 5000)
     t_eval = np.linspace(*t_span, 1000)
 
     fig, ax = plt.subplots(figsize=(10, 10))
-    
+
     # Draw Earth
     earth = plt.Circle((0, 0), R_EARTH, color='blue', alpha=0.3, label="Earth")
     ax.add_patch(earth)
@@ -187,8 +199,8 @@ def plot_trajectories():
 plot_trajectories()
 ```
 
+![alt text](image-11.png)
 
-![alt text](image-9.png)
 
 
 ---
