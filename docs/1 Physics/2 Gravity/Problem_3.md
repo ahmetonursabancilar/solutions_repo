@@ -118,50 +118,7 @@ plot_case_1()
   - **Trajectory 6 (Brown):** Hyperbolic trajectory at 8300 m/s.
 - **Insights:** Increasing velocity changes the orbit from circular to elliptical to hyperbolic.
 
----
 
-### **Graph 2: Multiple Elliptical Orbits**
-#### **Python Code for Graph 2**
-```python
-def plot_case_2():
-    altitudes = [300e3] * 11  # All at 300 km altitude
-    velocities = np.linspace(7500, 8000, 11)  # Velocities ranging from 7500 to 8000 m/s
-    colors = plt.cm.viridis(np.linspace(0, 1, 11))
-    labels = [f'Trajectory {i+1}' for i in range(11)]
-    
-    t_span = (0, 5000)  # 5000 seconds
-    t_eval = np.linspace(t_span[0], t_span[1], 1000)
-    
-    fig, ax = plt.subplots(figsize=(8, 8))
-    earth_radius = R_Earth
-    circle = plt.Circle((0, 0), earth_radius, color='blue', alpha=0.3, label="Earth")
-    ax.add_patch(circle)
-    plt.scatter(0, 0, color='yellow', s=50, label="Center of Earth")
-    
-    for i in range(len(velocities)):
-        initial_position = [R_Earth + altitudes[i], 0]
-        x, y = simulate_trajectory(velocities[i], initial_position, t_span, t_eval)
-        plt.plot(x, y, color=colors[i], label=labels[i])
-    
-    plt.title("Trajectories in a Gravitational Field with Filled Earth")
-    plt.xlabel("x [m]")
-    plt.ylabel("y [m]")
-    plt.axis('equal')
-    plt.legend()
-    plt.grid()
-    plt.show()
-
-# Run the plot
-plot_case_2()
-```
-
-![alt text](image-5.png)
-
-#### **Explanation of Graph 2**
-- **Observations:**
-  - All trajectories are elliptical, indicating they are bound to Earth.
-  - As velocity increases, the eccentricity of the orbits increases.
-- **Insights:** Small variations in velocity lead to significant changes in orbital shape.
 
 
 
