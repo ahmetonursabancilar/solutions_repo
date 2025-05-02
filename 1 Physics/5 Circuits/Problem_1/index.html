@@ -78,6 +78,38 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#introduction-motivation">🧭 Introduction &amp; Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#problem-scope-and-task-definition">📊 Problem Scope and Task Definition</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-1-algorithm-description-simplified">✅ Option 1: Algorithm Description (Simplified)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#option-2-full-implementation-advanced">✅ Option 2: Full Implementation (Advanced)</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#core-approach-graph-simplification">🔧 Core Approach: Graph Simplification</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-strategy">🧪 Testing Strategy</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tools-and-methods">⚙️ Tools and Methods</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#efficiency-and-improvement">📈 Efficiency and Improvement</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#code-1-basic-2d-circuit-visualization">✅ Code 1 - Basic 2D Circuit Visualization</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#explanation-of-the-visualization">🧠 Explanation of the Visualization:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#code-2-complex-2d-circuit-visualization-parallel-series">✅ Code 2 - Complex 2D Circuit Visualization (Parallel &amp; Series)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#explanation-of-the-visualization_1">🧠 Explanation of the Visualization:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-insights-for-presentations">Key Insights for Presentations:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications-in-presentations">🛠️ Applications in Presentations:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">✅ Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +203,241 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h2 id="equivalent-resistance-using-graph-theory">🔌 Equivalent Resistance Using Graph Theory</h2>
+<h3 id="introduction-motivation">🧭 <strong>Introduction &amp; Motivation</strong></h3>
+<p>Calculating the <strong>equivalent resistance</strong> of an electrical circuit is a fundamental task in physics and electrical engineering. It plays a vital role in designing efficient and reliable systems, from simple circuits to complex electrical networks. Traditionally, this task is accomplished by applying the <strong>series and parallel resistor rules</strong> repeatedly. While effective for basic circuits, this method becomes increasingly tedious and error-prone for circuits with many components, branches, and nested configurations.</p>
+<p>To overcome these limitations, we can turn to <strong>graph theory</strong>—a powerful branch of mathematics that allows us to model and analyze relationships between objects. By representing an electrical circuit as a <strong>graph</strong>, where:</p>
+<ul>
+<li><strong>Nodes (vertices)</strong> correspond to electrical junctions, and</li>
+<li><strong>Edges</strong> represent resistors with <strong>weights equal to their resistance values</strong>,</li>
+</ul>
+<p>we can develop an algorithmic approach that simplifies even the most complex circuits systematically and efficiently.</p>
+<p>This graphical representation not only enhances clarity but also enables <strong>automation</strong> through programming. This is particularly valuable for:</p>
+<ul>
+<li>Circuit simulation software,</li>
+<li>Optimization algorithms for power distribution,</li>
+<li>Educational tools for teaching circuit theory,</li>
+<li>Applications in embedded and hardware systems.</li>
+</ul>
+<p>Moreover, studying circuits using graph theory reveals deeper insights into how electrical principles relate to mathematical structures—highlighting the interdisciplinary power of combining <strong>physics</strong>, <strong>computer science</strong>, and <strong>mathematics</strong>.</p>
+<hr/>
+<h3 id="problem-scope-and-task-definition">📊 <strong>Problem Scope and Task Definition</strong></h3>
+<p>We aim to solve the problem of calculating <strong>equivalent resistance</strong> using graph-based techniques. Depending on the complexity level, the task can be approached in two ways:</p>
+<h4 id="option-1-algorithm-description-simplified">✅ <strong>Option 1: Algorithm Description (Simplified)</strong></h4>
+<p>This involves designing an algorithm that:</p>
+<ul>
+<li>Identifies <strong>series</strong> and <strong>parallel</strong> resistor connections,</li>
+<li>Iteratively reduces the graph by combining resistors,</li>
+<li>Continues until only a <strong>single equivalent resistance</strong> remains between two target nodes.</li>
+</ul>
+<p>This also includes writing <strong>pseudocode</strong> and explaining how the algorithm handles <strong>nested or mixed</strong> combinations (e.g., series of parallel groups or vice versa).</p>
+<h4 id="option-2-full-implementation-advanced">✅ <strong>Option 2: Full Implementation (Advanced)</strong></h4>
+<p>This involves implementing the algorithm in a programming language such as Python. The implementation should:</p>
+<ul>
+<li>Accept a <strong>circuit graph</strong> as input (using libraries like <code>networkx</code>),</li>
+<li>Handle <strong>any combination</strong> of resistors (including cycles, nested branches, etc.),</li>
+<li>Return the <strong>final equivalent resistance</strong>,</li>
+<li>
+<p>Be tested on:</p>
+</li>
+<li>
+<p>Simple series and parallel cases,</p>
+</li>
+<li>Nested resistor configurations,</li>
+<li>Complex circuits with multiple loops and branches.</li>
+</ul>
+<hr/>
+<h3 id="core-approach-graph-simplification">🔧 <strong>Core Approach: Graph Simplification</strong></h3>
+<p>The key idea is to iteratively simplify the circuit using <strong>graph transformations</strong>:</p>
+<ol>
+<li>
+<p><strong>Series Detection</strong>:
+   Identify linear paths where a node connects only two resistors → merge into one with total resistance:
+   <code>R_total = R1 + R2</code></p>
+</li>
+<li>
+<p><strong>Parallel Detection</strong>:
+   Detect multiple edges between two nodes → merge using:
+   <code>1/R_total = 1/R1 + 1/R2 + ...</code></p>
+</li>
+<li>
+<p><strong>Repeat</strong> until only the start and end nodes remain connected by one edge.</p>
+</li>
+<li>
+<p><strong>Output</strong>: the resistance of that final edge.</p>
+</li>
+</ol>
+<hr/>
+<h3 id="testing-strategy">🧪 <strong>Testing Strategy</strong></h3>
+<p>The algorithm should be tested on:</p>
+<ul>
+<li>
+<p><strong>Simple Series Circuit</strong>:</p>
+</li>
+<li>
+<p>A → B → C with R1 = 2Ω, R2 = 3Ω → Expected: 5Ω</p>
+</li>
+<li>
+<p><strong>Simple Parallel Circuit</strong>:</p>
+</li>
+<li>
+<p>A → B with two paths: R1 = 2Ω, R2 = 4Ω → Expected: 1.33Ω</p>
+</li>
+<li>
+<p><strong>Nested Configuration</strong>:</p>
+</li>
+<li>
+<p>A circuit that includes a series of parallel groups or vice versa</p>
+</li>
+<li>
+<p><strong>Complex Circuit with Cycles</strong>:</p>
+</li>
+<li>
+<p>E.g., a bridge or mesh network of resistors (like a Wheatstone bridge)</p>
+</li>
+</ul>
+<hr/>
+<h3 id="tools-and-methods">⚙️ <strong>Tools and Methods</strong></h3>
+<p>You can implement this using:</p>
+<ul>
+<li><strong>Python</strong>, due to its readability and powerful libraries.</li>
+<li><code>networkx</code>: to build and manipulate graphs.</li>
+<li><code>matplotlib</code>: to visualize the circuits.</li>
+<li><strong>DFS / BFS</strong>: for traversing the graph and detecting patterns.</li>
+<li>Optional: Use <strong>symbolic computation</strong> (with <code>sympy</code>) to extend the solver for variable resistances.</li>
+</ul>
+<hr/>
+<h3 id="efficiency-and-improvement">📈 <strong>Efficiency and Improvement</strong></h3>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>Each reduction pass is linear with respect to edges (O(E)).</li>
+<li>Multiple passes may be needed for deeply nested configurations.</li>
+</ul>
+<p><strong>Possible Improvements</strong>:</p>
+<ul>
+<li>Use <strong>Union-Find</strong> to quickly group parallel resistors.</li>
+<li>Use <strong>pattern recognition</strong> or <strong>machine learning</strong> for smart simplification.</li>
+<li>Integrate <strong>Kirchhoff’s laws</strong> and matrix-based approaches for highly complex circuits (e.g., using Laplacians or node-voltage methods).</li>
+</ul>
+<hr/>
+<p>Got it! I'll now provide you with two improved Python codes for visualizing circuit graphs in 2D, where the circuits are represented with both series and parallel connections. These will be high-quality graphs that you can use for presentation purposes. I'll also provide clear English explanations and insights for each code.</p>
+<h3 id="code-1-basic-2d-circuit-visualization">✅ <strong>Code 1 - Basic 2D Circuit Visualization</strong></h3>
+<p>This code creates a simple 2D circuit with both series and parallel resistor connections.</p>
+<pre><code class="language-python"># 📌 Install necessary libraries
+!pip install networkx matplotlib
+
+# 📚 Import required libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# 🌐 Create a basic circuit
+G = nx.Graph()
+
+# Add edges (resistors) with resistances
+G.add_edge('A', 'B', resistance=5)  # Series connection
+G.add_edge('B', 'C', resistance=2)  # Parallel connection
+G.add_edge('C', 'D', resistance=3)  # Series connection
+G.add_edge('A', 'D', resistance=6)  # Parallel connection
+
+# 🎨 2D Graph Visualization
+pos = nx.spring_layout(G, seed=42)  # Position the nodes in the layout
+edge_labels = nx.get_edge_attributes(G, 'resistance')  # Label the edges with resistance values
+
+# Plot the graph
+plt.figure(figsize=(8, 6))
+nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=600, font_size=15)
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=12, font_color='red')
+plt.title("Basic 2D Circuit Visualization (Series + Parallel)")
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-3.png"/></p>
+<h3 id="explanation-of-the-visualization">🧠 <strong>Explanation of the Visualization:</strong></h3>
+<ul>
+<li>This code creates a simple circuit where some resistors are connected in <strong>series</strong> and others in <strong>parallel</strong>.</li>
+<li><strong>Series connections</strong> are represented by resistors connected end-to-end, such as <code>A-B</code> and <code>C-D</code>.</li>
+<li><strong>Parallel connections</strong> are represented by resistors connected between the same two nodes, such as <code>B-C</code> and <code>A-D</code>.</li>
+<li>The <strong>resistances</strong> are displayed as labels on the edges of the graph.</li>
+<li>The visualization helps to clearly illustrate the connections in a circuit.</li>
+</ul>
+<hr/>
+<h3 id="code-2-complex-2d-circuit-visualization-parallel-series">✅ <strong>Code 2 - Complex 2D Circuit Visualization (Parallel &amp; Series)</strong></h3>
+<p>This code will create a more complex circuit by introducing additional series and parallel connections, representing a more intricate circuit layout.</p>
+<pre><code class="language-python"># 📌 Install necessary libraries
+!pip install networkx matplotlib
+
+# 📚 Import required libraries
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# 🌐 Create a complex circuit with both series and parallel connections
+G_complex = nx.Graph()
+
+# Add edges with resistances for a more complex circuit
+G_complex.add_edge('A', 'B', resistance=10)  # Series connection
+G_complex.add_edge('B', 'C', resistance=5)   # Parallel connection
+G_complex.add_edge('C', 'D', resistance=8)   # Series connection
+G_complex.add_edge('B', 'E', resistance=2)   # Parallel connection
+G_complex.add_edge('E', 'D', resistance=4)   # Parallel connection
+G_complex.add_edge('A', 'F', resistance=3)   # Series connection
+G_complex.add_edge('F', 'D', resistance=6)   # Series connection
+
+# 🎨 2D Graph Visualization
+pos_complex = nx.spring_layout(G_complex, seed=42)  # Position nodes in a layout
+edge_labels_complex = nx.get_edge_attributes(G_complex, 'resistance')  # Get edge labels (resistances)
+
+# Plot the graph
+plt.figure(figsize=(10, 8))
+nx.draw(G_complex, pos_complex, with_labels=True, node_color='lightgreen', node_size=700, font_size=15)
+nx.draw_networkx_edge_labels(G_complex, pos_complex, edge_labels=edge_labels_complex, font_size=12, font_color='red')
+plt.title("Complex 2D Circuit Visualization (Series + Parallel)")
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-4.png"/></p>
+<h3 id="explanation-of-the-visualization_1">🧠 <strong>Explanation of the Visualization:</strong></h3>
+<ul>
+<li>
+<p>This code creates a more <strong>complex circuit</strong> by introducing additional series and parallel connections:</p>
+</li>
+<li>
+<p><strong>Series connections</strong>: <code>A-B</code>, <code>C-D</code>, <code>A-F</code>, and <code>F-D</code>.</p>
+</li>
+<li><strong>Parallel connections</strong>: <code>B-C</code>, <code>B-E</code>, and <code>E-D</code>.</li>
+<li><strong>Resistances</strong> are shown on the edges, making it easier to identify the effect of each resistor.</li>
+<li>The visualization is more detailed and can be used for explaining circuits with more components or nested configurations.</li>
+</ul>
+<hr/>
+<h3 id="key-insights-for-presentations"><strong>Key Insights for Presentations:</strong></h3>
+<ol>
+<li>
+<p><strong>Basic 2D Circuit (Code 1)</strong>:</p>
+</li>
+<li>
+<p>This is a <strong>simplified circuit</strong>, perfect for explaining basic series and parallel connections.</p>
+</li>
+<li>It allows the audience to quickly grasp how resistors in series and parallel interact.</li>
+<li>The labeled resistances help illustrate how the total resistance is calculated.</li>
+<li>
+<p><strong>Complex 2D Circuit (Code 2)</strong>:</p>
+</li>
+<li>
+<p>This more <strong>complex circuit</strong> includes multiple series and parallel combinations, which makes it ideal for showing how complex circuits can be simplified.</p>
+</li>
+<li>It’s helpful when explaining the concept of <strong>nested parallel and series combinations</strong>.</li>
+<li>The more complex configuration also makes it easier to show the iterative steps in calculating equivalent resistance.</li>
+</ol>
+<hr/>
+<h3 id="applications-in-presentations">🛠️ <strong>Applications in Presentations</strong>:</h3>
+<ul>
+<li><strong>Teaching Basic Concepts</strong>: Use <strong>Code 1</strong> to explain the fundamental principles of series and parallel resistances.</li>
+<li><strong>Complex Circuit Analysis</strong>: Use <strong>Code 2</strong> to show how complex circuits can be reduced step-by-step to calculate the total equivalent resistance.</li>
+<li><strong>Visualization of Problem Solving</strong>: Both codes can be used to visually represent the circuit at different stages, allowing for step-by-step explanations of simplifications.</li>
+</ul>
+<h3 id="conclusion">✅ <strong>Conclusion</strong></h3>
+<p>Using <strong>graph theory</strong> to compute equivalent resistance transforms a traditionally manual process into a structured, scalable, and automatable method. This approach is not only mathematically elegant but also practical—enhancing our ability to design, analyze, and understand complex electrical systems. It bridges the gap between <strong>circuit theory and computational modeling</strong>, demonstrating how foundational mathematical tools can empower engineering tasks in modern technology.</p>
+<blockquote>
+<p><em>“From circuits to code, from wires to weights—graph theory powers the next generation of electrical analysis.”</em></p>
+</blockquote>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
