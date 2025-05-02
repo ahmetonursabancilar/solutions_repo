@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>📘 Simulating the Effects of the Lorentz Force - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "\ud83d\udcd8 Simulating the Effects of the Lorentz Force";
         var mkdocs_page_input_path = "1 Physics/4 Electromagnetism/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -70,8 +70,30 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">4 Electromagnetism</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">📘 Simulating the Effects of the Lorentz Force</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-introduction">🔎 1. Introduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-why-is-it-important">⚙️ 2. Why Is It Important?</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-types-of-motion">🧭 3. Types of Motion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-key-physical-concepts">📐 4. Key Physical Concepts</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-real-world-systems-using-the-lorentz-force">🚀 5. Real-World Systems Using the Lorentz Force</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#cyclotrons">✅ Cyclotrons</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#mass-spectrometers">✅ Mass Spectrometers</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#magnetic-confinement-tokamaks">✅ Magnetic Confinement (Tokamaks)</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-simulation-goals">📌 6. Simulation Goals</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#7-what-will-be-delivered">📈 7. What Will Be Delivered</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +185,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">4 Electromagnetism</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">📘 Simulating the Effects of the Lorentz Force</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +193,107 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="simulating-the-effects-of-the-lorentz-force">📘 Simulating the Effects of the Lorentz Force</h1>
+<hr/>
+<h2 id="1-introduction">🔎 1. Introduction</h2>
+<p>The <strong>Lorentz force</strong> is fundamental to the motion of charged particles in electric and magnetic fields. It is defined as:</p>
+<div class="arithmatex">\[
+\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(\vec{F}\)</span>: Force on the particle (N)  </li>
+<li><span class="arithmatex">\(q\)</span>: Charge of the particle (C)  </li>
+<li><span class="arithmatex">\(\vec{E}\)</span>: Electric field (V/m)  </li>
+<li><span class="arithmatex">\(\vec{v}\)</span>: Velocity of the particle (m/s)  </li>
+<li><span class="arithmatex">\(\vec{B}\)</span>: Magnetic field (T)</li>
+</ul>
+<hr/>
+<h2 id="2-why-is-it-important">⚙️ 2. Why Is It Important?</h2>
+<p>The Lorentz force plays a key role in systems such as:</p>
+<ul>
+<li>🔬 <strong>Particle accelerators</strong> </li>
+<li>🧪 <strong>Mass spectrometers</strong> </li>
+<li>🌌 <strong>Astrophysical plasmas</strong> </li>
+<li>⚡ <strong>Plasma confinement in fusion devices</strong></li>
+</ul>
+<hr/>
+<h2 id="3-types-of-motion">🧭 3. Types of Motion</h2>
+<table>
+<thead>
+<tr>
+<th>Field Configuration</th>
+<th>Resulting Motion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Only <span class="arithmatex">\(\vec{B}\)</span></td>
+<td>Circular / helical path</td>
+</tr>
+<tr>
+<td>Only <span class="arithmatex">\(\vec{E}\)</span></td>
+<td>Linear acceleration</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\vec{E} \parallel \vec{B}\)</span></td>
+<td>Spiral acceleration</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\vec{E} \perp \vec{B}\)</span></td>
+<td>Drift motion (<span class="arithmatex">\(\vec{E} \times \vec{B}\)</span> drift)</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="4-key-physical-concepts">📐 4. Key Physical Concepts</h2>
+<ul>
+<li><strong>Larmor Radius</strong>:</li>
+</ul>
+<div class="arithmatex">\[
+r_L = \frac{mv_\perp}{qB}
+\]</div>
+<ul>
+<li><strong>Cyclotron Frequency</strong>:</li>
+</ul>
+<div class="arithmatex">\[
+\omega_c = \frac{qB}{m}
+\]</div>
+<ul>
+<li><strong>Drift Velocity (for crossed fields):</strong></li>
+</ul>
+<div class="arithmatex">\[
+\vec{v}_d = \frac{\vec{E} \times \vec{B}}{B^2}
+\]</div>
+<hr/>
+<h2 id="5-real-world-systems-using-the-lorentz-force">🚀 5. Real-World Systems Using the Lorentz Force</h2>
+<h3 id="cyclotrons">✅ Cyclotrons</h3>
+<p>Particles spiral outward in a magnetic field while gaining energy from electric fields.</p>
+<h3 id="mass-spectrometers">✅ Mass Spectrometers</h3>
+<p>Charged particles are separated based on curvature of their paths in known fields.</p>
+<h3 id="magnetic-confinement-tokamaks">✅ Magnetic Confinement (Tokamaks)</h3>
+<p>Charged particles follow helical trajectories to remain confined inside plasma reactors.</p>
+<hr/>
+<h2 id="6-simulation-goals">📌 6. Simulation Goals</h2>
+<p>We aim to simulate and visualize:</p>
+<ol>
+<li>Uniform magnetic field → Circular motion  </li>
+<li>Combined electric and magnetic fields → Helical motion  </li>
+<li>Crossed <span class="arithmatex">\(\vec{E}\)</span> and <span class="arithmatex">\(\vec{B}\)</span> fields → Drift motion  </li>
+<li>Effects of varying:</li>
+<li><span class="arithmatex">\(|\vec{E}|\)</span>, <span class="arithmatex">\(|\vec{B}|\)</span></li>
+<li>Initial velocity</li>
+<li>Particle charge and mass</li>
+</ol>
+<hr/>
+<h2 id="7-what-will-be-delivered">📈 7. What Will Be Delivered</h2>
+<ul>
+<li>✅ Clean Python code for simulations  </li>
+<li>✅ Clear 2D and 3D trajectory plots  </li>
+<li>✅ Physical interpretation of motion  </li>
+<li>✅ Extension ideas: non-uniform fields, particle beams, collisions</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
