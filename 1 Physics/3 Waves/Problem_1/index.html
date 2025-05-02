@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>🌊 Interference Patterns on a Water Surface - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "\ud83c\udf0a Interference Patterns on a Water Surface";
         var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,8 +64,44 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🌊 Interference Patterns on a Water Surface</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wave-model">📐 Wave Model</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-simulation-setup">🧪 Python Simulation Setup</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code-core-functions">🧠 Python Code: Core Functions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-a-single-source">🌊 Visualizing a Single Source</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#two-sources-interference">🌊 Two Sources Interference</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_2"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#triangle-interference-pattern">🔺 Triangle Interference Pattern</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_3"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pentagon-interference-pattern">🔷 Pentagon Interference Pattern</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_4"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#animation-gif-of-wave-interference">🎥 Animation (GIF) of Wave Interference</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#observations-analysis">🧠 Observations &amp; Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#constructive-interference">✅ Constructive Interference:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#destructive-interference">❌ Destructive Interference:</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">✅ Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +199,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">3 Waves</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">🌊 Interference Patterns on a Water Surface</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +207,189 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="interference-patterns-on-a-water-surface">🌊 Interference Patterns on a Water Surface</h1>
+<p><strong>Simulating Wave Superposition from Point Sources in Regular Polygons</strong></p>
+<hr/>
+<h2 id="motivation">🎯 Motivation</h2>
+<p>Interference occurs when waves from different sources meet and combine. On a water surface, these patterns are easy to visualize as ripples intersect. This project explores how multiple wave sources positioned at the vertices of a regular polygon create beautiful and informative interference patterns.</p>
+<p>We study this using:</p>
+<ul>
+<li>Mathematical modeling of wave propagation</li>
+<li>Superposition of wave equations</li>
+<li>Visualizations using heatmaps and animations</li>
+</ul>
+<hr/>
+<h2 id="wave-model">📐 Wave Model</h2>
+<p>A circular wave on the water surface from a source at <span class="arithmatex">\((x_0, y_0)\)</span> is described by:</p>
+<div class="arithmatex">\[
+n(x, y, t) = A \cos(kr - \omega t + \phi)
+\]</div>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\(A\)</span>: Amplitude (same for all)</li>
+<li><span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>: Wave number</li>
+<li><span class="arithmatex">\(\omega = 2\pi f\)</span>: Angular frequency</li>
+<li><span class="arithmatex">\(r = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)</span>: Distance to the source</li>
+<li><span class="arithmatex">\(\phi\)</span>: Initial phase (constant across sources)</li>
+</ul>
+<hr/>
+<h2 id="python-simulation-setup">🧪 Python Simulation Setup</h2>
+<p>We'll simulate wave patterns for:</p>
+<ul>
+<li>One source</li>
+<li>Two sources</li>
+<li>Multiple sources forming triangle and pentagon</li>
+</ul>
+<h2 id="python-code-core-functions">🧠 Python Code: Core Functions</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.animation import FuncAnimation, PillowWriter
+
+# Wave parameters
+A = 1          # Amplitude
+f = 1          # Frequency (Hz)
+λ = 1          # Wavelength
+k = 2 * np.pi / λ
+ω = 2 * np.pi * f
+φ = 0          # Phase
+
+# Grid
+x = np.linspace(-5, 5, 400)
+y = np.linspace(-5, 5, 400)
+X, Y = np.meshgrid(x, y)
+
+def wave_from_source(x0, y0, t):
+    R = np.sqrt((X - x0)**2 + (Y - y0)**2) + 1e-6  # avoid zero division
+    return A * np.cos(k * R - ω * t + φ)
+
+def total_wave(sources, t):
+    return sum(wave_from_source(x0, y0, t) for (x0, y0) in sources)
+</code></pre>
+<hr/>
+<h2 id="visualizing-a-single-source">🌊 Visualizing a Single Source</h2>
+<pre><code class="language-python">plt.figure(figsize=(6,5))
+plt.contourf(X, Y, wave_from_source(0, 0, 0), cmap='viridis')
+plt.title("Single Source Interference Pattern")
+plt.colorbar(label='Wave Amplitude')
+plt.axis('equal')
+plt.show()
+</code></pre>
+<h2 id="_1"><img alt="alt text" src="../image.png"/></h2>
+<h2 id="two-sources-interference">🌊 Two Sources Interference</h2>
+<pre><code class="language-python">sources = [(-1.5, 0), (1.5, 0)]
+plt.figure(figsize=(6,5))
+plt.contourf(X, Y, total_wave(sources, 0), cmap='plasma')
+plt.title("Two Source Interference Pattern")
+plt.colorbar(label='Wave Amplitude')
+plt.axis('equal')
+plt.show()
+</code></pre>
+<h2 id="_2"><img alt="alt text" src="../image-1.png"/></h2>
+<h2 id="triangle-interference-pattern">🔺 Triangle Interference Pattern</h2>
+<pre><code class="language-python"># Equilateral triangle sources
+r = 2
+triangle_sources = [(r*np.cos(θ), r*np.sin(θ)) for θ in [0, 2*np.pi/3, 4*np.pi/3]]
+
+plt.figure(figsize=(6,5))
+plt.contourf(X, Y, total_wave(triangle_sources, 0), cmap='coolwarm')
+plt.title("Triangle Source Interference")
+plt.colorbar(label='Wave Amplitude')
+plt.axis('equal')
+plt.show()
+</code></pre>
+<h2 id="_3"><img alt="alt text" src="../image-2.png"/></h2>
+<h2 id="pentagon-interference-pattern">🔷 Pentagon Interference Pattern</h2>
+<pre><code class="language-python"># Pentagon sources
+r = 2
+pentagon_sources = [(r*np.cos(θ), r*np.sin(θ)) for θ in np.linspace(0, 2*np.pi, 5, endpoint=False)]
+
+plt.figure(figsize=(6,5))
+plt.contourf(X, Y, total_wave(pentagon_sources, 0), cmap='cividis')
+plt.title("Pentagon Source Interference")
+plt.colorbar(label='Wave Amplitude')
+plt.axis('equal')
+plt.show()
+</code></pre>
+<h2 id="_4"><img alt="alt text" src="../image-3.png"/></h2>
+<h2 id="animation-gif-of-wave-interference">🎥 Animation (GIF) of Wave Interference</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, PillowWriter
+from IPython.display import HTML, Image
+import base64
+import os
+
+# Wave parameters
+A = 1
+f = 1
+λ = 1
+k = 2 * np.pi / λ
+ω = 2 * np.pi * f
+φ = 0
+
+# Grid
+x = np.linspace(-5, 5, 400)
+y = np.linspace(-5, 5, 400)
+X, Y = np.meshgrid(x, y)
+
+def wave_from_source(x0, y0, t):
+    R = np.sqrt((X - x0)**2 + (Y - y0)**2) + 1e-6
+    return A * np.cos(k * R - ω * t + φ)
+
+def total_wave(sources, t):
+    return sum(wave_from_source(x0, y0, t) for (x0, y0) in sources)
+
+# Pentagon source example
+r = 2
+sources = [(r * np.cos(theta), r * np.sin(theta)) for theta in np.linspace(0, 2*np.pi, 5, endpoint=False)]
+
+# Create animation
+fig, ax = plt.subplots(figsize=(6,6))
+cax = ax.imshow(np.zeros_like(X), extent=[-5, 5, -5, 5], cmap='inferno', animated=True)
+fig.colorbar(cax, ax=ax, label='Amplitude')
+ax.set_title("Wave Interference Animation")
+
+def update(frame):
+    t = frame * 0.1
+    Z = total_wave(sources, t)
+    cax.set_array(Z)
+    ax.set_title(f"t = {t:.2f} s")
+    return [cax]
+
+ani = FuncAnimation(fig, update, frames=60, blit=True)
+
+# Save GIF
+gif_path = "wave_interference.gif"
+ani.save(gif_path, writer=PillowWriter(fps=10))
+plt.close()
+
+# Display GIF
+with open(gif_path, "rb") as f:
+    data = f.read()
+
+data_url = "data:image/gif;base64," + base64.b64encode(data).decode()
+display(HTML(f'&lt;img src="{data_url}" width=400&gt;'))
+
+# Optional download link
+from google.colab import files
+files.download(gif_path)
+</code></pre>
+<hr/>
+<h2 id="observations-analysis">🧠 Observations &amp; Analysis</h2>
+<h3 id="constructive-interference">✅ Constructive Interference:</h3>
+<p>Occurs when wave crests from different sources meet — resulting in <strong>higher amplitude</strong>.</p>
+<h3 id="destructive-interference">❌ Destructive Interference:</h3>
+<p>Occurs when a crest meets a trough — resulting in <strong>near-zero displacement</strong>.</p>
+<ul>
+<li><strong>Single Source:</strong> Concentric circular ripples.</li>
+<li><strong>Two Sources:</strong> Alternating bands of constructive/destructive interference.</li>
+<li><strong>Triangle/Pentagon:</strong> Symmetric floral patterns due to coherent superposition — more complex as sources increase.</li>
+</ul>
+<hr/>
+<h2 id="conclusion">✅ Conclusion</h2>
+<p>This simulation visually captures the essence of <strong>wave interference</strong> and <strong>superposition</strong> principles using simple mathematical models. As more sources are added in symmetrical arrangements, the complexity and beauty of the patterns grow — reinforcing the link between geometry and physics.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
