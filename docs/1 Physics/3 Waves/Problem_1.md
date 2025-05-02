@@ -19,23 +19,106 @@ We study this using:
 
 ---
 
-## 📐 Wave Model
 
-A circular wave on the water surface from a source at $(x_0, y_0)$ is described by:
+## 📘 Theoretical Background: Wave Interference on Water Surface
+
+### 🌊 What Is Wave Interference?
+
+Wave interference is a phenomenon that occurs when two or more waves overlap in space and time. On the surface of water, this is easily visualized by the ripples created from dropping multiple pebbles — their circular waves spread outward and interact.
+
+There are two main types of interference:
+
+* **Constructive Interference**: Occurs when the crests of two waves align, leading to a higher amplitude.
+
+  > 💡 The waves are *in phase* — their peaks and troughs match.
+
+* **Destructive Interference**: Occurs when the crest of one wave meets the trough of another, cancelling each other out.
+
+  > 💡 The waves are *out of phase* — a peak aligns with a trough.
+
+---
+
+### 📐 Mathematical Form of a Single Circular Wave
+
+A single point source emits a circular wave described by the function:
 
 $$
 n(x, y, t) = A \cos(kr - \omega t + \phi)
 $$
 
-Where:
+where:
 
-* $A$: Amplitude (same for all)
+* $A$: Amplitude of the wave
 * $k = \frac{2\pi}{\lambda}$: Wave number
 * $\omega = 2\pi f$: Angular frequency
-* $r = \sqrt{(x - x_0)^2 + (y - y_0)^2}$: Distance to the source
-* $\phi$: Initial phase (constant across sources)
+* $r = \sqrt{(x - x_0)^2 + (y - y_0)^2}$: Distance from the source at $(x_0, y_0)$
+* $\phi$: Initial phase offset
 
 ---
+
+### 🔁 Superposition Principle
+
+When multiple sources emit waves, the total displacement at a point is the **sum** of individual displacements:
+
+$$
+n_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi_i)
+$$
+
+This is the core of wave interference — the overlapping of multiple coherent wavefronts.
+
+---
+
+## 🔺 Geometric Configurations and Their Impact
+
+### ▶️ One Source
+
+* Produces symmetric circular wavefronts.
+* No interference occurs.
+
+### ▶️ Two Sources
+
+* Interference fringes appear as **alternating bands** of constructive and destructive interference.
+* Classic *Young’s Double-Slit*-like pattern.
+
+### ▶️ Triangle / Square / Pentagon Configuration
+
+* More complex and symmetric interference patterns.
+* Results in **radial and circular symmetry** due to regular spacing.
+* Central zones of strong constructive interference may form, surrounded by intricate cancellation areas.
+
+---
+
+## 🧠 Physical Interpretations
+
+* **Interference patterns are spatial maps of energy distribution** — bright/high amplitude regions mean wave reinforcement, dark/low amplitude regions indicate cancellation.
+* The regularity of polygon shapes makes them ideal for studying symmetry in wave interference.
+* This concept applies not just to water, but also to **sound**, **light**, **radio**, and even **quantum probability waves**.
+
+---
+
+## 🔍 Real-World Applications
+
+* **Sonar and radar systems** use wave interference for object detection.
+* **Optics**: Interference patterns are fundamental in devices like interferometers.
+* **Acoustics**: Room design considers interference to avoid "dead spots" in sound.
+* **Quantum physics**: Electron diffraction patterns mirror these same interference rules.
+
+---
+
+## 🎓 Educational Value
+
+This simulation and visualization offer a clear, intuitive understanding of:
+
+* Wave propagation
+* Interference
+* Symmetry in physics
+* Principle of superposition
+
+It's a hands-on method to explore foundational wave concepts, bridging the gap between **theory and observation**.
+
+---
+
+
 
 ## 🧪 Python Simulation Setup
 
