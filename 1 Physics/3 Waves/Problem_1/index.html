@@ -68,7 +68,31 @@
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#wave-model">📐 Wave Model</a>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background-wave-interference-on-water-surface">📘 Theoretical Background: Wave Interference on Water Surface</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-wave-interference">🌊 What Is Wave Interference?</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#mathematical-form-of-a-single-circular-wave">📐 Mathematical Form of a Single Circular Wave</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#superposition-principle">🔁 Superposition Principle</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#geometric-configurations-and-their-impact">🔺 Geometric Configurations and Their Impact</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#one-source">▶️ One Source</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#two-sources">▶️ Two Sources</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#triangle-square-pentagon-configuration">▶️ Triangle / Square / Pentagon Configuration</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#physical-interpretations">🧠 Physical Interpretations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-applications">🔍 Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#educational-value">🎓 Educational Value</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#python-simulation-setup">🧪 Python Simulation Setup</a>
 </li>
@@ -221,19 +245,86 @@
 <li>Visualizations using heatmaps and animations</li>
 </ul>
 <hr/>
-<h2 id="wave-model">📐 Wave Model</h2>
-<p>A circular wave on the water surface from a source at <span class="arithmatex">\((x_0, y_0)\)</span> is described by:</p>
+<h2 id="theoretical-background-wave-interference-on-water-surface">📘 Theoretical Background: Wave Interference on Water Surface</h2>
+<h3 id="what-is-wave-interference">🌊 What Is Wave Interference?</h3>
+<p>Wave interference is a phenomenon that occurs when two or more waves overlap in space and time. On the surface of water, this is easily visualized by the ripples created from dropping multiple pebbles — their circular waves spread outward and interact.</p>
+<p>There are two main types of interference:</p>
+<ul>
+<li><strong>Constructive Interference</strong>: Occurs when the crests of two waves align, leading to a higher amplitude.</li>
+</ul>
+<blockquote>
+<p>💡 The waves are <em>in phase</em> — their peaks and troughs match.</p>
+</blockquote>
+<ul>
+<li><strong>Destructive Interference</strong>: Occurs when the crest of one wave meets the trough of another, cancelling each other out.</li>
+</ul>
+<blockquote>
+<p>💡 The waves are <em>out of phase</em> — a peak aligns with a trough.</p>
+</blockquote>
+<hr/>
+<h3 id="mathematical-form-of-a-single-circular-wave">📐 Mathematical Form of a Single Circular Wave</h3>
+<p>A single point source emits a circular wave described by the function:</p>
 <div class="arithmatex">\[
 n(x, y, t) = A \cos(kr - \omega t + \phi)
 \]</div>
-<p>Where:</p>
+<p>where:</p>
 <ul>
-<li><span class="arithmatex">\(A\)</span>: Amplitude (same for all)</li>
+<li><span class="arithmatex">\(A\)</span>: Amplitude of the wave</li>
 <li><span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>: Wave number</li>
 <li><span class="arithmatex">\(\omega = 2\pi f\)</span>: Angular frequency</li>
-<li><span class="arithmatex">\(r = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)</span>: Distance to the source</li>
-<li><span class="arithmatex">\(\phi\)</span>: Initial phase (constant across sources)</li>
+<li><span class="arithmatex">\(r = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)</span>: Distance from the source at <span class="arithmatex">\((x_0, y_0)\)</span></li>
+<li><span class="arithmatex">\(\phi\)</span>: Initial phase offset</li>
 </ul>
+<hr/>
+<h3 id="superposition-principle">🔁 Superposition Principle</h3>
+<p>When multiple sources emit waves, the total displacement at a point is the <strong>sum</strong> of individual displacements:</p>
+<div class="arithmatex">\[
+n_{\text{total}}(x, y, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi_i)
+\]</div>
+<p>This is the core of wave interference — the overlapping of multiple coherent wavefronts.</p>
+<hr/>
+<h2 id="geometric-configurations-and-their-impact">🔺 Geometric Configurations and Their Impact</h2>
+<h3 id="one-source">▶️ One Source</h3>
+<ul>
+<li>Produces symmetric circular wavefronts.</li>
+<li>No interference occurs.</li>
+</ul>
+<h3 id="two-sources">▶️ Two Sources</h3>
+<ul>
+<li>Interference fringes appear as <strong>alternating bands</strong> of constructive and destructive interference.</li>
+<li>Classic <em>Young’s Double-Slit</em>-like pattern.</li>
+</ul>
+<h3 id="triangle-square-pentagon-configuration">▶️ Triangle / Square / Pentagon Configuration</h3>
+<ul>
+<li>More complex and symmetric interference patterns.</li>
+<li>Results in <strong>radial and circular symmetry</strong> due to regular spacing.</li>
+<li>Central zones of strong constructive interference may form, surrounded by intricate cancellation areas.</li>
+</ul>
+<hr/>
+<h2 id="physical-interpretations">🧠 Physical Interpretations</h2>
+<ul>
+<li><strong>Interference patterns are spatial maps of energy distribution</strong> — bright/high amplitude regions mean wave reinforcement, dark/low amplitude regions indicate cancellation.</li>
+<li>The regularity of polygon shapes makes them ideal for studying symmetry in wave interference.</li>
+<li>This concept applies not just to water, but also to <strong>sound</strong>, <strong>light</strong>, <strong>radio</strong>, and even <strong>quantum probability waves</strong>.</li>
+</ul>
+<hr/>
+<h2 id="real-world-applications">🔍 Real-World Applications</h2>
+<ul>
+<li><strong>Sonar and radar systems</strong> use wave interference for object detection.</li>
+<li><strong>Optics</strong>: Interference patterns are fundamental in devices like interferometers.</li>
+<li><strong>Acoustics</strong>: Room design considers interference to avoid "dead spots" in sound.</li>
+<li><strong>Quantum physics</strong>: Electron diffraction patterns mirror these same interference rules.</li>
+</ul>
+<hr/>
+<h2 id="educational-value">🎓 Educational Value</h2>
+<p>This simulation and visualization offer a clear, intuitive understanding of:</p>
+<ul>
+<li>Wave propagation</li>
+<li>Interference</li>
+<li>Symmetry in physics</li>
+<li>Principle of superposition</li>
+</ul>
+<p>It's a hands-on method to explore foundational wave concepts, bridging the gap between <strong>theory and observation</strong>.</p>
 <hr/>
 <h2 id="python-simulation-setup">🧪 Python Simulation Setup</h2>
 <p>We'll simulate wave patterns for:</p>
