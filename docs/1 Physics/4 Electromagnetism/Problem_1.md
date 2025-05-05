@@ -122,45 +122,74 @@ def lorentz_force(q, m, E, B, v):
     return (q / m) * (E + np.cross(v, B))
 
 # Euler integration
-def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
+def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-5, steps=5000):
     r = np.zeros((steps, 3))
     v = np.zeros((steps, 3))
     r[0], v[0] = r0, v0
 
     for i in range(1, steps):
-        a = lorentz_force(q, m, E, B, v[i-1])
-        v[i] = v[i-1] + a * dt
-        r[i] = r[i-1] + v[i] * dt
+        a = lorentz_force(q, m, E, B, v[i - 1])
+        v[i] = v[i - 1] + a * dt
+        r[i] = r[i - 1] + v[i] * dt
 
     return r
 
-# Parameters
-q = 1               # charge (C), updated to 1 C
-m = 1e-3            # mass (kg), updated to 1 gram = 1e-3 kg
-B = np.array([0, 0, 1])  # magnetic field (T)
-E = np.array([0, 0, 0])  # electric field (V/m)
-v0 = np.array([1e6, 0, 0])  # initial velocity (m/s)
-r0 = np.array([0, 0, 0])    # initial position (m)
+# Parameters (user-specified)
+q = 1.0                 # charge in Coulombs
+m = 0.001               # mass in kg (1 gram)
+B = np.array([0, 0, 1]) # magnetic field in z-direction (T)
+E = np.array([0, 0, 0]) # no electric field
+v0 = np.array([1.0, 0, 0]) # initial velocity in x-direction (m/s)
+r0 = np.array([0, 0, 0])   # initial position
 
 # Run simulation
 trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
 
-# Plot
+# Plot result
 plt.figure(figsize=(6, 6))
 plt.plot(trajectory[:, 0], trajectory[:, 1], color='blue')
-plt.title("Circular Motion in a Magnetic Field")
+plt.title("Circular Motion in a Uniform Magnetic Field")
 plt.xlabel("x (m)")
 plt.ylabel("y (m)")
-plt.axis('equal')
 plt.grid(True)
+plt.axis('equal')
 plt.show()
+
 ```
 
-![alt text](image-3.png)
+![alt text](image-8.png)
 
 
-Explanation:
-This graph shows the circular trajectory of a charged particle moving in a plane perpendicular to a uniform magnetic field. The Lorentz force causes the particle to constantly curve, resulting in perfect circular motion — a fundamental behavior in devices like cyclotrons and mass spectrometers
+---
+
+### 🔍 Explanation: Circular Motion in a Uniform Magnetic Field
+
+This plot demonstrates the **circular trajectory** of a charged particle moving in a uniform magnetic field when no electric field is present.
+
+* The magnetic field \$\vec{B}\$ is directed **out of the screen** (along the z-axis).
+
+* The particle starts with an initial velocity \$\vec{v}\_0\$ in the x-direction.
+
+* Since the **Lorentz force** is always perpendicular to the velocity:
+
+  $$
+  \vec{F} = q \vec{v} \times \vec{B}
+  $$
+
+  the particle undergoes **uniform circular motion** in the x-y plane.
+
+* The radius of the circular path is determined by:
+
+  $$
+  r = \frac{m v}{q B}
+  $$
+
+This behavior is fundamental in cyclotrons, mass spectrometers, and other charged particle control systems.
+
+---
+
+
+
 
 ## 🧵 Helical Motion in a Uniform Magnetic Field
 
@@ -210,8 +239,60 @@ plt.show()
 ![alt text](image-4.png)
 
 
-Explanation:
-This graph shows the particle following a helical path — a combination of circular motion in the xy-plane and linear motion along the z-axis. The particle spirals around the magnetic field lines due to the component of velocity parallel to the field. This kind of motion is typical in plasma confinement and magnetic bottle traps.
+Here's a Python code to simulate **Helical Motion in a Uniform Magnetic Field** with the specified values for charge $q = 1 \, \text{C}$ and mass $m = 1 \, \text{g}$:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Lorentz force function
+def lorentz_force(q, m, E, B, v):
+    return (q / m) * (E + np.cross(v, B))
+
+# Euler integration
+def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
+    r = np.zeros((steps, 3))
+    v = np.zeros((steps, 3))
+    r[0], v[0] = r0, v0
+
+    for i in range(1, steps):
+        a = lorentz_force(q, m, E, B, v[i-1])
+        v[i] = v[i-1] + a * dt
+        r[i] = r[i-1] + v[i] * dt
+
+    return r
+
+# Parameters
+q = 1  # charge (C)
+m = 1e-3  # mass (kg) - 1g = 1e-3 kg
+B = np.array([0, 0, 1])  # magnetic field (T), in the z-direction
+E = np.array([0, 0, 0])  # no electric field
+v0 = np.array([1e5, 0, 1e5])  # initial velocity with components in x and z directions
+r0 = np.array([0, 0, 0])  # initial position at origin
+
+# Run simulation
+trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
+
+# Plot in 3D
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='green')
+ax.set_title("Helical Motion in a Magnetic Field")
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_zlabel("z (m)")
+plt.show()
+```
+
+### Explanation:
+
+* The particle's initial velocity $\vec{v_0}$ has components in both the $x$- and $z$-directions.
+* The magnetic field $\vec{B}$ is in the $z$-direction, causing the particle to move in a **helical path** around the magnetic field lines.
+* The **Lorentz force** $q(\vec{v} \times \vec{B})$ acts perpendicular to the velocity of the particle, resulting in circular motion in the $x$-$y$ plane, while the motion along the $z$-axis is due to the initial velocity component in the $z$-direction.
+* The **radius of the circular motion** and the **pitch** of the helix depend on the initial velocity components, charge, and magnetic field strength.
+
+This code will generate a 3D plot showing the helical path of a charged particle moving in the magnetic field.
 
 
 ## 🔀 Drift Motion in Crossed Electric and Magnetic Fields
