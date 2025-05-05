@@ -128,12 +128,12 @@ def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
     return r
 
 # Parameters
-q = 1.6e-19       # charge (C)
-m = 9.11e-31      # mass (kg)
-B = np.array([0, 0, 1])      # magnetic field (T)
-E = np.array([0, 0, 0])      # electric field (V/m)
-v0 = np.array([1e6, 0, 0])   # initial velocity (m/s)
-r0 = np.array([0, 0, 0])     # initial position (m)
+q = 1               # charge (C), updated to 1 C
+m = 1e-3            # mass (kg), updated to 1 gram = 1e-3 kg
+B = np.array([0, 0, 1])  # magnetic field (T)
+E = np.array([0, 0, 0])  # electric field (V/m)
+v0 = np.array([1e6, 0, 0])  # initial velocity (m/s)
+r0 = np.array([0, 0, 0])    # initial position (m)
 
 # Run simulation
 trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
@@ -149,8 +149,7 @@ plt.grid(True)
 plt.show()
 ```
 
-
-![alt text](image.png)
+![alt text](image-3.png)
 
 
 Explanation:
@@ -180,18 +179,18 @@ def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
 
     return r
 
-# Parameters
-q = 1.6e-19
-m = 9.11e-31
+# Parameters (Updated)
+q = 1                 # charge in Coulombs
+m = 1e-3              # mass in kilograms (1 g)
 B = np.array([0, 0, 1])             # magnetic field (T)
 E = np.array([0, 0, 0])             # no electric field
-v0 = np.array([1e6, 0, 1e6])        # velocity with z-component
-r0 = np.array([0, 0, 0])            # start at origin
+v0 = np.array([1e6, 0, 1e6])        # initial velocity with z-component
+r0 = np.array([0, 0, 0])            # initial position
 
 # Run simulation
 trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
 
-# Plot in 3D
+# 3D Plot
 fig = plt.figure(figsize=(8, 6))
 ax = fig.add_subplot(111, projection='3d')
 ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='green')
@@ -201,8 +200,7 @@ ax.set_ylabel("y (m)")
 ax.set_zlabel("z (m)")
 plt.show()
 ```
-
-![alt text](image-1.png)
+![alt text](image-4.png)
 
 
 Explanation:
@@ -232,13 +230,13 @@ def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
 
     return r
 
-# Parameters
-q = 1.6e-19
-m = 9.11e-31
-E = np.array([1e3, 0, 0])   # electric field in x-direction
-B = np.array([0, 0, 1])     # magnetic field in z-direction
+# Parameters (Revised)
+q = 1                 # charge in Coulombs
+m = 1e-3              # mass in kilograms (1 gram)
+E = np.array([1e3, 0, 0])   # electric field in x-direction (V/m)
+B = np.array([0, 0, 1])     # magnetic field in z-direction (T)
 v0 = np.array([0, 0, 0])    # initial velocity is zero
-r0 = np.array([0, 0, 0])    # start at the origin
+r0 = np.array([0, 0, 0])    # initial position
 
 # Run simulation
 trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
@@ -252,9 +250,10 @@ plt.ylabel("y (m)")
 plt.grid(True)
 plt.axis('equal')
 plt.show()
+
 ```
 
-![alt text](image-2.png)
+![alt text](image-5.png)
 
 
 
