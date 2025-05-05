@@ -267,6 +267,74 @@ $$
 This velocity is perpendicular to both fields. This phenomenon is crucial in devices like magnetic confinement in fusion reactors.
 
 
+---
+
+
+
+Here's a Python simulation of an **interesting trajectory**: a *complex 3D motion* of a charged particle where both **electric and magnetic fields are present and not aligned**. This setup leads to a **non-trivial spiraling drift** — a motion that combines rotation, drift, and acceleration.
+
+---
+
+### 🔁 Complex 3D Trajectory with Non-Perpendicular E and B Fields
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Lorentz force function
+def lorentz_force(q, m, E, B, v):
+    return (q / m) * (E + np.cross(v, B))
+
+# Euler integration for particle motion
+def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-4, steps=5000):
+    r = np.zeros((steps, 3))
+    v = np.zeros((steps, 3))
+    r[0], v[0] = r0, v0
+
+    for i in range(1, steps):
+        a = lorentz_force(q, m, E, B, v[i-1])
+        v[i] = v[i-1] + a * dt
+        r[i] = r[i-1] + v[i] * dt
+
+    return r
+
+# Parameters
+q = 1.0                  # charge in Coulombs
+m = 0.001                # mass in kg (1 g)
+E = np.array([100, 50, 0])    # electric field (V/m)
+B = np.array([0, 0, 1])       # magnetic field (T)
+v0 = np.array([10, 10, 5])    # initial velocity (m/s)
+r0 = np.array([0, 0, 0])      # initial position
+
+# Simulate trajectory
+trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
+
+# Plot the trajectory in 3D
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='purple')
+ax.set_title("Complex 3D Trajectory in Combined E and B Fields")
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_zlabel("z (m)")
+plt.show()
+```
+
+---
+
+![alt text](image-7.png)
+
+### ✨ What Does This Show?
+
+In this configuration:
+
+* The **electric field** is not perpendicular to the magnetic field.
+* The **initial velocity** also has components in multiple directions.
+
+This causes the particle to spiral while simultaneously being **accelerated along a drift path**, leading to a **non-circular, non-helical** trajectory that reflects the true complexity of Lorentz-force dynamics in real-world plasmas.
+
+
 
 
 ### ✅ Conclusion
