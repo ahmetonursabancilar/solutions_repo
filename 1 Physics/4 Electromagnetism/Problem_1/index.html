@@ -100,6 +100,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#drift-motion-in-crossed-electric-and-magnetic-fields">🔀 Drift Motion in Crossed Electric and Magnetic Fields</a>
 <ul>
+<li class="toctree-l4"><a class="reference internal" href="#complex-3d-trajectory-with-non-perpendicular-e-and-b-fields">🔁 Complex 3D Trajectory with Non-Perpendicular E and B Fields</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#what-does-this-show">✨ What Does This Show?</a>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#conclusion">✅ Conclusion</a>
 </li>
 </ul>
@@ -444,6 +448,61 @@ plt.show()
 \vec{v}_\text{drift} = \frac{\vec{E} \times \vec{B}}{B^2}
 \]</div>
 <p>This velocity is perpendicular to both fields. This phenomenon is crucial in devices like magnetic confinement in fusion reactors.</p>
+<hr/>
+<p>Here's a Python simulation of an <strong>interesting trajectory</strong>: a <em>complex 3D motion</em> of a charged particle where both <strong>electric and magnetic fields are present and not aligned</strong>. This setup leads to a <strong>non-trivial spiraling drift</strong> — a motion that combines rotation, drift, and acceleration.</p>
+<hr/>
+<h3 id="complex-3d-trajectory-with-non-perpendicular-e-and-b-fields">🔁 Complex 3D Trajectory with Non-Perpendicular E and B Fields</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Lorentz force function
+def lorentz_force(q, m, E, B, v):
+    return (q / m) * (E + np.cross(v, B))
+
+# Euler integration for particle motion
+def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-4, steps=5000):
+    r = np.zeros((steps, 3))
+    v = np.zeros((steps, 3))
+    r[0], v[0] = r0, v0
+
+    for i in range(1, steps):
+        a = lorentz_force(q, m, E, B, v[i-1])
+        v[i] = v[i-1] + a * dt
+        r[i] = r[i-1] + v[i] * dt
+
+    return r
+
+# Parameters
+q = 1.0                  # charge in Coulombs
+m = 0.001                # mass in kg (1 g)
+E = np.array([100, 50, 0])    # electric field (V/m)
+B = np.array([0, 0, 1])       # magnetic field (T)
+v0 = np.array([10, 10, 5])    # initial velocity (m/s)
+r0 = np.array([0, 0, 0])      # initial position
+
+# Simulate trajectory
+trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
+
+# Plot the trajectory in 3D
+fig = plt.figure(figsize=(10, 7))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='purple')
+ax.set_title("Complex 3D Trajectory in Combined E and B Fields")
+ax.set_xlabel("x (m)")
+ax.set_ylabel("y (m)")
+ax.set_zlabel("z (m)")
+plt.show()
+</code></pre>
+<hr/>
+<p><img alt="alt text" src="../image-7.png"/></p>
+<h3 id="what-does-this-show">✨ What Does This Show?</h3>
+<p>In this configuration:</p>
+<ul>
+<li>The <strong>electric field</strong> is not perpendicular to the magnetic field.</li>
+<li>The <strong>initial velocity</strong> also has components in multiple directions.</li>
+</ul>
+<p>This causes the particle to spiral while simultaneously being <strong>accelerated along a drift path</strong>, leading to a <strong>non-circular, non-helical</strong> trajectory that reflects the true complexity of Lorentz-force dynamics in real-world plasmas.</p>
 <h3 id="conclusion">✅ Conclusion</h3>
 <p>The Lorentz force is a fundamental concept that governs the behavior of charged particles in electromagnetic fields. Through simulations and visualizations, we've seen how particles move in circular, helical, or drifting paths depending on the configuration of electric and magnetic fields. These dynamics are not just theoretical — they underpin real-world technologies such as particle accelerators, fusion devices, and mass spectrometers. By adjusting parameters like field strength and initial velocity, we gain deeper insight into particle control and confinement, which is essential for advancing both scientific research and practical applications in modern physics and engineering.</p>
 <hr/>
