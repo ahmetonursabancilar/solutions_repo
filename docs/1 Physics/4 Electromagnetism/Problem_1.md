@@ -1,6 +1,13 @@
 # 📘 Simulating the Effects of the Lorentz Force
 
----
+
+
+
+### 🎓 Motivation
+
+For university students studying physics or engineering, mastering the behavior of charged particles under electric and magnetic fields is essential. This topic forms the basis of key technologies like MRI machines, cyclotrons, and plasma confinement in fusion energy. Through computational simulations and visualizations of the Lorentz force, we can deepen our understanding of theoretical concepts while also building practical skills in numerical methods and scientific programming.
+
+
 
 ## 🔎 1. Introduction
 
