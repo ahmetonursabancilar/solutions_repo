@@ -207,6 +207,8 @@ plt.axis('equal')
 plt.show()
 ```
 ![alt text](image-2.png)
+
+![alt text](image-5.png)
 ---
 
 ## 🔷 Pentagon Interference Pattern
