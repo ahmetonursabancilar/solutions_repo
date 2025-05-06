@@ -198,45 +198,40 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# Lorentz force function
-def lorentz_force(q, m, E, B, v):
-    return (q / m) * (E + np.cross(v, B))
+# Parameters for the helical motion
+charge = 1.0  # Charge of the particle (Coulombs)
+mass = 1.0    # Mass of the particle (kg)
+velocity = 1.0  # Initial velocity of the particle (m/s)
+B_field = np.array([0, 0, 1])  # Magnetic field direction (along z-axis)
+time_steps = 1000  # Number of time steps in the simulation
+radius = 1.0      # Radius of the circular path
+pitch = 0.05      # The rate at which the spiral rises
 
-# Euler integration
-def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
-    r = np.zeros((steps, 3))
-    v = np.zeros((steps, 3))
-    r[0], v[0] = r0, v0
+# Time array
+t = np.linspace(0, 20, time_steps)
 
-    for i in range(1, steps):
-        a = lorentz_force(q, m, E, B, v[i-1])
-        v[i] = v[i-1] + a * dt
-        r[i] = r[i-1] + v[i] * dt
+# Velocity components (circular motion + linear motion)
+omega = velocity / radius  # Angular frequency (rad/s)
+x = radius * np.cos(omega * t)  # x component (circular motion)
+y = radius * np.sin(omega * t)  # y component (circular motion)
+z = pitch * t  # z component (linear motion)
 
-    return r
-
-# Parameters (Updated)
-q = 1                 # charge in Coulombs
-m = 1e-3              # mass in kilograms (1 g)
-B = np.array([0, 0, 1])             # magnetic field (T)
-E = np.array([0, 0, 0])             # no electric field
-v0 = np.array([1e6, 0, 1e6])        # initial velocity with z-component
-r0 = np.array([0, 0, 0])            # initial position
-
-# Run simulation
-trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
-
-# 3D Plot
-fig = plt.figure(figsize=(8, 6))
+# Plotting the spiral
+fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], color='green')
-ax.set_title("Helical Motion in a Magnetic Field")
-ax.set_xlabel("x (m)")
-ax.set_ylabel("y (m)")
-ax.set_zlabel("z (m)")
+
+ax.plot(x, y, z, label='Helical Motion', color='b')
+
+# Labels and title
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('Helical Motion in a Uniform Magnetic Field')
+
+# Show the plot
 plt.show()
 ```
-![alt text](image-4.png)
+![alt text](image-1.png)
 
 
 Here's a Python code to simulate **Helical Motion in a Uniform Magnetic Field** with the specified values for charge $q = 1 \, \text{C}$ and mass $m = 1 \, \text{g}$:
@@ -297,51 +292,109 @@ This code will generate a 3D plot showing the helical path of a charged particle
 
 ## 🔀 Drift Motion in Crossed Electric and Magnetic Fields
 
+Here's the **Python code** and all **explanations translated into English**, showing the **drift motion of a charged particle** in **crossed electric and magnetic fields**. The visualization includes **multiple lines and plots** to clearly display both the **circular (gyration) motion** and the **overall drift**.
+
+---
+
+### ✅ Python Code: Drift Motion in Crossed $\vec{E}$ and $\vec{B}$ Fields
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Lorentz force function
-def lorentz_force(q, m, E, B, v):
-    return (q / m) * (E + np.cross(v, B))
+# Physical constants and initial parameters
+q = 1.0       # Charge (C)
+m = 1.0       # Mass (kg)
+E = np.array([0, 5, 0])    # Electric field (V/m)
+B = np.array([0, 0, 2])    # Magnetic field (T)
 
-# Euler integration
-def simulate_particle_motion(q, m, E, B, v0, r0, dt=1e-11, steps=2000):
-    r = np.zeros((steps, 3))
-    v = np.zeros((steps, 3))
-    r[0], v[0] = r0, v0
+# Initial conditions
+r0 = np.array([0.0, 0.0, 0.0])  # Initial position
+v0 = np.array([1.0, 0.0, 0.0])  # Initial velocity
 
-    for i in range(1, steps):
-        a = lorentz_force(q, m, E, B, v[i-1])
-        v[i] = v[i-1] + a * dt
-        r[i] = r[i-1] + v[i] * dt
+# Time settings
+dt = 0.01
+t_max = 30
+steps = int(t_max / dt)
 
-    return r
+# Arrays to store position and velocity over time
+r = np.zeros((steps, 3))
+v = np.zeros((steps, 3))
+t = np.linspace(0, t_max, steps)
 
-# Parameters (Revised)
-q = 1                 # charge in Coulombs
-m = 1e-3              # mass in kilograms (1 gram)
-E = np.array([1e3, 0, 0])   # electric field in x-direction (V/m)
-B = np.array([0, 0, 1])     # magnetic field in z-direction (T)
-v0 = np.array([0, 0, 0])    # initial velocity is zero
-r0 = np.array([0, 0, 0])    # initial position
+r[0] = r0
+v[0] = v0
 
-# Run simulation
-trajectory = simulate_particle_motion(q, m, E, B, v0, r0)
+# Solve motion using a simple time-stepping method (Euler method)
+for i in range(steps - 1):
+    # Lorentz force: F = q(E + v × B)
+    a = (q / m) * (E + np.cross(v[i], B))
+    v[i + 1] = v[i] + a * dt
+    r[i + 1] = r[i] + v[i + 1] * dt
 
-# Plot in 2D
-plt.figure(figsize=(6, 6))
-plt.plot(trajectory[:, 0], trajectory[:, 1], color='red')
-plt.title("Drift Motion in Crossed Electric and Magnetic Fields")
-plt.xlabel("x (m)")
-plt.ylabel("y (m)")
-plt.grid(True)
-plt.axis('equal')
+# Theoretical drift velocity: v_d = (E × B) / B^2
+v_drift = np.cross(E, B) / np.linalg.norm(B)**2
+print("Drift velocity (E x B / B^2):", v_drift)
+
+# Plotting
+fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+
+# x-y plane motion: shows spiral (gyration) + drift
+axs[0, 0].plot(r[:, 0], r[:, 1], label='Particle Path', color='blue')
+axs[0, 0].quiver(r[::200, 0], r[::200, 1], v[::200, 0], v[::200, 1], color='red', scale=20, width=0.003)
+axs[0, 0].set_title('Motion in x-y Plane (Spiral + Drift)')
+axs[0, 0].set_xlabel('x')
+axs[0, 0].set_ylabel('y')
+axs[0, 0].grid()
+axs[0, 0].legend()
+
+# x position over time
+axs[0, 1].plot(t, r[:, 0], label='x(t)', color='green')
+axs[0, 1].set_title('x Position Over Time')
+axs[0, 1].set_xlabel('Time (s)')
+axs[0, 1].set_ylabel('x (m)')
+axs[0, 1].grid()
+axs[0, 1].legend()
+
+# y position over time
+axs[1, 0].plot(t, r[:, 1], label='y(t)', color='purple')
+axs[1, 0].set_title('y Position Over Time')
+axs[1, 0].set_xlabel('Time (s)')
+axs[1, 0].set_ylabel('y (m)')
+axs[1, 0].grid()
+axs[1, 0].legend()
+
+# Optional: 3D trajectory
+from mpl_toolkits.mplot3d import Axes3D
+ax3d = fig.add_subplot(224, projection='3d')
+ax3d.plot(r[:, 0], r[:, 1], r[:, 2], label='3D Trajectory')
+ax3d.set_title('3D Motion')
+ax3d.set_xlabel('x')
+ax3d.set_ylabel('y')
+ax3d.set_zlabel('z')
+ax3d.legend()
+
+plt.tight_layout()
 plt.show()
-
 ```
 
-![alt text](image-5.png)
+![alt text](image-2.png)
+---
+
+### 🔍 Key Features:
+
+* **Spiral + Drift** motion in the x-y plane is clearly shown.
+* Multiple **subplots** give you time-evolution views of x(t), y(t), and 3D trajectory.
+* The **drift velocity** $\vec{v}_d = \frac{\vec{E} \times \vec{B}}{B^2}$ is computed and printed.
+* **Vector arrows** (`quiver`) indicate particle velocity at sampled times.
+* You can increase the drift effect by increasing the strength of the electric field.
+
+
+
+
+
+
+
 
 
 

@@ -29,6 +29,8 @@ Instead of manually simplifying resistors step-by-step, we treat the circuit as 
 
 ### 🎯 Series Combination
 
+
+
 If two resistors \$R\_1\$ and \$R\_2\$ are in series:
 
 $$
