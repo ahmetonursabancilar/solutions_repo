@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>🎓 Presentation: Exploring the Central Limit Theorem through Simulations - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "\ud83c\udf93 Presentation: Exploring the Central Limit Theorem through Simulations";
         var mkdocs_page_input_path = "1 Physics/6 Statistics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -82,8 +82,36 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">6 Statistics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">🎓 Presentation: Exploring the Central Limit Theorem through Simulations</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#slide-1-title-slide">🪄 Slide 1: Title Slide</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-2-what-is-the-central-limit-theorem">🔍 Slide 2: What is the Central Limit Theorem?</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-3-simulation-plan">🛠 Slide 3: Simulation Plan</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-4-python-setup-code-block">🐍 Slide 4: Python Setup (Code Block)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-5-sampling-function-code-block">🧪 Slide 5: Sampling Function (Code Block)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-6-uniform-distribution-simulations">🔵 Slide 6: Uniform Distribution – Simulations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-7-uniform-distribution-plots">📊 Slide 7: Uniform Distribution – Plots</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-8-exponential-distribution-simulations">🔶 Slide 8: Exponential Distribution – Simulations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-9-exponential-distribution-plots">📊 Slide 9: Exponential Distribution – Plots</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-10-binomial-distribution-simulations">🟥 Slide 10: Binomial Distribution – Simulations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-11-binomial-distribution-plots">📊 Slide 11: Binomial Distribution – Plots</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-12-variance-of-sample-means">📉 Slide 12: Variance of Sample Means</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-13-real-world-applications">🌎 Slide 13: Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slide-14-conclusion">💬 Slide 14: Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -163,7 +191,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">6 Statistics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">🎓 Presentation: Exploring the Central Limit Theorem through Simulations</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +199,170 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="presentation-exploring-the-central-limit-theorem-through-simulations">🎓 <strong>Presentation: Exploring the Central Limit Theorem through Simulations</strong></h1>
+<h2 id="slide-1-title-slide">🪄 Slide 1: Title Slide</h2>
+<p><strong>Title:</strong>
+📊 <em>Exploring the Central Limit Theorem through Simulations</em></p>
+<p><strong>Subtitle:</strong>
+<em>How sample means tend toward normality—no matter the original distribution.</em></p>
+<hr/>
+<h2 id="slide-2-what-is-the-central-limit-theorem">🔍 Slide 2: What is the Central Limit Theorem?</h2>
+<blockquote>
+<p><strong>Definition:</strong>
+The Central Limit Theorem (CLT) states that the sampling distribution of the sample mean tends toward a normal distribution as the sample size increases, <strong>regardless of the population's original distribution</strong>.</p>
+</blockquote>
+<p>📌 Why is it important?</p>
+<ul>
+<li>Allows inference using normal distribution.</li>
+<li>Foundation for confidence intervals and hypothesis testing.</li>
+<li>Powers much of modern statistics.</li>
+</ul>
+<hr/>
+<h2 id="slide-3-simulation-plan">🛠 Slide 3: Simulation Plan</h2>
+<p><strong>What will we do?</strong></p>
+<ol>
+<li>
+<p>Generate populations from various distributions:</p>
+</li>
+<li>
+<p>Uniform</p>
+</li>
+<li>Exponential</li>
+<li>Binomial</li>
+<li>Draw many random samples of sizes: 5, 10, 30, 50</li>
+<li>Compute sample means</li>
+<li>Visualize the sampling distribution</li>
+<li>Discuss how normality emerges as sample size grows</li>
+</ol>
+<hr/>
+<h2 id="slide-4-python-setup-code-block">🐍 Slide 4: Python Setup (Code Block)</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set(style='whitegrid')
+</code></pre>
+<p>💡 <em>We use NumPy for data generation and Seaborn for visualization.</em></p>
+<hr/>
+<h2 id="slide-5-sampling-function-code-block">🧪 Slide 5: Sampling Function (Code Block)</h2>
+<pre><code class="language-python">def simulate_sampling_distribution(population_data, sample_sizes, num_samples=1000):
+    results = {}
+    for size in sample_sizes:
+        sample_means = []
+        for _ in range(num_samples):
+            sample = np.random.choice(population_data, size=size)
+            sample_means.append(np.mean(sample))
+        results[size] = sample_means
+    return results
+</code></pre>
+<blockquote>
+<p><strong>Definition:</strong>
+<em>Sampling Distribution:</em> The distribution of means across repeated samples from the same population.</p>
+</blockquote>
+<hr/>
+<h2 id="slide-6-uniform-distribution-simulations">🔵 Slide 6: Uniform Distribution – Simulations</h2>
+<pre><code class="language-python">uniform_population = np.random.uniform(low=0, high=100, size=100000)
+sample_sizes = [5, 10, 30, 50]
+uniform_results = simulate_sampling_distribution(uniform_population, sample_sizes)
+</code></pre>
+<p>📘 <strong>Uniform Distribution:</strong>
+All values are equally likely.</p>
+<hr/>
+<h2 id="slide-7-uniform-distribution-plots">📊 Slide 7: Uniform Distribution – Plots</h2>
+<p>Loop to generate histograms:</p>
+<pre><code class="language-python">for size, means in uniform_results.items():
+    plt.figure(figsize=(8,4))
+    sns.histplot(means, bins=30, kde=True, color='skyblue')
+    plt.title(f'Uniform Distribution - Sample Size = {size}')
+    plt.xlabel('Sample Mean')
+    plt.ylabel('Frequency')
+    plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image-2.png"/>
+<img alt="alt text" src="../image.png"/>
+<img alt="alt text" src="../image-3.png"/></p>
+<p><strong>Observation:</strong> As sample size increases, the sampling distribution becomes more normal.</p>
+<hr/>
+<h2 id="slide-8-exponential-distribution-simulations">🔶 Slide 8: Exponential Distribution – Simulations</h2>
+<pre><code class="language-python">exponential_population = np.random.exponential(scale=1.0, size=100000)
+exponential_results = simulate_sampling_distribution(exponential_population, sample_sizes)
+</code></pre>
+<p>📘 <strong>Exponential Distribution:</strong>
+A right-skewed distribution, often used to model time between events.</p>
+<hr/>
+<h2 id="slide-9-exponential-distribution-plots">📊 Slide 9: Exponential Distribution – Plots</h2>
+<pre><code class="language-python">for size, means in exponential_results.items():
+    plt.figure(figsize=(8,4))
+    sns.histplot(means, bins=30, kde=True, color='orange')
+    plt.title(f'Exponential Distribution - Sample Size = {size}')
+    plt.xlabel('Sample Mean')
+    plt.ylabel('Frequency')
+    plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-4.png"/>
+<img alt="alt text" src="../image-5.png"/>
+<img alt="alt text" src="../image-6.png"/>
+<img alt="alt text" src="../image-7.png"/>
+<strong>Observation:</strong> Skewed population, but sample means tend toward normality with larger sample size.</p>
+<hr/>
+<h2 id="slide-10-binomial-distribution-simulations">🟥 Slide 10: Binomial Distribution – Simulations</h2>
+<pre><code class="language-python">binomial_population = np.random.binomial(n=1, p=0.3, size=100000)
+binomial_results = simulate_sampling_distribution(binomial_population, sample_sizes)
+</code></pre>
+<p>📘 <strong>Binomial Distribution:</strong>
+Discrete distribution showing number of successes in fixed trials with probability <em>p</em>.</p>
+<hr/>
+<h2 id="slide-11-binomial-distribution-plots">📊 Slide 11: Binomial Distribution – Plots</h2>
+<pre><code class="language-python">for size, means in binomial_results.items():
+    plt.figure(figsize=(8,4))
+    sns.histplot(means, bins=30, kde=True, color='red')
+    plt.title(f'Binomial Distribution - Sample Size = {size}')
+    plt.xlabel('Sample Mean')
+    plt.ylabel('Frequency')
+    plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-8.png"/></p>
+<p><img alt="alt text" src="../image-9.png"/></p>
+<p><img alt="alt text" src="../image-10.png"/></p>
+<p><img alt="alt text" src="../image-11.png"/>
+<strong>Observation:</strong> Even discrete distributions follow CLT.</p>
+<hr/>
+<h2 id="slide-12-variance-of-sample-means">📉 Slide 12: Variance of Sample Means</h2>
+<pre><code class="language-python">pop_var = np.var(uniform_population)
+sizes = np.arange(1, 101)
+variances = [pop_var / n for n in sizes]
+
+plt.figure(figsize=(8,5))
+plt.plot(sizes, variances, label='Var(X̄) = σ²/n', color='green')
+plt.xlabel('Sample Size')
+plt.ylabel('Variance of Sample Mean')
+plt.title('Decrease in Variance of Sample Mean with Increasing n')
+plt.legend()
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-12.png"/></p>
+<p>📘 <strong>Key Formula:</strong></p>
+<div class="arithmatex">\[
+\text{Var}(\bar{X}) = \frac{\sigma^2}{n}
+\]</div>
+<hr/>
+<h2 id="slide-13-real-world-applications">🌎 Slide 13: Real-World Applications</h2>
+<p><strong>Where is CLT used?</strong></p>
+<ul>
+<li>📦 Quality control in manufacturing (Six Sigma)</li>
+<li>💰 Financial modeling and risk management</li>
+<li>🧪 Medical trials and drug testing</li>
+<li>📊 A/B testing in web analytics</li>
+<li>📈 Estimating population means in surveys</li>
+</ul>
+<hr/>
+<h2 id="slide-14-conclusion">💬 Slide 14: Conclusion</h2>
+<ul>
+<li>CLT explains why the <strong>normal distribution appears everywhere</strong></li>
+<li>Works regardless of population distribution (with large enough samples)</li>
+<li>Simulations help visualize and internalize this key idea</li>
+</ul>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
