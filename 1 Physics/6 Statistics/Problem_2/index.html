@@ -86,6 +86,12 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#estimating-using-monte-carlo-methods">Estimating π Using Monte Carlo Methods</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#a-visual-and-statistical-exploration">A Visual and Statistical Exploration</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,7 +177,304 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<hr/>
+<h1 id="slide-1-title">🎯 Slide 1: <strong>Title</strong></h1>
+<h3 id="estimating-using-monte-carlo-methods"><strong>Estimating π Using Monte Carlo Methods</strong></h3>
+<h4 id="a-visual-and-statistical-exploration">A Visual and Statistical Exploration</h4>
+<h1 id="slide-2-motivation">💡 Slide 2: <strong>Motivation</strong></h1>
+<ul>
+<li>Monte Carlo methods use <strong>random sampling</strong> to solve mathematical problems.</li>
+<li>
+<p>Estimating <strong>π</strong> is a classic, elegant example of applying randomness in:</p>
+</li>
+<li>
+<p>Geometry</p>
+</li>
+<li>Probability</li>
+<li>Numerical computation</li>
+<li>Helps understand convergence and simulation accuracy.</li>
+</ul>
+<hr/>
+<h1 id="slide-3-agenda">📋 Slide 3: <strong>Agenda</strong></h1>
+<ol>
+<li>Estimating π using a <strong>Unit Circle</strong></li>
+<li>Estimating π using <strong>Buffon’s Needle</strong></li>
+<li><strong>Python code</strong> demonstrations</li>
+<li><strong>Visual outputs</strong> for clarity</li>
+<li><strong>Convergence analysis</strong></li>
+<li>Final comparison and conclusion</li>
+</ol>
+<hr/>
+<h1 id="slide-4-part-1-estimating-via-circle">🔵 Slide 4: <strong>Part 1 — Estimating π via Circle</strong></h1>
+<h2 id="theoretical-foundation">🧠 Theoretical Foundation</h2>
+<ul>
+<li>Consider a square of side 2 and a circle of radius 1 inside.</li>
+<li>Circle area = π × 1² = π</li>
+<li>Square area = 2² = 4</li>
+<li>Random points uniformly placed → proportion in circle ≈ π / 4</li>
+</ul>
+<div class="arithmatex">\[
+\pi \approx 4 \times \frac{\text{Points Inside Circle}}{\text{Total Points}}
+\]</div>
+<hr/>
+<h1 id="slide-5-python-simulation-circle-method">🧪 Slide 5: <strong>Python Simulation — Circle Method</strong></h1>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def estimate_pi_circle(n_points=10000, visualize=True):
+    x = np.random.uniform(-1, 1, n_points)
+    y = np.random.uniform(-1, 1, n_points)
+    distances = x**2 + y**2
+    inside = distances &lt;= 1
+
+    pi_estimate = 4 * np.sum(inside) / n_points
+
+    if visualize:
+        plt.figure(figsize=(6, 6))
+        plt.scatter(x[inside], y[inside], s=1, color='blue', label='Inside Circle')
+        plt.scatter(x[~inside], y[~inside], s=1, color='red', label='Outside Circle')
+        circle = plt.Circle((0, 0), 1, color='black', fill=False)
+        plt.gca().add_patch(circle)
+        plt.gca().set_aspect('equal')
+        plt.title(f"Estimated π = {pi_estimate:.5f}")
+        plt.legend()
+        plt.grid(True)
+        plt.show()
+
+    return pi_estimate
+</code></pre>
+<h2 id="_1"><img alt="alt text" src="../image-13.png"/></h2>
+<h1 id="slide-6-circle-visualization">📊 Slide 6: <strong>Circle Visualization</strong></h1>
+<h3 id="what-youll-see">What You'll See:</h3>
+<ul>
+<li><strong>Blue points</strong>: Inside the circle</li>
+<li><strong>Red points</strong>: Outside the circle</li>
+<li>Real-time estimate appears on the plot title
+  ✅ Easy to understand visually</li>
+</ul>
+<hr/>
+<h1 id="slide-7-convergence-of-circle-method">📈 Slide 7: <strong>Convergence of Circle Method</strong></h1>
+<ul>
+<li>Accuracy improves with more points</li>
+<li><strong>Error \~ 1 / √N</strong> → slow but consistent convergence</li>
+<li>After \~10,000 points, π is usually accurate to 2–3 decimal places</li>
+</ul>
+<p>✅ Very stable method</p>
+<hr/>
+<h1 id="slide-8-part-2-estimating-via-buffons-needle">📍 Slide 8: <strong>Part 2 — Estimating π via Buffon’s Needle</strong></h1>
+<h2 id="theoretical-foundation_1">🧠 Theoretical Foundation</h2>
+<ul>
+<li>Drop a needle of length <strong>L</strong> on a plane with <strong>parallel lines</strong> d units apart.</li>
+<li>Probability of crossing a line:</li>
+</ul>
+<div class="arithmatex">\[
+P = \frac{2L}{d\pi} \Rightarrow \pi \approx \frac{2L \cdot N}{d \cdot C}
+\]</div>
+<p>Where:</p>
+<ul>
+<li><strong>N</strong> = total number of drops</li>
+<li><strong>C</strong> = number of crosses</li>
+</ul>
+<hr/>
+<h1 id="slide-9-python-simulation-buffons-needle">🧪 Slide 9: <strong>Python Simulation — Buffon’s Needle</strong></h1>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def buffons_needle(n_drops=1000, needle_length=1.0, line_spacing=2.0, visualize=True):
+    # Random positions
+    x_centers = np.random.uniform(0, line_spacing / 2, n_drops)
+    angles = np.random.uniform(0, np.pi / 2, n_drops)
+
+    # Calculate whether each needle crosses a line
+    crosses = x_centers &lt;= (needle_length / 2) * np.sin(angles)
+    num_crosses = np.sum(crosses)
+
+    # Estimate pi
+    if num_crosses == 0:
+        pi_estimate = np.inf
+    else:
+        pi_estimate = (2 * needle_length * n_drops) / (line_spacing * num_crosses)
+
+    if visualize:
+        plt.figure(figsize=(6, 6))
+        for i in range(n_drops):
+            x = np.random.uniform(0, 10)
+            y = np.random.uniform(0, 10)
+            angle = np.random.uniform(0, np.pi)
+            x0 = x - (needle_length / 2) * np.cos(angle)
+            y0 = y - (needle_length / 2) * np.sin(angle)
+            x1 = x + (needle_length / 2) * np.cos(angle)
+            y1 = y + (needle_length / 2) * np.sin(angle)
+            color = 'blue' if (int(y0 / line_spacing) != int(y1 / line_spacing)) else 'red'
+            plt.plot([x0, x1], [y0, y1], color=color, alpha=0.5)
+
+        for i in range(0, 11):
+            plt.axhline(i * line_spacing, color='black', linewidth=0.5)
+
+        plt.title(f"Estimated π = {pi_estimate:.5f}")
+        plt.xlim(0, 10)
+        plt.ylim(0, 10)
+        plt.gca().set_aspect('equal')
+        plt.grid(True)
+        plt.show()
+
+    return pi_estimate
+
+# Run the function to test
+buffons_needle(n_drops=1000, visualize=True)
+
+</code></pre>
+<h2 id="_2"><img alt="alt text" src="../image-14.png"/></h2>
+<h1 id="slide-10-needle-visualization">📷 Slide 10: <strong>Needle Visualization</strong></h1>
+<ul>
+<li><strong>Blue needles</strong>: Crossed a line</li>
+<li><strong>Red needles</strong>: Did not cross</li>
+<li>Elegant and geometric simulation
+  👁️ Visually distinct from the circle method</li>
+</ul>
+<hr/>
+<h1 id="slide-11-combined-convergence-plot">📈 Slide 11: <strong>Combined Convergence Plot</strong></h1>
+<h3 id="code-comparing-both-methods">Code: Comparing Both Methods</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def estimate_pi_circle_only(n_points):
+    x = np.random.uniform(-1, 1, n_points)
+    y = np.random.uniform(-1, 1, n_points)
+    inside = x**2 + y**2 &lt;= 1
+    return 4 * np.sum(inside) / n_points
+
+def estimate_pi_buffon_only(n_drops, needle_length=1.0, line_spacing=2.0):
+    x_centers = np.random.uniform(0, line_spacing / 2, n_drops)
+    angles = np.random.uniform(0, np.pi / 2, n_drops)
+    crosses = x_centers &lt;= (needle_length / 2) * np.sin(angles)
+    num_crosses = np.sum(crosses)
+    if num_crosses == 0:
+        return np.nan
+    return (2 * needle_length * n_drops) / (line_spacing * num_crosses)
+
+# Sample sizes
+samples = np.arange(100, 10001, 200)
+pi_true = np.pi
+circle_errors = []
+buffon_errors = []
+
+for n in samples:
+    pi_circle = estimate_pi_circle_only(n)
+    pi_buffon = estimate_pi_buffon_only(n)
+    circle_errors.append(abs(pi_circle - pi_true))
+    buffon_errors.append(abs(pi_buffon - pi_true))
+
+# Plotting convergence
+plt.figure(figsize=(10, 6))
+plt.plot(samples, circle_errors, label="Circle Method", marker='o')
+plt.plot(samples, buffon_errors, label="Buffon's Needle", marker='x')
+plt.xlabel("Number of Samples")
+plt.ylabel("Absolute Error")
+plt.title("Convergence of π Estimation Methods")
+plt.legend()
+plt.grid(True)
+plt.yscale("log")  # Optional: log scale to highlight convergence speed
+plt.show()
+</code></pre>
+<h2 id="_3"><img alt="alt text" src="../image-15.png"/></h2>
+<h1 id="slide-115-convergence-analysis">⏱️ Slide 11.5: <strong>Convergence Analysis</strong></h1>
+<h3 id="how-fast-do-we-get-a-good-estimate">How Fast Do We Get a Good Estimate?</h3>
+<ul>
+<li>
+<p><strong>Circle method</strong>: Fast convergence</p>
+</li>
+<li>
+<p>Good estimate after \~5,000–10,000 points</p>
+</li>
+<li>
+<p><strong>Buffon’s needle</strong>: Slower convergence</p>
+</li>
+<li>
+<p>Higher variance in results</p>
+</li>
+<li>More samples needed to stabilize</li>
+</ul>
+<h3 id="rule-of-thumb">Rule of Thumb:</h3>
+<div class="arithmatex">\[
+\text{Error} \propto \frac{1}{\sqrt{N}} \quad \text{(for both methods)}
+\]</div>
+<hr/>
+<h1 id="slide-12-comparison-table">📊 Slide 12: <strong>Comparison Table</strong></h1>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Circle Method</th>
+<th>Buffon’s Needle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Convergence Speed</td>
+<td>✅ Faster</td>
+<td>❌ Slower</td>
+</tr>
+<tr>
+<td>Visual Intuition</td>
+<td>✅ High</td>
+<td>✅ Moderate</td>
+</tr>
+<tr>
+<td>Variance</td>
+<td>❌ Low</td>
+<td>⚠️ High</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>✅ Simple Math</td>
+<td>⚠️ Trig + Geometry</td>
+</tr>
+<tr>
+<td>Accuracy (typical)</td>
+<td>✅ Stable</td>
+<td>⚠️ Varies heavily</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h1 id="slide-13-conclusion">✅ Slide 13: <strong>Conclusion</strong></h1>
+<ul>
+<li>Monte Carlo methods demonstrate <strong>randomness in precision</strong></li>
+<li>
+<p><strong>Circle-based method</strong> is:</p>
+</li>
+<li>
+<p>More accurate</p>
+</li>
+<li>Easier to simulate</li>
+<li>
+<p><strong>Buffon’s Needle</strong>:</p>
+</li>
+<li>
+<p>Elegant and historic</p>
+</li>
+<li>Good example of geometry in probability</li>
+<li><strong>Convergence matters</strong> in method choice</li>
+</ul>
+<hr/>
+<h1 id="slide-14-deliverables">📁 Slide 14: <strong>Deliverables</strong></h1>
+<h3 id="code">💻 Code:</h3>
+<ul>
+<li>Python functions for both methods</li>
+<li>Visualization &amp; convergence graph</li>
+</ul>
+<h3 id="report-includes">📄 Report Includes:</h3>
+<ul>
+<li>Explanations</li>
+<li>Derivations</li>
+<li>Full annotated code</li>
+</ul>
+<h3 id="outputs">📊 Outputs:</h3>
+<ul>
+<li>Scatter plots &amp; needle visuals</li>
+<li>Convergence graphs</li>
+</ul>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
