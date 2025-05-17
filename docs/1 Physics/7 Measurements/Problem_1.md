@@ -1,5 +1,9 @@
 
 
+
+
+---
+
 # 🎓 Measuring Earth's Gravitational Acceleration with a Pendulum
 
 **A Hands-On Experimental Physics Project**
@@ -17,8 +21,8 @@
 
 ## 🧪 Materials
 
-* A string (\~1.5 meters)
-* A small weight (e.g. a coin pouch or keychain)
+* A charger cable (\~1.10 meters)
+* A small weight (the connector itself)
 * Stopwatch (or smartphone timer)
 * Ruler or tape measure
 
@@ -26,15 +30,15 @@
 
 ## ⚙️ Setup
 
-* The weight is attached to one end of the string; the other end is tied to a fixed support.
-* The pendulum length $L$ is measured from the suspension point to the weight's center of mass.
-* Measurement resolution = **1 mm → Uncertainty $\Delta L = 0.5 \text{ cm}$**
+* The connector was used as the pendulum bob, suspended from the 110 cm cable.
+* The pendulum length $L$ was measured from the suspension point to the center of the mass.
+* Measurement resolution = **1 cm → Uncertainty $\Delta L = 0.005 \text{ m}$**
 
 ---
 
 ## ⏱️ Data Collection
 
-* The pendulum is displaced by less than 15° and released.
+* The pendulum was displaced by less than 15° and released.
 * **We timed 10 complete oscillations** using a stopwatch.
 * This was repeated **10 times**, giving 10 measurements of $T_{10}$.
 
@@ -55,16 +59,16 @@ All calculations, graphs, and uncertainty analyses are based on this actual expe
 
 | Trial | $T_{10}$ (s) |
 | ----- | ------------ |
-| 1     | 24.33        |
-| 2     | 24.40        |
-| 3     | 24.28        |
-| 4     | 24.25        |
-| 5     | 24.38        |
-| 6     | 24.36        |
-| 7     | 24.29        |
-| 8     | 24.32        |
-| 9     | 24.35        |
-| 10    | 24.41        |
+| 1     | 19.89        |
+| 2     | 20.05        |
+| 3     | 19.90        |
+| 4     | 19.69        |
+| 5     | 20.11        |
+| 6     | 19.81        |
+| 7     | 20.03        |
+| 8     | 20.18        |
+| 9     | 19.98        |
+| 10    | 20.16        |
 
 ---
 
@@ -73,7 +77,7 @@ All calculations, graphs, and uncertainty analyses are based on this actual expe
 ```python
 import matplotlib.pyplot as plt
 
-times = [24.33, 24.40, 24.28, 24.25, 24.38, 24.36, 24.29, 24.32, 24.35, 24.41]
+times = [19.89, 20.05, 19.90, 19.69, 20.11, 19.81, 20.03, 20.18, 19.98, 20.16]
 plt.figure(figsize=(8, 5))
 plt.plot(range(1, 11), times, marker='o')
 plt.title("Measured Times for 10 Oscillations")
@@ -82,7 +86,7 @@ plt.ylabel("Time (s)")
 plt.grid(True)
 plt.show()
 ```
-![alt text](image.png)
+![alt text](image-3.png)
 ---
 
 ## 📊 Step-by-Step Data Analysis
@@ -90,17 +94,19 @@ plt.show()
 * Average time for 10 oscillations:
 
   $$
-  \overline{T}_{10} = 24.337 \text{ s}
+  \overline{T}_{10} = 19.990 \, \text{s}
   $$
+
 * Standard deviation:
 
   $$
-  \sigma_T = 0.0516 \text{ s}
+  \sigma_T = 0.1524 \, \text{s}
   $$
+
 * Uncertainty:
 
   $$
-  \Delta T_{10} = \frac{\sigma_T}{\sqrt{10}} = 0.0163 \text{ s}
+  \Delta T_{10} = \frac{\sigma_T}{\sqrt{10}} = 0.0482 \, \text{s}
   $$
 
 ---
@@ -110,12 +116,13 @@ plt.show()
 * Period of 1 oscillation:
 
   $$
-  T = \frac{\overline{T}_{10}}{10} = 2.4337 \text{ s}
+  T = \frac{\overline{T}_{10}}{10} = 1.999 \, \text{s}
   $$
+
 * Uncertainty:
 
   $$
-  \Delta T = \frac{\Delta T_{10}}{10} = 0.00163 \text{ s}
+  \Delta T = \frac{\Delta T_{10}}{10} = 0.00482 \, \text{s}
   $$
 
 ---
@@ -123,8 +130,8 @@ plt.show()
 ## 📈 Graph 2: Period with Uncertainty
 
 ```python
-T = 2.4337
-dT = 0.00163
+T = 1.999
+dT = 0.00482
 
 plt.errorbar([1], [T], yerr=[dT], fmt='o', capsize=5, label="Measured Period")
 plt.axhline(y=T, color='gray', linestyle='--')
@@ -135,18 +142,17 @@ plt.grid(True)
 plt.legend()
 plt.show()
 ```
-![alt text](image-1.png)
+![alt text](image-4.png)
 ---
 
 ## 🌍 Calculating Gravitational Acceleration
 
 $$
-g = \frac{4\pi^2 L}{T^2}
-\quad \text{with} \quad L = 1.50 \text{ m}
+g = \frac{4\pi^2 L}{T^2} \quad \text{with} \quad L = 1.10 \, \text{m}
 $$
 
 $$
-g = \frac{4 \cdot \pi^2 \cdot 1.50}{(2.4337)^2} \approx 9.972 \text{ m/s}^2
+g = \frac{4 \cdot \pi^2 \cdot 1.10}{(1.999)^2} \approx 10.87 \, \text{m/s}^2
 $$
 
 ---
@@ -158,8 +164,8 @@ $$
 $$
 
 $$
-\Delta g = 9.972 \cdot \sqrt{\left( \frac{0.005}{1.50} \right)^2 + \left( 2 \cdot \frac{0.00163}{2.4337} \right)^2}
-\approx 0.044 \text{ m/s}^2
+\Delta g = 10.87 \cdot \sqrt{\left( \frac{0.005}{1.10} \right)^2 + \left( 2 \cdot \frac{0.00482}{1.999} \right)^2}
+\approx 0.11 \, \text{m/s}^2
 $$
 
 ---
@@ -168,7 +174,7 @@ $$
 
 ```python
 plt.figure(figsize=(6, 5))
-plt.errorbar(['Measured g'], [9.972], yerr=[0.044], fmt='o', capsize=10, label="Measured")
+plt.errorbar(['Measured g'], [10.87], yerr=[0.11], fmt='o', capsize=10, label="Measured")
 plt.axhline(y=9.81, color='green', linestyle='--', label="Standard g (9.81 m/s²)")
 plt.title("Comparison of Measured vs Standard g")
 plt.ylabel("g (m/s²)")
@@ -176,27 +182,28 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
-![alt text](image-2.png)
+![alt text](image-5.png)
 ---
 
 ## 📌 Final Result
 
 $$
-g = (9.972 \pm 0.044) \, \text{m/s}^2
+g = (10.87 \pm 0.11) \, \text{m/s}^2
 $$
 
-✅ The measured value is **close to the theoretical value (9.81 m/s²)**
-✅ The uncertainty is **small and well-calculated**
+✅ The measured value is **slightly higher than the standard (9.81 m/s²)**
+✅ The uncertainty is **reasonable and based on real data**
 
 ---
 
 ## 🧠 What Did We Learn?
 
-* Careful timing and repeated trials reduce random error.
-* Small angle approximation holds well for <15°.
-* Measurement resolution directly affects uncertainty.
-* Even basic tools + thoughtful analysis = real science!
+* Repeated trials help minimize random errors.
+* Proper attention to timing and angle keeps the setup valid.
+* Even basic tools like a charger cable and stopwatch are enough to conduct real physics.
+* The accuracy depends on both measurement precision and careful uncertainty analysis.
 
 ---
+
 
 
