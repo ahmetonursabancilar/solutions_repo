@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>🎓 Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
+<title>Problem 1 - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "\ud83c\udf93 Equivalent Resistance Using Graph Theory";
+        var mkdocs_page_name = "Problem 1";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,42 +76,8 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">🎓 Equivalent Resistance Using Graph Theory</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#scenario-from-start-to-end-through-a-maze-of-resistors">⚙️ Scenario: From START to END through a Maze of Resistors</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#graph-theory-perspective">📐 Graph Theory Perspective</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundation">🧠 Theoretical Foundation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#series-combination">🎯 Series Combination</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#parallel-combination">🎯 Parallel Combination</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-by-step-python-implementation">🧰 Step-by-Step Python Implementation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#setup-graph-construction">✅ Setup &amp; Graph Construction</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#step-1-create-a-complex-circuit-graph">🔹 Step 1: Create a Complex Circuit Graph</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#step-2-apply-series-reduction">🔹 Step 2: Apply Series Reduction</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-apply-parallel-reduction">🔹 Step 3: Apply Parallel Reduction</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-4-compute-final-equivalent-resistance">🔹 Step 4: Compute Final Equivalent Resistance</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#summary">🧠 Summary:</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#explanation-through-visuals">📈 Explanation Through Visuals</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#conclusion">🧠 Conclusion</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -197,7 +163,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">🎓 Equivalent Resistance Using Graph Theory</li>
+<li class="breadcrumb-item active">Problem 1</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -205,203 +171,270 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="equivalent-resistance-using-graph-theory">🎓 Equivalent Resistance Using Graph Theory</h1>
-<h2 id="scenario-from-start-to-end-through-a-maze-of-resistors">⚙️ Scenario: From START to END through a Maze of Resistors</h2>
-<p>Imagine a complex electrical network where:</p>
+<h2 id="slide-1-title-slide">🎓 <strong>Slide 1: Title Slide</strong></h2>
 <ul>
-<li>Nodes represent connection points (junctions),</li>
-<li>Edges represent resistors with values (in Ohms),</li>
-<li>There is a <code>START</code> node and an <code>END</code> node,</li>
-<li>The resistors are arbitrarily connected—some in series, some in parallel, some nested.</li>
+<li><strong>Title</strong>: <strong>Equivalent Resistance Using Graph Theory</strong></li>
+<li><strong>Subtitle</strong>: <em>A Systematic Approach to Simplifying Complex Circuits</em></li>
 </ul>
-<p>Our task is to <strong>find the total equivalent resistance</strong> between <code>START</code> and <code>END</code> using <strong>graph simplification techniques</strong>.</p>
+<p>📽 <em>Animation Suggestion</em>: Fade-in for title and subtitle, with a background image of a complex circuit.</p>
 <hr/>
-<h2 id="graph-theory-perspective">📐 Graph Theory Perspective</h2>
-<p>Instead of manually simplifying resistors step-by-step, we treat the circuit as a <strong>weighted undirected graph</strong>:</p>
+<h2 id="slide-2-motivation">💡 <strong>Slide 2: Motivation</strong></h2>
+<h3 id="why-use-graph-theory-for-equivalent-resistance"><strong>Why Use Graph Theory for Equivalent Resistance?</strong></h3>
 <ul>
-<li>Each resistor becomes an edge,</li>
-<li>Each junction becomes a node,</li>
-<li>The resistance value becomes the edge weight.</li>
+<li>Traditional series/parallel rules become messy in complex circuits.</li>
+<li>Graph theory offers a structured, algorithmic approach.</li>
+<li>
+<p>Powerful for:</p>
+</li>
+<li>
+<p>Circuit simulation tools</p>
+</li>
+<li>Optimization engines</li>
+<li>Educational purposes</li>
 </ul>
+<p>📈 <em>Visual</em>: Show a tangled resistor network vs. a neat graph.</p>
 <hr/>
-<h2 id="theoretical-foundation">🧠 Theoretical Foundation</h2>
-<h3 id="series-combination">🎯 Series Combination</h3>
-<p>If two resistors $R_1$ and $R_2$ are in series:</p>
-<div class="arithmatex">\[
-R_{\text{eq}} = R_1 + R_2
-\]</div>
-<h3 id="parallel-combination">🎯 Parallel Combination</h3>
-<p>If two resistors $R_1$ and $R_2$ are in parallel:</p>
-<div class="arithmatex">\[
-\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}
-\Rightarrow
-R_{\text{eq}} = \left(\frac{1}{R_1} + \frac{1}{R_2}\right)^{-1}
-\]</div>
-<hr/>
-<h2 id="step-by-step-python-implementation">🧰 Step-by-Step Python Implementation</h2>
-<p>Below is a Colab-compatible code block to:</p>
+<h2 id="slide-3-key-concept-circuits-as-graphs">🔗 <strong>Slide 3: Key Concept — Circuits as Graphs</strong></h2>
+<h3 id="graph-representation"><strong>Graph Representation:</strong></h3>
 <ul>
-<li>Build a complex resistor network,</li>
-<li>Simplify it step-by-step,</li>
-<li>Show each simplification stage using plots or GIFs.</li>
+<li><strong>Nodes</strong> → Junctions</li>
+<li><strong>Edges</strong> → Resistors (weights = resistance)</li>
 </ul>
-<h3 id="setup-graph-construction">✅ Setup &amp; Graph Construction</h3>
-<pre><code class="language-python"># 📦 Install the necessary libraries (run once)
-!pip install networkx matplotlib --quiet
-
-# 🧠 Import libraries
-import networkx as nx
+<p>🖼️ <em>Visual Aid</em>: Circuit diagram on the left, graph on the right (linked by arrows).</p>
+<p>🧠 <em>Analogy</em>: Think of it like a road network with travel cost = resistance.</p>
+<hr/>
+<h2 id="slide-4-algorithm-overview">⚙️ <strong>Slide 4: Algorithm Overview</strong></h2>
+<h3 id="step-by-step-plan"><strong>Step-by-Step Plan</strong></h3>
+<pre><code class="language-python">function compute_equivalent_resistance(graph, source, sink):
+    while number_of_edges(graph) &gt; 1:
+        detect all series pairs
+        if any found:
+            replace each series pair with an equivalent resistor
+        else:
+            detect all parallel pairs
+            replace each parallel pair with an equivalent resistor
+    return resistance between source and sink
+</code></pre>
+<p>🧭 <em>Goal</em>: Reduce the graph to a single edge between source and sink.</p>
+<hr/>
+<h2 id="slide-5-case-study-introduction">🧪 <strong>Slide 5: Case Study Introduction</strong></h2>
+<h3 id="well-walk-through-an-example-circuit"><strong>We’ll Walk Through an Example Circuit</strong></h3>
+<ul>
+<li>Circuit with resistors: <span class="arithmatex">\(R_1, R_2, R_3, R_4, R_5\)</span></li>
+<li><strong>Source</strong>: <span class="arithmatex">\(B+\)</span>, <strong>Sink</strong>: <span class="arithmatex">\(B-\)</span></li>
+</ul>
+<p>🖼️ <em>Visual</em>: Realistic resistor diagram with labels.</p>
+<hr/>
+<h2 id="slide-6-graph-representation">📊 <strong>Slide 6: Graph Representation</strong></h2>
+<h3 id="graph-version-of-the-circuit"><strong>Graph Version of the Circuit</strong></h3>
+<ul>
+<li><strong>Nodes</strong>: <span class="arithmatex">\(B+, n_1, n_2, n_3, n_4, B-\)</span></li>
+<li><strong>Edges</strong>: Represent resistors with weights</li>
+</ul>
+<p>👁️ <em>Visual</em>: <code>networkx</code>-based graph visualization</p>
+<hr/>
+<h2 id="slide-7-python-code-graph-creation">🧑‍💻 <strong>Slide 7: Python Code — Graph Creation</strong></h2>
+<h3 id="initial-circuit-graph-with-networkx"><strong>Initial Circuit Graph with <code>networkx</code></strong></h3>
+<pre><code class="language-python">import networkx as nx
 import matplotlib.pyplot as plt
 
+G = nx.Graph()
+edges = [
+    ('B+', 'n1', 2),
+    ('n1', 'n2', 3),
+    ('n1', 'n3', 4),
+    ('n2', 'n3', 5),
+    ('n2', 'B-', 6),
+    ('n3', 'B-', 7)
+]
+
+for u, v, r in edges:
+    G.add_edge(u, v, resistance=r)
+
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=800)
+labels = nx.get_edge_attributes(G, 'resistance')
+nx.draw_networkx_edge_labels(G, pos, edge_labels={k: f"{v}Ω" for k, v in labels.items()})
+plt.title("Initial Circuit Graph")
+plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-12.png"/>
+📸 <em>Output</em>: Rendered interactive graph image.</p>
 <hr/>
-<h3 id="step-1-create-a-complex-circuit-graph">🔹 Step 1: Create a Complex Circuit Graph</h3>
-<pre><code class="language-python"># 🔧 Build a complex circuit graph (nested series &amp; parallel)
-G = nx.MultiGraph()
-
-# Resistors between nodes with resistance (ohms)
-G.add_edge('A', 'B', resistance=5)
-G.add_edge('B', 'C', resistance=3)
-G.add_edge('B', 'C', resistance=6)
-G.add_edge('C', 'D', resistance=4)
-G.add_edge('D', 'E', resistance=2)
-G.add_edge('E', 'F', resistance=1)
-G.add_edge('F', 'G', resistance=7)
-G.add_edge('G', 'H', resistance=2)
-G.add_edge('H', 'C', resistance=8)
-G.add_edge('A', 'C', resistance=10)  # Shortcut path
-
-
-# 🖼️ Visualize the initial circuit
-def draw_circuit(G, title="Circuit"):
-    pos = nx.spring_layout(G, seed=42)
-    edge_labels = nx.get_edge_attributes(G, 'resistance')
-    nx.draw(G, pos, with_labels=True, node_color='skyblue', node_size=800)
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-    plt.title(title)
-    plt.show()
-
-draw_circuit(G, "🔌 Step 1: Original Circuit with Multiple Paths")
-</code></pre>
-<p><img alt="alt text" src="../image-5.png"/></p>
-<h3 id="step-2-apply-series-reduction">🔹 Step 2: Apply Series Reduction</h3>
-<pre><code class="language-python">
-# 🛠️ Function to simplify series connections
-def simplify_series(G, source, target):
-    G = G.copy()
-    changed = True
-
-    while changed:
-        changed = False
-        for node in list(G.nodes()):
-            if node in (source, target):
-                continue
-            if G.degree(node) == 2:
-                neighbors = list(G.neighbors(node))
-                if G.number_of_edges(neighbors[0], node) == 1 and G.number_of_edges(node, neighbors[1]) == 1:
-                    r1 = G[neighbors[0]][node][0]['resistance']
-                    r2 = G[node][neighbors[1]][0]['resistance']
-                    G.remove_node(node)
-                    G.add_edge(neighbors[0], neighbors[1], resistance=r1 + r2)
-                    changed = True
-                    break
-    return G
-
-# ⚡ Apply series simplification
-G_series = simplify_series(G, 'A', 'C')
-
-# 🔍 Visualize after series simplification
-draw_circuit(G_series, "🔧 Step 2: After Series Reduction")
-
-</code></pre>
-<p><img alt="alt text" src="../image-6.png"/></p>
+<h2 id="slide-8-step-1-series-reduction">🔄 <strong>Slide 8: Step 1 — Series Reduction</strong></h2>
+<h3 id="detect-and-replace-series-resistors"><strong>Detect and Replace Series Resistors</strong></h3>
+<ul>
+<li>Example: <span class="arithmatex">\(R_2\)</span> and <span class="arithmatex">\(R_3\)</span> in series → <span class="arithmatex">\(R_{23} = R_2 + R_3\)</span></li>
+</ul>
+<p>🛠️ <em>Visual</em>: Before/after graph with series highlighted.</p>
 <hr/>
-<h2 id="step-3-apply-parallel-reduction">🔹 <strong>Step 3: Apply Parallel Reduction</strong></h2>
-<p>Now we'll detect <strong>parallel connections</strong> between the same pair of nodes and reduce them using the parallel resistance formula:</p>
-<div class="arithmatex">\[
-\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}
-\]</div>
-<p>Here's the function to do that:</p>
-<pre><code class="language-python"># 🛠️ Function to simplify parallel connections
-def simplify_parallel(G):
-    G = G.copy()
-    changed = True
+<h2 id="slide-9-python-code-series-detection">🧑‍💻 <strong>Slide 9: Python Code — Series Detection</strong></h2>
+<pre><code class="language-python">def find_series_pairs(graph):
+    series_pairs = []
+    for node in graph.nodes:
+        if graph.degree[node] == 2:
+            neighbors = list(graph.neighbors(node))
+            if len(neighbors) == 2:
+                u, v = neighbors
+                r1 = graph[u][node]['resistance']
+                r2 = graph[v][node]['resistance']
+                series_pairs.append((u, node, v, r1 + r2))
+    return series_pairs
 
-    while changed:
-        changed = False
-        edges_to_check = list(G.edges(data=True))
-        seen = set()
-        for u, v, d in edges_to_check:
-            if (u, v) in seen or (v, u) in seen:
-                continue
-            parallel_edges = G.get_edge_data(u, v)
-            if parallel_edges and len(parallel_edges) &gt; 1:
-                total_inv = sum(1 / attr['resistance'] for attr in parallel_edges.values())
-                req = 1 / total_inv
-                G.remove_edges_from([(u, v)] * len(parallel_edges))
-                G.add_edge(u, v, resistance=req)
-                changed = True
+def merge_series_resistors(graph, u, mid, v, new_r):
+    graph.add_edge(u, v, resistance=new_r)
+    graph.remove_node(mid)
+</code></pre>
+<p><img alt="alt text" src="../image-13.png"/>
+🎬 <em>Action</em>: Highlight which node gets removed in visualization.</p>
+<hr/>
+<h2 id="slide-10-step-2-parallel-reduction">🧲 <strong>Slide 10: Step 2 — Parallel Reduction</strong></h2>
+<h3 id="detect-and-replace-parallel-resistors"><strong>Detect and Replace Parallel Resistors</strong></h3>
+<ul>
+<li>Formula: <span class="arithmatex">\(R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2}\)</span></li>
+</ul>
+<p>🔁 <em>Visual</em>: Two edges between same nodes → one edge</p>
+<hr/>
+<h2 id="slide-11-python-code-parallel-detection">🧑‍💻 <strong>Slide 11: Python Code — Parallel Detection</strong></h2>
+<pre><code class="language-python">from collections import defaultdict
+
+def find_parallel_pairs(graph):
+    edge_counts = defaultdict(list)
+    for u, v, data in graph.edges(data=True):
+        edge_counts[frozenset((u, v))].append(data['resistance'])
+
+    parallels = []
+    for nodes, resistances in edge_counts.items():
+        if len(resistances) &gt; 1:
+            u, v = tuple(nodes)
+            R_eq = 1 / sum(1/r for r in resistances)
+            parallels.append((u, v, R_eq))
+    return parallels
+
+def merge_parallel_resistors(graph, u, v, new_r):
+    graph.remove_edges_from([(u, v)] * graph.number_of_edges(u, v))
+    graph.add_edge(u, v, resistance=new_r)
+</code></pre>
+<p><img alt="alt text" src="../image-14.png"/>
+📌 <em>Tip</em>: Use multigraphs for actual multiple edges, or simulate via attributes.</p>
+<hr/>
+<h2 id="slide-12-final-reduction">✅ <strong>Slide 12: Final Reduction</strong></h2>
+<h3 id="when-only-one-edge-remains"><strong>When Only One Edge Remains</strong></h3>
+<ul>
+<li>Only edge between <span class="arithmatex">\(B+\)</span> and <span class="arithmatex">\(B-\)</span></li>
+<li>This edge's weight = total equivalent resistance</li>
+</ul>
+<p>🧠 <em>Key Insight</em>: Reduction is recursive and deterministic.</p>
+<hr/>
+<h2 id="slide-13-full-function-all-in-one-solver">🧩 <strong>Slide 13: Full Function — All-in-One Solver</strong></h2>
+<pre><code class="language-python">def compute_equivalent_resistance(graph, source, sink):
+    step = 1
+    while True:
+        series = find_series_pairs(graph)
+        if series:
+            u, mid, v, R = series[0]
+            merge_series_resistors(graph, u, mid, v, R)
+        else:
+            parallels = find_parallel_pairs(graph)
+            if parallels:
+                u, v, R = parallels[0]
+                merge_parallel_resistors(graph, u, v, R)
+            else:
                 break
-            seen.add((u, v))
-    return G
+        step += 1
 
-
-# ⚡ Apply parallel simplification
-G_parallel = simplify_parallel(G_series)
-
-# 🔍 Visualize after parallel simplification
-draw_circuit(G_parallel, "🔧 Step 3: After Parallel Reduction")
-</code></pre>
-<p>✅ <em>What this does:</em> Replaces multiple resistors between the same two nodes with a single equivalent resistor.</p>
-<p><img alt="alt text" src="../image-7.png"/></p>
-<hr/>
-<p>Perfect! Let’s proceed to the final step. 🎯</p>
-<hr/>
-<h2 id="step-4-compute-final-equivalent-resistance">🔹 <strong>Step 4: Compute Final Equivalent Resistance</strong></h2>
-<p>At this point, your graph should be reduced as much as possible—ideally to a single edge between the <strong>start</strong> and <strong>end</strong> nodes. We'll now extract and display the final equivalent resistance.</p>
-<p>Here’s the code:</p>
-<pre><code class="language-python"># 🧮 Function to compute final equivalent resistance
-def get_equivalent_resistance(G, start, end):
     try:
-        resistance = G[start][end]['resistance']
-        print(f"✅ Final Equivalent Resistance between {start} and {end}: {resistance:.2f} Ω")
-        return resistance
+        return graph[source][sink]['resistance']
     except KeyError:
-        print(f"⚠️ No direct connection between {start} and {end}. The circuit is open.")
-        return float('inf')
-
-# 🧾 Calculate and show result
-equivalent_resistance = get_equivalent_resistance(G_parallel, 'A', 'D')
-
-# 🖼️ Visualize final simplified graph
-draw_circuit(G_parallel, "🏁 Final Simplified Circuit")
+        return None
 </code></pre>
-<p><img alt="alt text" src="../image-8.png"/></p>
+<p>👨‍🏫 <em>Usage</em>:</p>
+<pre><code class="language-python">R_eq = compute_equivalent_resistance(G, 'B+', 'B-')
+print(f"Equivalent Resistance: {R_eq:.2f} Ω")
+</code></pre>
+<p><img alt="alt text" src="../image-16.png"/></p>
+<p><img alt="alt text" src="../image-17.png"/></p>
+<p><img alt="alt text" src="../image-18.png"/></p>
+<p><img alt="alt text" src="../image-19.png"/></p>
+<p><img alt="alt text" src="../image-20.png"/></p>
+<h2 id="_1"><img alt="alt text" src="../image-21.png"/></h2>
+<h2 id="slide-14-more-complex-cases">🔁 <strong>Slide 14: More Complex Cases</strong></h2>
+<h3 id="loops-bridges-and-combinations"><strong>Loops, Bridges, and Combinations</strong></h3>
+<ul>
+<li>
+<p>Can handle:</p>
+</li>
+<li>
+<p>Nested branches</p>
+</li>
+<li>Multi-path topologies</li>
+<li>Fully systematic!</li>
+</ul>
+<p>🧠 <em>Analogy</em>: Like simplifying a maze using rules.</p>
 <hr/>
-<h3 id="summary">🧠 Summary:</h3>
+<h2 id="slide-15-efficiency-optimization">⏱️ <strong>Slide 15: Efficiency &amp; Optimization</strong></h2>
+<h3 id="performance-scaling"><strong>Performance &amp; Scaling</strong></h3>
 <ul>
-<li>We <strong>constructed</strong> a graph-based circuit.</li>
-<li>Applied <strong>series and parallel</strong> simplifications step by step.</li>
-<li>Visualized every stage of simplification.</li>
-<li>Finally, computed the <strong>equivalent resistance</strong> between two nodes using graph theory principles.</li>
+<li>Time complexity: Up to <span class="arithmatex">\(O(n^2)\)</span></li>
+<li>
+<p>Optimizations:</p>
+</li>
+<li>
+<p>Priority queues for bottlenecks</p>
+</li>
+<li>Memoization for subgraphs</li>
+<li>Use of <code>networkx.MultiGraph</code> for true parallel edges</li>
 </ul>
-<h2 id="explanation-through-visuals">📈 Explanation Through Visuals</h2>
-<p>This sequence shows how resistors:</p>
+<p>⚙️ <em>Advanced Tip</em>: Integrate with SPICE or circuit solver engines.</p>
+<hr/>
+<h2 id="slide-16-conclusion">🧠 <strong>Slide 16: Conclusion</strong></h2>
+<h3 id="key-takeaways"><strong>Key Takeaways</strong></h3>
 <ul>
-<li>In <strong>series</strong> (e.g., <code>START - A - B - END</code>) collapse into one edge,</li>
-<li>In <strong>parallel</strong> (e.g., <code>START - END</code> directly vs. through other paths) get merged using the parallel rule,</li>
-<li>Ultimately leading to a single resistor value between <code>START</code> and <code>END</code>.</li>
+<li>Graph theory enables systematic, programmable simplification.</li>
+<li>Great for teaching, software, and automation.</li>
+<li>Bridges physics with computation.</li>
+</ul>
+<p>💬 <em>Quote</em>:</p>
+<blockquote>
+<p>"By treating circuits as graphs, we turn intuition into algorithms."</p>
+</blockquote>
+<hr/>
+<h2 id="slide-17-references-acknowledgments">📚 <strong>Slide 17: References &amp; Acknowledgments</strong></h2>
+<ul>
+<li>
+<p><strong>Resources</strong>:</p>
+</li>
+<li>
+<p><em>Introduction to Graph Theory</em> by Douglas West</p>
+</li>
+<li><em>The Art of Electronics</em> by Horowitz &amp; Hill</li>
+<li><code>networkx</code> and <code>matplotlib</code> documentation</li>
+<li>
+<p><strong>Thanks</strong>:</p>
+</li>
+<li>
+<p>Collaborators, mentors, and open-source libraries</p>
+</li>
 </ul>
 <hr/>
-<h2 id="conclusion">🧠 Conclusion</h2>
-<p>This approach shows how <strong>graph-based methods</strong> enable:</p>
+<h3 id="final-notes">🔚 Final Notes</h3>
 <ul>
-<li>Fast simplification,</li>
-<li>Clear visualization,</li>
-<li>Automation-ready implementations,</li>
-<li>Real-time simulations.</li>
+<li>
+<p><strong>Visual Polish</strong>:</p>
+</li>
+<li>
+<p>Use color coding: red for series, blue for parallel.</p>
+</li>
+<li>Animate graph reductions slide-by-slide.</li>
+<li>
+<p><strong>Interactive Ideas</strong>:</p>
+</li>
+<li>
+<p>Add sliders to change resistance values</p>
+</li>
+<li>Live demo with Jupyter Notebook</li>
 </ul>
-<p>Combining mathematics, graph theory, and Python makes this a robust and elegant solution to circuit analysis.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
