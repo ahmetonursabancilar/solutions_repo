@@ -86,30 +86,36 @@ function compute_equivalent_resistance(graph, source, sink):
 ### **Initial Circuit Graph with `networkx`**
 
 ```python
-import networkx as nx
 import matplotlib.pyplot as plt
+import networkx as nx
 
-G = nx.Graph()
-edges = [
-    ('B+', 'n1', 2),
-    ('n1', 'n2', 3),
-    ('n1', 'n3', 4),
-    ('n2', 'n3', 5),
-    ('n2', 'B-', 6),
-    ('n3', 'B-', 7)
-]
+# Başlangıç devresi: karmaşık devre
+G_step1 = nx.Graph()
+G_step1.add_edge("B+", "A", label="R1")
+G_step1.add_edge("A", "C", label="R2")
+G_step1.add_edge("B+", "B", label="R3")
+G_step1.add_edge("B", "C", label="")
+G_step1.add_edge("C", "D", label="R4")
+G_step1.add_edge("D", "B-", label="R5")
 
-for u, v, r in edges:
-    G.add_edge(u, v, resistance=r)
+pos1 = {
+    "B+": (0, 2),
+    "A": (1, 2.5),
+    "C": (2, 2),
+    "B": (1, 1.2),
+    "D": (3, 2),
+    "B-": (4, 2)
+}
 
-pos = nx.spring_layout(G)
-nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=800)
-labels = nx.get_edge_attributes(G, 'resistance')
-nx.draw_networkx_edge_labels(G, pos, edge_labels={k: f"{v}Ω" for k, v in labels.items()})
-plt.title("Initial Circuit Graph")
+plt.figure(figsize=(10, 4))
+nx.draw(G_step1, pos1, with_labels=True, node_color="lightyellow", node_size=2000, font_size=12)
+edge_labels1 = {(u, v): d['label'] for u, v, d in G_step1.edges(data=True) if d['label']}
+nx.draw_networkx_edge_labels(G_step1, pos1, edge_labels=edge_labels1, font_size=12)
+plt.title("Step 1: Original Circuit", fontsize=14)
+plt.axis("off")
 plt.show()
 ```
-![alt text](image-12.png)
+![alt text](image-9.png)
 📸 *Output*: Rendered interactive graph image.
 
 ---
@@ -124,27 +130,27 @@ plt.show()
 
 ---
 
-## 🧑‍💻 **Slide 9: Python Code — Series Detection**
+## 🧑‍💻 **Slide 9: Python Code — Series Detection (R1 & R2 Series → R12)**
 
 ```python
-def find_series_pairs(graph):
-    series_pairs = []
-    for node in graph.nodes:
-        if graph.degree[node] == 2:
-            neighbors = list(graph.neighbors(node))
-            if len(neighbors) == 2:
-                u, v = neighbors
-                r1 = graph[u][node]['resistance']
-                r2 = graph[v][node]['resistance']
-                series_pairs.append((u, node, v, r1 + r2))
-    return series_pairs
+G_step2 = nx.Graph()
+G_step2.add_edge("B+", "C", label="R12")  # R1 + R2
+G_step2.add_edge("B+", "B", label="R3")
+G_step2.add_edge("B", "C", label="")
+G_step2.add_edge("C", "D", label="R4")
+G_step2.add_edge("D", "B-", label="R5")
 
-def merge_series_resistors(graph, u, mid, v, new_r):
-    graph.add_edge(u, v, resistance=new_r)
-    graph.remove_node(mid)
+plt.figure(figsize=(10, 4))
+nx.draw(G_step2, pos1, with_labels=True, node_color="lightgreen", node_size=2000, font_size=12)
+edge_labels2 = {(u, v): d['label'] for u, v, d in G_step2.edges(data=True) if d['label']}
+nx.draw_networkx_edge_labels(G_step2, pos1, edge_labels=edge_labels2, font_size=12)
+plt.title("Step 2: R1 and R2 Combined (R12)", fontsize=14)
+plt.axis("off")
+plt.show()
+
 ```
 
-![alt text](image-13.png)
+![alt text](image-10.png)
 🎬 *Action*: Highlight which node gets removed in visualization.
 
 ---
@@ -159,32 +165,51 @@ def merge_series_resistors(graph, u, mid, v, new_r):
 
 ---
 
-## 🧑‍💻 **Slide 11: Python Code — Parallel Detection**
+## 🧑‍💻 **Slide 11: Python Code — Parallel Detection  (R12 & R3 Parallel → R123) **
 
 ```python
-from collections import defaultdict
+G_step3 = nx.Graph()
+G_step3.add_edge("B+", "C", label="R123")  # R12 || R3
+G_step3.add_edge("C", "D", label="R4")
+G_step3.add_edge("D", "B-", label="R5")
 
-def find_parallel_pairs(graph):
-    edge_counts = defaultdict(list)
-    for u, v, data in graph.edges(data=True):
-        edge_counts[frozenset((u, v))].append(data['resistance'])
+plt.figure(figsize=(10, 4))
+nx.draw(G_step3, pos1, with_labels=True, node_color="skyblue", node_size=2000, font_size=12)
+edge_labels3 = {(u, v): d['label'] for u, v, d in G_step3.edges(data=True) if d['label']}
+nx.draw_networkx_edge_labels(G_step3, pos1, edge_labels=edge_labels3, font_size=12)
+plt.title("Step 3: R123 = R3 || R12", fontsize=14)
+plt.axis("off")
+plt.show()
 
-    parallels = []
-    for nodes, resistances in edge_counts.items():
-        if len(resistances) > 1:
-            u, v = tuple(nodes)
-            R_eq = 1 / sum(1/r for r in resistances)
-            parallels.append((u, v, R_eq))
-    return parallels
-
-def merge_parallel_resistors(graph, u, v, new_r):
-    graph.remove_edges_from([(u, v)] * graph.number_of_edges(u, v))
-    graph.add_edge(u, v, resistance=new_r)
 ```
-![alt text](image-14.png)
+![alt text](image-11.png)
 📌 *Tip*: Use multigraphs for actual multiple edges, or simulate via attributes.
 
 ---
+
+
+## 🧑‍💻 **Slide 11.5: Python Code — Series Detection (R123 & R4 Series → R1234) **
+```python
+G_step4 = nx.Graph()
+G_step4.add_edge("B+", "D", label="R1234")  # R123 + R4
+G_step4.add_edge("D", "B-", label="R5")
+
+pos4 = {
+    "B+": (0, 2),
+    "D": (2, 2),
+    "B-": (4, 2)
+}
+
+plt.figure(figsize=(8, 3))
+nx.draw(G_step4, pos4, with_labels=True, node_color="orange", node_size=2000, font_size=12)
+edge_labels4 = {(u, v): d['label'] for u, v, d in G_step4.edges(data=True)}
+nx.draw_networkx_edge_labels(G_step4, pos4, edge_labels=edge_labels4, font_size=12)
+plt.title("Step 4: R123 + R4 = R1234", fontsize=14)
+plt.axis("off")
+plt.show()
+```
+
+![alt text](image-15.png)
 
 ## ✅ **Slide 12: Final Reduction**
 
@@ -197,48 +222,28 @@ def merge_parallel_resistors(graph, u, v, new_r):
 
 ---
 
-## 🧩 **Slide 13: Full Function — All-in-One Solver**
+## 🧩 **Slide 13:  Final Solution (R1234 & R5 Serial → R_eq)**
 
 ```python
-def compute_equivalent_resistance(graph, source, sink):
-    step = 1
-    while True:
-        series = find_series_pairs(graph)
-        if series:
-            u, mid, v, R = series[0]
-            merge_series_resistors(graph, u, mid, v, R)
-        else:
-            parallels = find_parallel_pairs(graph)
-            if parallels:
-                u, v, R = parallels[0]
-                merge_parallel_resistors(graph, u, v, R)
-            else:
-                break
-        step += 1
+G_step5 = nx.Graph()
+G_step5.add_edge("B+", "B-", label="R_eq")  # Final result
 
-    try:
-        return graph[source][sink]['resistance']
-    except KeyError:
-        return None
+pos5 = {
+    "B+": (0, 1),
+    "B-": (4, 1)
+}
+
+plt.figure(figsize=(6, 2))
+nx.draw(G_step5, pos5, with_labels=True, node_color="salmon", node_size=2000, font_size=12)
+edge_labels5 = {(u, v): d['label'] for u, v, d in G_step5.edges(data=True)}
+nx.draw_networkx_edge_labels(G_step5, pos5, edge_labels=edge_labels5, font_size=12)
+plt.title("Step 5: Final Equivalent Resistance (R_eq)", fontsize=14)
+plt.axis("off")
+plt.show()
+
 ```
+![alt text](image-22.png)
 
-👨‍🏫 *Usage*:
-
-```python
-R_eq = compute_equivalent_resistance(G, 'B+', 'B-')
-print(f"Equivalent Resistance: {R_eq:.2f} Ω")
-```
-![alt text](image-16.png)
-
-![alt text](image-17.png)
-
-![alt text](image-18.png)
-
-![alt text](image-19.png)
-
-![alt text](image-20.png)
-
-![alt text](image-21.png)
 ---
 
 ## 🔁 **Slide 14: More Complex Cases**
