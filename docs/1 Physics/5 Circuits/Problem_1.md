@@ -81,172 +81,236 @@ function compute_equivalent_resistance(graph, source, sink):
 
 ---
 
-## 🧑‍💻 **Slide 7: Python Code — Graph Creation**
+## 🧑‍💻 **Slide 7:Presentation: Step-by-Step Simplification of a Complex Resistor Circuit**
 
-### **Initial Circuit Graph with `networkx`**
+## Introduction
+
+We start with a complex circuit between terminals **B+** and **B-** involving multiple resistors connected in series and parallel. Our goal is to simplify the circuit step-by-step and find the total equivalent resistance $R_{final}$.
+
+---
+
+## Step 1: Initial Circuit
+
+The initial circuit looks like this:
+
+$$
+B^+ - R_1 - (R_2 \parallel R_3) - R_4 - (R_5 \parallel R_6) - B^-
+$$
+
+Here, $R_2$ and $R_3$ are in parallel, as are $R_5$ and $R_6$. Other resistors are in series.
+
+---
+
+### Code: Drawing the Initial Circuit
 
 ```python
-import matplotlib.pyplot as plt
-import networkx as nx
+import schemdraw
+import schemdraw.elements as elm
 
-# Başlangıç devresi: karmaşık devre
-G_step1 = nx.Graph()
-G_step1.add_edge("B+", "A", label="R1")
-G_step1.add_edge("A", "C", label="R2")
-G_step1.add_edge("B+", "B", label="R3")
-G_step1.add_edge("B", "C", label="")
-G_step1.add_edge("C", "D", label="R4")
-G_step1.add_edge("D", "B-", label="R5")
-
-pos1 = {
-    "B+": (0, 2),
-    "A": (1, 2.5),
-    "C": (2, 2),
-    "B": (1, 1.2),
-    "D": (3, 2),
-    "B-": (4, 2)
-}
-
-plt.figure(figsize=(10, 4))
-nx.draw(G_step1, pos1, with_labels=True, node_color="lightyellow", node_size=2000, font_size=12)
-edge_labels1 = {(u, v): d['label'] for u, v, d in G_step1.edges(data=True) if d['label']}
-nx.draw_networkx_edge_labels(G_step1, pos1, edge_labels=edge_labels1, font_size=12)
-plt.title("Step 1: Original Circuit", fontsize=14)
-plt.axis("off")
-plt.show()
+with schemdraw.Drawing() as d:
+    d += elm.SourceV().label('B+').up()
+    d += elm.Line().right().length(1)
+    
+    d += elm.Resistor().right().label('R1')
+    
+    # Parallel R2 and R3 branches
+    d += elm.Dot()
+    d.push()
+    d += elm.Line().up().length(1)
+    d += elm.Resistor().right().label('R2')
+    d += elm.Line().down().length(1)
+    d.pop()
+    d += elm.Line().down().length(1)
+    d += elm.Resistor().right().label('R3')
+    d += elm.Line().up().length(1)
+    d += elm.Dot()
+    
+    d += elm.Resistor().right().label('R4')
+    
+    # Parallel R5 and R6 branches
+    d += elm.Dot()
+    d.push()
+    d += elm.Line().up().length(1)
+    d += elm.Resistor().right().label('R5')
+    d += elm.Line().down().length(1)
+    d.pop()
+    d += elm.Line().down().length(1)
+    d += elm.Resistor().right().label('R6')
+    d += elm.Line().up().length(1)
+    d += elm.Dot()
+    
+    d += elm.Line().right().length(1)
+    d += elm.Ground().label('B-')
 ```
-![alt text](image-9.png)
-📸 *Output*: Rendered interactive graph image.
+
+![alt text](<adim 1.png>)
+
 
 ---
 
-## 🔄 **Slide 8: Step 1 — Series Reduction**
+## Step 2: Calculate $R_{23}$ - Parallel Combination of $R_2$ and $R_3$
 
-### **Detect and Replace Series Resistors**
-
-* Example: $R_2$ and $R_3$ in series → $R_{23} = R_2 + R_3$
-
-🛠️ *Visual*: Before/after graph with series highlighted.
+$$
+R_{23} = \left( \frac{1}{R_2} + \frac{1}{R_3} \right)^{-1}
+$$
 
 ---
 
-## 🧑‍💻 **Slide 9: Python Code — Series Detection (R1 & R2 Series → R12)**
+### Code: Compute $R_{23}$
 
 ```python
-G_step2 = nx.Graph()
-G_step2.add_edge("B+", "C", label="R12")  # R1 + R2
-G_step2.add_edge("B+", "B", label="R3")
-G_step2.add_edge("B", "C", label="")
-G_step2.add_edge("C", "D", label="R4")
-G_step2.add_edge("D", "B-", label="R5")
+from sympy import symbols, simplify
 
-plt.figure(figsize=(10, 4))
-nx.draw(G_step2, pos1, with_labels=True, node_color="lightgreen", node_size=2000, font_size=12)
-edge_labels2 = {(u, v): d['label'] for u, v, d in G_step2.edges(data=True) if d['label']}
-nx.draw_networkx_edge_labels(G_step2, pos1, edge_labels=edge_labels2, font_size=12)
-plt.title("Step 2: R1 and R2 Combined (R12)", fontsize=14)
-plt.axis("off")
-plt.show()
+R1, R2, R3, R4, R5, R6 = symbols('R1 R2 R3 R4 R5 R6')
 
+R23 = simplify(1 / (1/R2 + 1/R3))
+print(f"R23 = {R23}")
 ```
 
-![alt text](image-10.png)
-🎬 *Action*: Highlight which node gets removed in visualization.
+$$
+R_{23} = \frac{R_2 \times R_3}{R_2 + R_3}
+$$
+
+
 
 ---
 
-## 🧲 **Slide 10: Step 2 — Parallel Reduction**
-
-### **Detect and Replace Parallel Resistors**
-
-* Formula: $R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2}$
-
-🔁 *Visual*: Two edges between same nodes → one edge
-
----
-
-## 🧑‍💻 **Slide 11: Python Code — Parallel Detection  (R12 & R3 Parallel → R123) **
+### Code: Draw Circuit with $R_{23}$ instead of $R_2 \parallel R_3$
 
 ```python
-G_step3 = nx.Graph()
-G_step3.add_edge("B+", "C", label="R123")  # R12 || R3
-G_step3.add_edge("C", "D", label="R4")
-G_step3.add_edge("D", "B-", label="R5")
+with schemdraw.Drawing() as d:
+    d += elm.SourceV().label('B+').up()
+    d += elm.Line().right().length(1)
 
-plt.figure(figsize=(10, 4))
-nx.draw(G_step3, pos1, with_labels=True, node_color="skyblue", node_size=2000, font_size=12)
-edge_labels3 = {(u, v): d['label'] for u, v, d in G_step3.edges(data=True) if d['label']}
-nx.draw_networkx_edge_labels(G_step3, pos1, edge_labels=edge_labels3, font_size=12)
-plt.title("Step 3: R123 = R3 || R12", fontsize=14)
-plt.axis("off")
-plt.show()
+    d += elm.Resistor().right().label('R1')
+    d += elm.Resistor().right().label('R23')
+    d += elm.Resistor().right().label('R4')
 
+    # Parallel R5 and R6 remain
+    d += elm.Dot()
+    d.push()
+    d += elm.Line().up().length(1)
+    d += elm.Resistor().right().label('R5')
+    d += elm.Line().down().length(1)
+    d.pop()
+    d += elm.Line().down().length(1)
+    d += elm.Resistor().right().label('R6')
+    d += elm.Line().up().length(1)
+    d += elm.Dot()
+
+    d += elm.Line().right().length(1)
+    d += elm.Ground().label('B-')
 ```
-![alt text](image-11.png)
-📌 *Tip*: Use multigraphs for actual multiple edges, or simulate via attributes.
+
+![alt text](<adim 2.png>)
 
 ---
 
+## Step 3: Calculate $R_{56}$ - Parallel Combination of $R_5$ and $R_6$
 
-## 🧑‍💻 **Slide 11.5: Python Code — Series Detection (R123 & R4 Series → R1234) **
-```python
-G_step4 = nx.Graph()
-G_step4.add_edge("B+", "D", label="R1234")  # R123 + R4
-G_step4.add_edge("D", "B-", label="R5")
-
-pos4 = {
-    "B+": (0, 2),
-    "D": (2, 2),
-    "B-": (4, 2)
-}
-
-plt.figure(figsize=(8, 3))
-nx.draw(G_step4, pos4, with_labels=True, node_color="orange", node_size=2000, font_size=12)
-edge_labels4 = {(u, v): d['label'] for u, v, d in G_step4.edges(data=True)}
-nx.draw_networkx_edge_labels(G_step4, pos4, edge_labels=edge_labels4, font_size=12)
-plt.title("Step 4: R123 + R4 = R1234", fontsize=14)
-plt.axis("off")
-plt.show()
-```
-
-![alt text](image-15.png)
-
-## ✅ **Slide 12: Final Reduction**
-
-### **When Only One Edge Remains**
-
-* Only edge between $B+$ and $B-$
-* This edge's weight = total equivalent resistance
-
-🧠 *Key Insight*: Reduction is recursive and deterministic.
+$$
+R_{56} = \left( \frac{1}{R_5} + \frac{1}{R_6} \right)^{-1}
+$$
 
 ---
 
-## 🧩 **Slide 13:  Final Solution (R1234 & R5 Serial → R_eq)**
+### Code: Compute $R_{56}$
 
 ```python
-G_step5 = nx.Graph()
-G_step5.add_edge("B+", "B-", label="R_eq")  # Final result
-
-pos5 = {
-    "B+": (0, 1),
-    "B-": (4, 1)
-}
-
-plt.figure(figsize=(6, 2))
-nx.draw(G_step5, pos5, with_labels=True, node_color="salmon", node_size=2000, font_size=12)
-edge_labels5 = {(u, v): d['label'] for u, v, d in G_step5.edges(data=True)}
-nx.draw_networkx_edge_labels(G_step5, pos5, edge_labels=edge_labels5, font_size=12)
-plt.title("Step 5: Final Equivalent Resistance (R_eq)", fontsize=14)
-plt.axis("off")
-plt.show()
-
+R56 = simplify(1 / (1/R5 + 1/R6))
+print(f"R56 = {R56}")
 ```
-![alt text](image-22.png)
+$$
+R_{56} = \frac{R_5 \times R_6}{R_5 + R_6}
+$$
 
 ---
 
-## 🔁 **Slide 14: More Complex Cases**
+### Code: Draw Circuit with $R_{56}$ instead of $R_5 \parallel R_6$
+
+```python
+with schemdraw.Drawing() as d:
+    d += elm.SourceV().label('B+').up()
+    d += elm.Line().right().length(1)
+
+    d += elm.Resistor().right().label('R1')
+    d += elm.Resistor().right().label('R23')
+    d += elm.Resistor().right().label('R4')
+    d += elm.Resistor().right().label('R56')
+
+    d += elm.Line().right().length(1)
+    d += elm.Ground().label('B-')
+```
+
+![alt text](<adim 3.png>)
+
+---
+
+## Step 4: Calculate Total Equivalent Resistance $R_{final}$
+
+Since now all resistors are in series:
+
+$$
+R_{final} = R_1 + R_{23} + R_4 + R_{56}
+$$
+
+---
+
+### Code: Compute $R_{final}$
+
+```python
+R_final = simplify(R1 + R23 + R4 + R56)
+print(f"Total Equivalent Resistance, R_final = {R_final}")
+```
+$$
+R_{final} = R_1 + \frac{R_2 \times R_3}{R_2 + R_3} + R_4 + \frac{R_5 \times R_6}{R_5 + R_6}
+$$
+
+---
+
+### Code: Draw Final Simplified Circuit Showing $R_{final}$
+
+```python
+with schemdraw.Drawing() as d:
+    d += elm.SourceV().label('B+').up()
+    d += elm.Line().right().length(1)
+
+    d += elm.Resistor().right().label(r'$R_{final}$', fontsize=14)
+
+    d += elm.Line().right().length(1)
+    d += elm.Ground().label('B-')
+
+    # Label explaining the formula under the circuit
+    d += elm.Label().down().at((0, -2)).label(r'$R_{final} = R_1 + R_{23} + R_4 + R_{56}$', fontsize=14)
+```
+![alt text](<adim 4.png>)
+
+---
+
+# Summary
+
+* We started with a complex resistor network.
+* Simplified parallel resistor pairs step-by-step.
+* Finally expressed the entire circuit as a single equivalent resistor $R_{final}$.
+* Visualized each step with clear schematics to aid understanding.
+
+---
+
+If you want, I can help you make this into slides or a notebook with runnable cells!
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## 🔁 **Slide 8: More Complex Cases**
 
 ### **Loops, Bridges, and Combinations**
 
@@ -260,7 +324,7 @@ plt.show()
 
 ---
 
-## ⏱️ **Slide 15: Efficiency & Optimization**
+## ⏱️ **Slide 9: Efficiency & Optimization**
 
 ### **Performance & Scaling**
 
@@ -275,7 +339,7 @@ plt.show()
 
 ---
 
-## 🧠 **Slide 16: Conclusion**
+## 🧠 **Slide 10: Conclusion**
 
 ### **Key Takeaways**
 
@@ -289,7 +353,7 @@ plt.show()
 
 ---
 
-## 📚 **Slide 17: References & Acknowledgments**
+## 📚 **Slide 11: References & Acknowledgments**
 
 * **Resources**:
 
