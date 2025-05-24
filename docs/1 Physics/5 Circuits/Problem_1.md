@@ -276,7 +276,7 @@ with schemdraw.Drawing() as d:
 
 ---
 
-If you want, I can help you make this into slides or a notebook with runnable cells!
+
 
 
 
