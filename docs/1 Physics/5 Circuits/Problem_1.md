@@ -39,27 +39,7 @@
 
 ---
 
-## ⚙️ **Slide 4: Algorithm Overview**
-
-### **Step-by-Step Plan**
-
-```python
-function compute_equivalent_resistance(graph, source, sink):
-    while number_of_edges(graph) > 1:
-        detect all series pairs
-        if any found:
-            replace each series pair with an equivalent resistor
-        else:
-            detect all parallel pairs
-            replace each parallel pair with an equivalent resistor
-    return resistance between source and sink
-```
-
-🧭 *Goal*: Reduce the graph to a single edge between source and sink.
-
----
-
-## 🧪 **Slide 5: Case Study Introduction**
+## 🧪 **Slide 4: Case Study Introduction**
 
 ### **We’ll Walk Through an Example Circuit**
 
@@ -70,7 +50,7 @@ function compute_equivalent_resistance(graph, source, sink):
 
 ---
 
-## 📊 **Slide 6: Graph Representation**
+## 📊 **Slide 5: Graph Representation**
 
 ### **Graph Version of the Circuit**
 
@@ -81,7 +61,7 @@ function compute_equivalent_resistance(graph, source, sink):
 
 ---
 
-## 🧑‍💻 **Slide 7:Presentation: Step-by-Step Simplification of a Complex Resistor Circuit**
+## 🧑‍💻 **Slide 6:Presentation: Step-by-Step Simplification of a Complex Resistor Circuit**
 
 ## Introduction
 
@@ -310,7 +290,7 @@ If you want, I can help you make this into slides or a notebook with runnable ce
 
 ---
 
-## 🔁 **Slide 8: More Complex Cases**
+## 🔁 **Slide 7: More Complex Cases**
 
 ### **Loops, Bridges, and Combinations**
 
@@ -324,7 +304,7 @@ If you want, I can help you make this into slides or a notebook with runnable ce
 
 ---
 
-## ⏱️ **Slide 9: Efficiency & Optimization**
+## ⏱️ **Slide 8: Efficiency & Optimization**
 
 ### **Performance & Scaling**
 
@@ -339,7 +319,7 @@ If you want, I can help you make this into slides or a notebook with runnable ce
 
 ---
 
-## 🧠 **Slide 10: Conclusion**
+## 🧠 **Slide 9: Conclusion**
 
 ### **Key Takeaways**
 
@@ -353,7 +333,7 @@ If you want, I can help you make this into slides or a notebook with runnable ce
 
 ---
 
-## 📚 **Slide 11: References & Acknowledgments**
+## 📚 **Slide 10: References & Acknowledgments**
 
 * **Resources**:
 
