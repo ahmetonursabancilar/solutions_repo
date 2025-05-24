@@ -346,16 +346,4 @@ If you want, I can help you make this into slides or a notebook with runnable ce
 
 ---
 
-### 🔚 Final Notes
-
-* **Visual Polish**:
-
-  * Use color coding: red for series, blue for parallel.
-  * Animate graph reductions slide-by-slide.
-* **Interactive Ideas**:
-
-  * Add sliders to change resistance values
-  * Live demo with Jupyter Notebook
-
----
 
