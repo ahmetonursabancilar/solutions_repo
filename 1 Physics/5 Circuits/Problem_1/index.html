@@ -203,21 +203,7 @@
 <p>🖼️ <em>Visual Aid</em>: Circuit diagram on the left, graph on the right (linked by arrows).</p>
 <p>🧠 <em>Analogy</em>: Think of it like a road network with travel cost = resistance.</p>
 <hr/>
-<h2 id="slide-4-algorithm-overview">⚙️ <strong>Slide 4: Algorithm Overview</strong></h2>
-<h3 id="step-by-step-plan"><strong>Step-by-Step Plan</strong></h3>
-<pre><code class="language-python">function compute_equivalent_resistance(graph, source, sink):
-    while number_of_edges(graph) &gt; 1:
-        detect all series pairs
-        if any found:
-            replace each series pair with an equivalent resistor
-        else:
-            detect all parallel pairs
-            replace each parallel pair with an equivalent resistor
-    return resistance between source and sink
-</code></pre>
-<p>🧭 <em>Goal</em>: Reduce the graph to a single edge between source and sink.</p>
-<hr/>
-<h2 id="slide-5-case-study-introduction">🧪 <strong>Slide 5: Case Study Introduction</strong></h2>
+<h2 id="slide-4-case-study-introduction">🧪 <strong>Slide 4: Case Study Introduction</strong></h2>
 <h3 id="well-walk-through-an-example-circuit"><strong>We’ll Walk Through an Example Circuit</strong></h3>
 <ul>
 <li>Circuit with resistors: <span class="arithmatex">\(R_1, R_2, R_3, R_4, R_5\)</span></li>
@@ -225,7 +211,7 @@
 </ul>
 <p>🖼️ <em>Visual</em>: Realistic resistor diagram with labels.</p>
 <hr/>
-<h2 id="slide-6-graph-representation">📊 <strong>Slide 6: Graph Representation</strong></h2>
+<h2 id="slide-5-graph-representation">📊 <strong>Slide 5: Graph Representation</strong></h2>
 <h3 id="graph-version-of-the-circuit"><strong>Graph Version of the Circuit</strong></h3>
 <ul>
 <li><strong>Nodes</strong>: <span class="arithmatex">\(B+, n_1, n_2, n_3, n_4, B-\)</span></li>
@@ -233,7 +219,7 @@
 </ul>
 <p>👁️ <em>Visual</em>: <code>networkx</code>-based graph visualization</p>
 <hr/>
-<h2 id="slide-7presentation-step-by-step-simplification-of-a-complex-resistor-circuit">🧑‍💻 <strong>Slide 7:Presentation: Step-by-Step Simplification of a Complex Resistor Circuit</strong></h2>
+<h2 id="slide-6presentation-step-by-step-simplification-of-a-complex-resistor-circuit">🧑‍💻 <strong>Slide 6:Presentation: Step-by-Step Simplification of a Complex Resistor Circuit</strong></h2>
 <h2 id="introduction">Introduction</h2>
 <p>We start with a complex circuit between terminals <strong>B+</strong> and <strong>B-</strong> involving multiple resistors connected in series and parallel. Our goal is to simplify the circuit step-by-step and find the total equivalent resistance <span class="arithmatex">\(R_{final}\)</span>.</p>
 <hr/>
@@ -395,7 +381,7 @@ R_{final} = R_1 + \frac{R_2 \times R_3}{R_2 + R_3} + R_4 + \frac{R_5 \times R_6}
 <hr/>
 <p>If you want, I can help you make this into slides or a notebook with runnable cells!</p>
 <hr/>
-<h2 id="slide-8-more-complex-cases">🔁 <strong>Slide 8: More Complex Cases</strong></h2>
+<h2 id="slide-7-more-complex-cases">🔁 <strong>Slide 7: More Complex Cases</strong></h2>
 <h3 id="loops-bridges-and-combinations"><strong>Loops, Bridges, and Combinations</strong></h3>
 <ul>
 <li>
@@ -409,7 +395,7 @@ R_{final} = R_1 + \frac{R_2 \times R_3}{R_2 + R_3} + R_4 + \frac{R_5 \times R_6}
 </ul>
 <p>🧠 <em>Analogy</em>: Like simplifying a maze using rules.</p>
 <hr/>
-<h2 id="slide-9-efficiency-optimization">⏱️ <strong>Slide 9: Efficiency &amp; Optimization</strong></h2>
+<h2 id="slide-8-efficiency-optimization">⏱️ <strong>Slide 8: Efficiency &amp; Optimization</strong></h2>
 <h3 id="performance-scaling"><strong>Performance &amp; Scaling</strong></h3>
 <ul>
 <li>Time complexity: Up to <span class="arithmatex">\(O(n^2)\)</span></li>
@@ -424,7 +410,7 @@ R_{final} = R_1 + \frac{R_2 \times R_3}{R_2 + R_3} + R_4 + \frac{R_5 \times R_6}
 </ul>
 <p>⚙️ <em>Advanced Tip</em>: Integrate with SPICE or circuit solver engines.</p>
 <hr/>
-<h2 id="slide-10-conclusion">🧠 <strong>Slide 10: Conclusion</strong></h2>
+<h2 id="slide-9-conclusion">🧠 <strong>Slide 9: Conclusion</strong></h2>
 <h3 id="key-takeaways"><strong>Key Takeaways</strong></h3>
 <ul>
 <li>Graph theory enables systematic, programmable simplification.</li>
@@ -436,7 +422,7 @@ R_{final} = R_1 + \frac{R_2 \times R_3}{R_2 + R_3} + R_4 + \frac{R_5 \times R_6}
 <p>"By treating circuits as graphs, we turn intuition into algorithms."</p>
 </blockquote>
 <hr/>
-<h2 id="slide-11-references-acknowledgments">📚 <strong>Slide 11: References &amp; Acknowledgments</strong></h2>
+<h2 id="slide-10-references-acknowledgments">📚 <strong>Slide 10: References &amp; Acknowledgments</strong></h2>
 <ul>
 <li>
 <p><strong>Resources</strong>:</p>
