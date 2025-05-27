@@ -346,4 +346,123 @@ with schemdraw.Drawing() as d:
 
 ---
 
+```python 
 
+# Gerekli kütüphaneler (Colab için)
+!pip install schemdraw
+
+import schemdraw
+import schemdraw.elements as elm
+from sympy import symbols, simplify
+import matplotlib.pyplot as plt
+
+# Direnç sembolleri
+R1, R2, R3, R4, R5, R6 = symbols('R1 R2 R3 R4 R5 R6')
+
+# Sayısal değerler (Ohm cinsinden)
+values = {
+    R1: 10,
+    R2: 20,
+    R3: 30,
+    R4: 15,
+    R5: 25,
+    R6: 50
+}
+
+# Paralel direnç formülleri (sadelestirmeler)
+R23 = simplify((R2 * R3) / (R2 + R3))
+R56 = simplify((R5 * R6) / (R5 + R6))
+R_final = simplify(R1 + R23 + R4 + R56)
+
+# Sembolikten sayısala dönüş
+R23_val = float(R23.subs(values))
+R56_val = float(R56.subs(values))
+Rfinal_val = float(R_final.subs(values))
+
+# --- STEP 1: Orijinal devre ---
+def draw_step1():
+    with schemdraw.Drawing() as d:
+        d += elm.SourceV().label('B+').up()
+        d += elm.Resistor().right().label(f'R1 = {values[R1]}Ω')
+        d += elm.Dot()
+        d.push()
+        d += elm.Line().up().length(1)
+        d += elm.Resistor().right().label(f'R2 = {values[R2]}Ω')
+        d += elm.Line().down().length(1)
+        d.pop()
+        d += elm.Line().down().length(1)
+        d += elm.Resistor().right().label(f'R3 = {values[R3]}Ω')
+        d += elm.Line().up().length(1)
+        d += elm.Dot()
+        d += elm.Resistor().right().label(f'R4 = {values[R4]}Ω')
+        d += elm.Dot()
+        d.push()
+        d += elm.Line().up().length(1)
+        d += elm.Resistor().right().label(f'R5 = {values[R5]}Ω')
+        d += elm.Line().down().length(1)
+        d.pop()
+        d += elm.Line().down().length(1)
+        d += elm.Resistor().right().label(f'R6 = {values[R6]}Ω')
+        d += elm.Line().up().length(1)
+        d += elm.Dot()
+        d += elm.Line().right()
+        d += elm.Ground().label('B-')
+        plt.title("Step 1: Original Circuit")
+        d.draw()
+
+# --- STEP 2: R2 || R3 = R23 ---
+def draw_step2():
+    with schemdraw.Drawing() as d:
+        d += elm.SourceV().label('B+').up()
+        d += elm.Resistor().right().label(f'R1 = {values[R1]}Ω')
+        d += elm.Resistor().right().label(f'R23 = {round(R23_val, 2)}Ω')
+        d += elm.Resistor().right().label(f'R4 = {values[R4]}Ω')
+        d += elm.Dot()
+        d.push()
+        d += elm.Line().up().length(1)
+        d += elm.Resistor().right().label(f'R5 = {values[R5]}Ω')
+        d += elm.Line().down().length(1)
+        d.pop()
+        d += elm.Line().down().length(1)
+        d += elm.Resistor().right().label(f'R6 = {values[R6]}Ω')
+        d += elm.Line().up().length(1)
+        d += elm.Dot()
+        d += elm.Line().right()
+        d += elm.Ground().label('B-')
+        plt.title("Step 2: R2 || R3 simplified to R23")
+        d.draw()
+
+# --- STEP 3: R5 || R6 = R56 ---
+def draw_step3():
+    with schemdraw.Drawing() as d:
+        d += elm.SourceV().label('B+').up()
+        d += elm.Resistor().right().label(f'R1 = {values[R1]}Ω')
+        d += elm.Resistor().right().label(f'R23 = {round(R23_val, 2)}Ω')
+        d += elm.Resistor().right().label(f'R4 = {values[R4]}Ω')
+        d += elm.Resistor().right().label(f'R56 = {round(R56_val, 2)}Ω')
+        d += elm.Ground().label('B-')
+        plt.title("Step 3: R5 || R6 simplified to R56")
+        d.draw()
+
+# --- STEP 4: Rfinal (toplam) ---
+def draw_step4():
+    with schemdraw.Drawing() as d:
+        d += elm.SourceV().label('B+').up()
+        d += elm.Resistor().right().label(f'Rfinal = {round(Rfinal_val, 2)}Ω')
+        d += elm.Ground().label('B-')
+        plt.title("Step 4: Final Equivalent Resistance")
+        d.draw()
+
+# --- HEPSİNİ ÇALIŞTIR ---
+draw_step1()
+draw_step2()
+draw_step3()
+draw_step4()
+
+print("Summary:")
+print(f"R23 = (R2 * R3) / (R2 + R3) = {round(R23_val, 2)} Ω")
+print(f"R56 = (R5 * R6) / (R5 + R6) = {round(R56_val, 2)} Ω")
+print(f"Rfinal = R1 + R23 + R4 + R56 = {round(Rfinal_val, 2)} Ω")
+```
+
+![alt text](dsadasd.png)
